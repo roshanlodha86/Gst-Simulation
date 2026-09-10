@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Notices & Orders | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .notices-card {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 22px 25px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.05);
+    }
+    .notices-table th {
+      background: #1b3f75;
+      color: #ffffff;
+      font-size: 12.5px;
+      vertical-align: middle !important;
+    }
+    .notices-table td {
+      font-size: 13px;
+      vertical-align: middle !important;
+    }
+    .status-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-pending {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    .status-replied {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+    .notice-view-box {
+      background: #f8fafe;
+      border: 1px solid #dbeafe;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- UI Shell Placeholders -->
+  <div id="gst-header"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+    
+    <!-- Breadcrumbs -->
+    <div id="gst-breadcrumbs"></div>
+
+    <!-- Header Section -->
+    <div class="notices-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:15px;">
+        <div>
+          <h3 style="margin:0; color:#1b3f75; font-weight:700; font-size:20px;">
+            <i class="fa fa-bell-o"></i> View Additional Notices & Orders
+          </h3>
+          <p style="margin:4px 0 0 0; color:#64748b; font-size:13px;">
+            Taxpayer: <strong id="noticeLegalName" style="color:#1b3f75;">BHARAT ENTERPRISES PRIVATE LIMITED</strong> 
+            &nbsp;|&nbsp; GSTIN: <strong id="noticeGstin" style="font-family:monospace; color:#1b3f75;">27AAACB2234K1ZV</strong>
+          </p>
+        </div>
+        <div>
+          <button class="btn btn-default" onclick="loadNotices()" style="font-weight:600; font-size:12.5px;">
+            <i class="fa fa-refresh"></i> Refresh Records
+          </button>
+        </div>
+      </div>
+
+      <!-- Info Alert -->
+      <div class="alert alert-info" style="background:#eef6ff; border-color:#bddbfc; color:#1b3f75; font-size:12.5px; margin-bottom:20px;">
+        <i class="fa fa-info-circle"></i> <strong>Statutory Notice:</strong> This section displays intimations, show cause notices, assessment orders, and demand orders issued by Central and State jurisdictional tax authorities under Sections 61, 73, 74, 129, and 130 of the CGST/SGST Acts. Replies must be submitted before the stipulated due date.
+      </div>
+
+      <!-- Notices Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover notices-table">
+          <thead>
+            <tr>
+              <th style="width:50px;">#</th>
+              <th>Notice / Reference No</th>
+              <th>Type of Notice / Order</th>
+              <th>Issuing Authority & Section</th>
+              <th>Issue Date</th>
+              <th>Due Date</th>
+              <th>Demand Amount</th>
+              <th>Status</th>
+              <th style="width:160px; text-align:center;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="noticesTableBody">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Notice Details Modal -->
+  <div class="modal fade" id="viewNoticeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content" style="border-radius:6px;">
+        <div class="modal-header" style="background:#1b3f75; color:#fff; border-radius:5px 5px 0 0;">
+          <button type="button" class="close" data-dismiss="modal" style="color:#fff; opacity:0.8;">&times;</button>
+          <h4 class="modal-title" id="vmTitle" style="font-weight:700;"><i class="fa fa-file-text-o"></i> Notice Details</h4>
+        </div>
+        <div class="modal-body" id="vmBody" style="font-size:13px;">
+          <!-- Content populated via JS -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="vmReplyBtn" style="background:#1b3f75; border-color:#1b3f75;">
+            <i class="fa fa-reply"></i> Submit Reply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Reply Modal -->
+  <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content" style="border-radius:6px;">
+        <div class="modal-header" style="background:#1b3f75; color:#fff; border-radius:5px 5px 0 0;">
+          <button type="button" class="close" data-dismiss="modal" style="color:#fff; opacity:0.8;">&times;</button>
+          <h4 class="modal-title" style="font-weight:700;"><i class="fa fa-reply"></i> Submit Reply to Notice / Intimation</h4>
+        </div>
+        <div class="modal-body" style="font-size:13px;">
+          <form id="replyForm" onsubmit="handleReplySubmit(event)">
+            <input type="hidden" id="replyRefNo">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Reference Notice Number</label>
+                <input type="text" id="dispReplyRefNo" class="form-control" readonly>
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Taxpayer GSTIN</label>
+                <input type="text" id="dispReplyGstin" class="form-control" readonly>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Authorized Signatory <span style="color:red;">*</span></label>
+              <select class="form-control" id="replySignatory" required>
+                <option value="Rajesh Kumar Sharma - Managing Director">Rajesh Kumar Sharma (Managing Director)</option>
+                <option value="Anil Ramesh Mehta - Whole-time Director">Anil Ramesh Mehta (Whole-time Director)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Grounds of Defense / Explanation / Reply Remarks <span style="color:red;">*</span></label>
+              <textarea class="form-control" id="replyRemarks" rows="5" placeholder="Enter detailed point-wise reply, reasons for discrepancies, legal references or evidence..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Supporting Evidence / Reconciliation Statement (Simulated File)</label>
+              <input type="file" class="form-control" id="replyAttachment" accept=".pdf,.xlsx,.csv">
+              <span class="help-block" style="font-size:11.5px; color:#64748b;">Allowed formats: PDF, Excel, CSV. Max size: 5MB per file.</span>
+            </div>
+
+            <div class="checkbox" style="margin-top:15px;">
+              <label style="font-weight:600; color:#1b3f75;">
+                <input type="checkbox" id="replyVerification" required>
+                I hereby solemnly affirm and declare that the information given herein above is true and correct to the best of my knowledge and belief.
+              </label>
+            </div>
+
+            <div style="margin-top:20px; text-align:right;">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-success" style="font-weight:700;">
+                <i class="fa fa-shield"></i> Verify with EVC & Submit Reply
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer placeholder -->
+  <div id="gst-footer"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentNotices = [];
+    var activeTaxpayerGstin = '27AAACB2234K1ZV';
+
+    function loadNotices() {
+      var user = (window.GSTSimulation && GSTSimulation.getUser && GSTSimulation.getUser()) || null;
+      activeTaxpayerGstin = (user && user.gstin) || '27AAACB2234K1ZV';
+
+      fetch('/api/profile?gstin=' + encodeURIComponent(activeTaxpayerGstin))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success && data.taxpayer) {
+            document.getElementById('noticeLegalName').innerText = data.taxpayer.legalName;
+            document.getElementById('noticeGstin').innerText = data.taxpayer.gstin;
+            currentNotices = data.taxpayer.notices || [];
+            renderNoticesTable();
+          }
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
+    }
+
+    function renderNoticesTable() {
+      var tbody = document.getElementById('noticesTableBody');
+      if (!currentNotices || currentNotices.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted" style="padding:25px;">No notices or orders found for this taxpayer.</td></tr>';
+        return;
+      }
+
+      var html = '';
+      currentNotices.forEach(function(n, idx) {
+        var isPending = (n.status === 'PENDING_REPLY');
+        var statusBadge = isPending 
+          ? '<span class="status-pill status-pending"><i class="fa fa-clock-o"></i> Pending Reply</span>'
+          : '<span class="status-pill status-replied"><i class="fa fa-check-circle"></i> Replied</span>';
+        
+        var demandStr = (n.taxDemand && n.taxDemand.total > 0)
+          ? '<strong style="color:#c0392b;">₹ ' + n.taxDemand.total.toLocaleString('en-IN') + '</strong>'
+          : '<span class="text-muted">₹ 0.00</span>';
+
+        html += 
+          '<tr>' +
+            '<td>' + (idx + 1) + '</td>' +
+            '<td><strong style="color:#1b3f75; font-family:monospace;">' + n.referenceNo + '</strong></td>' +
+            '<td><strong>' + n.type + '</strong></td>' +
+            '<td><span style="font-size:12px; color:#475f82;">' + n.issuingAuthority + '</span><br><small class="text-muted">' + n.section + '</small></td>' +
+            '<td>' + n.issueDate + '</td>' +
+            '<td><strong style="color:' + (isPending ? '#c0392b' : '#333') + ';">' + n.dueDate + '</strong></td>' +
+            '<td>' + demandStr + '</td>' +
+            '<td>' + statusBadge + '</td>' +
+            '<td style="text-align:center;">' +
+              '<button type="button" class="btn btn-xs btn-default" onclick="viewNoticeDetail(' + idx + ')" style="margin-right:5px;" title="View Notice">' +
+                '<i class="fa fa-eye"></i> View' +
+              '</button>' +
+              (isPending 
+                ? '<button type="button" class="btn btn-xs btn-primary" onclick="openReplyModal(' + idx + ')" style="background:#1b3f75; border-color:#1b3f75;">' +
+                    '<i class="fa fa-reply"></i> Reply' +
+                  '</button>'
+                : '<button type="button" class="btn btn-xs btn-success" onclick="viewNoticeDetail(' + idx + ')" style="background:#27ae60; border-color:#27ae60;">' +
+                    '<i class="fa fa-check"></i> View Reply' +
+                  '</button>'
+              ) +
+            '</td>' +
+          '</tr>';
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    function viewNoticeDetail(idx) {
+      var n = currentNotices[idx];
+      if (!n) return;
+
+      var demandHtml = '';
+      if (n.taxDemand && n.taxDemand.total > 0) {
+        demandHtml = 
+          '<div style="background:#fff5f5; border:1px solid #fed7d7; border-radius:4px; padding:12px; margin-top:10px;">' +
+            '<h5 style="margin:0 0 6px 0; color:#c0392b; font-weight:700;"><i class="fa fa-exclamation-triangle"></i> Tax Demand Determination</h5>' +
+            '<p style="margin:0; font-size:12.5px;">Tax: <strong>₹ ' + n.taxDemand.tax.toLocaleString('en-IN') + '</strong> | Interest: <strong>₹ ' + n.taxDemand.interest.toLocaleString('en-IN') + '</strong> | Penalty: <strong>₹ ' + n.taxDemand.penalty.toLocaleString('en-IN') + '</strong> | Total: <strong style="color:#c0392b;">₹ ' + n.taxDemand.total.toLocaleString('en-IN') + '</strong></p>' +
+          '</div>';
+      }
+
+      var replyHtml = '';
+      if (n.reply) {
+        replyHtml = 
+          '<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:4px; padding:14px; margin-top:15px;">' +
+            '<h5 style="margin:0 0 8px 0; color:#15803d; font-weight:700;"><i class="fa fa-check-circle"></i> Taxpayer Reply Submitted</h5>' +
+            '<p style="margin:0 0 4px 0;">Acknowledgment DIN: <strong style="font-family:monospace; color:#15803d;">' + n.reply.replyRefNo + '</strong> | Date: ' + n.reply.replyDate + '</p>' +
+            '<p style="margin:0 0 4px 0; font-size:12.5px;"><strong>Remarks:</strong> ' + n.reply.remarks + '</p>' +
+            '<p style="margin:0; font-size:12px; color:#166534;"><strong>Status:</strong> ' + n.reply.status + '</p>' +
+          '</div>';
+      }
+
+      var content = 
+        '<div class="notice-view-box">' +
+          '<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">' +
+            '<div>' +
+              '<h4 style="margin:0; color:#1b3f75; font-weight:700;">' + n.type + '</h4>' +
+              '<p style="margin:4px 0 0 0; color:#64748b;">Notice Reference: <strong style="font-family:monospace; color:#1b3f75;">' + n.referenceNo + '</strong></p>' +
+            '</div>' +
+            '<span class="badge" style="background:#1b3f75;">' + n.section + '</span>' +
+          '</div>' +
+          '<table class="table table-bordered table-condensed" style="background:#fff; font-size:12.5px; margin-bottom:12px;">' +
+            '<tr><th style="width:30%;">Issuing Office</th><td>' + n.issuingAuthority + '</td></tr>' +
+            '<tr><th>Date of Issue</th><td>' + n.issueDate + '</td></tr>' +
+            '<tr><th>Reply Due Date</th><td><strong style="color:#c0392b;">' + n.dueDate + '</strong></td></tr>' +
+          '</table>' +
+          '<h5 style="margin:12px 0 6px 0; font-weight:700; color:#1b3f75;">Brief Particulars & Grounds:</h5>' +
+          '<p style="background:#fff; border:1px solid #e2e8f0; border-radius:4px; padding:10px; margin:0; line-height:1.5;">' + n.description + '</p>' +
+          demandHtml +
+          replyHtml +
+        '</div>';
+
+      document.getElementById('vmBody').innerHTML = content;
+      var replyBtn = document.getElementById('vmReplyBtn');
+      if (n.status === 'PENDING_REPLY') {
+        replyBtn.style.display = 'inline-block';
+        replyBtn.onclick = function() {
+          $('#viewNoticeModal').modal('hide');
+          openReplyModal(idx);
+        };
+      } else {
+        replyBtn.style.display = 'none';
+      }
+
+      $('#viewNoticeModal').modal('show');
+    }
+
+    function openReplyModal(idx) {
+      var n = currentNotices[idx];
+      if (!n) return;
+      document.getElementById('replyRefNo').value = n.referenceNo;
+      document.getElementById('dispReplyRefNo').value = n.referenceNo + ' (' + n.type + ')';
+      document.getElementById('dispReplyGstin').value = activeTaxpayerGstin;
+      document.getElementById('replyRemarks').value = '';
+      document.getElementById('replyVerification').checked = false;
+      $('#replyModal').modal('show');
+    }
+
+    function handleReplySubmit(e) {
+      e.preventDefault();
+      var refNo = document.getElementById('replyRefNo').value;
+      var remarks = document.getElementById('replyRemarks').value.trim();
+
+      // Show simulated OTP modal for EVC
+      GSTSimulation.showOtpModal({
+        title: 'Verify & Sign Reply via Aadhaar / Pan EVC',
+        mobile: '9820123456',
+        email: 'rajesh.sharma@bharatenterprises.in',
+        expectedOtp: '123456',
+        onVerify: function() {
+          fetch('/api/notices/reply', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              referenceNo: refNo,
+              gstin: activeTaxpayerGstin,
+              remarks: remarks
+            })
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            $('#replyModal').modal('hide');
+            if (data.success) {
+              GSTSimulation.showToast(data.message + ' Generated DIN: ' + data.din, 'success', 'Reply Filed');
+              loadNotices();
+            } else {
+              GSTSimulation.showToast('Failed to submit reply.', 'danger');
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+            GSTSimulation.showToast('Network error while filing reply.', 'danger');
+          });
+        }
+      });
+    }
+
+    window.addEventListener('load', function() {
+      loadNotices();
+    });
+
+    window.addEventListener('gstUserChanged', function() {
+      loadNotices();
+    });
+  </script>
+
+</body>
+</html>

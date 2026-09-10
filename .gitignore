@@ -1,0 +1,27 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# SQLite journal/locks
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Environment & local files
+.env
+.venv/
+env/
+venv/
+.agents/
+.gemini/
+
+# Scraping & temporary files
+gst_*.html
+test_*.html
+test_*.css
+scraped_portal/
+reference_docs/
+download_references.py
+extract_assets.py
+fetch_gst_pages.py

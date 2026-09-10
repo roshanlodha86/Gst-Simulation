@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Law, Acts, Rules & Rate Matrix | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .law-card {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.06);
+    }
+    .law-tabs-nav {
+      border-bottom: 2px solid #1b3f75;
+      margin-bottom: 0;
+    }
+    .law-tabs-nav > li > a {
+      color: #475f82;
+      font-weight: 700;
+      font-size: 13.5px;
+      border-radius: 4px 4px 0 0;
+      padding: 10px 20px;
+    }
+    .law-tabs-nav > li.active > a,
+    .law-tabs-nav > li.active > a:hover {
+      color: #ffffff !important;
+      background: #1b3f75 !important;
+      border: 1px solid #1b3f75 !important;
+      border-bottom-color: transparent !important;
+    }
+    .law-pane {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-top: none;
+      padding: 25px;
+      border-radius: 0 0 6px 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      margin-bottom: 30px;
+    }
+    .section-box {
+      background: #f8fafe;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #1b3f75;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b3f75;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .section-text {
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .rate-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .rate-0 { background: #e2e8f0; color: #334155; }
+    .rate-5 { background: #dcfce7; color: #166534; }
+    .rate-12 { background: #e0f2fe; color: #075985; }
+    .rate-18 { background: #fef3c7; color: #92400e; }
+    .rate-28 { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+
+  <!-- UI Shell Placeholders -->
+  <div id="gst-header"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+    
+    <!-- Breadcrumbs -->
+    <div id="gst-breadcrumbs"></div>
+
+    <!-- Law Header Banner -->
+    <div class="law-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:15px;">
+        <div>
+          <h2 style="margin:0; color:#1b3f75; font-weight:700; font-size:22px;">
+            <i class="fa fa-book"></i> GST Law, Statutory Acts, Rules & Rates
+          </h2>
+          <p style="margin:4px 0 0 0; color:#64748b; font-size:13px;">
+            Central Goods and Services Tax Act, 2017 &bull; Integrated Goods and Services Tax Act, 2017 &bull; Central Tax Rules &bull; HSN/SAC Master
+          </p>
+        </div>
+        <div>
+          <span class="label label-primary" style="background:#1b3f75; font-size:12px; padding:6px 10px;">
+            <i class="fa fa-university"></i> Ministry of Finance &bull; CBIC
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav nav-tabs law-tabs-nav" id="lawTabs" role="tablist">
+        <li class="active"><a href="#tab-acts" onclick="switchLawTab('acts')"><i class="fa fa-gavel"></i> GST Acts (Statutory Law)</a></li>
+        <li><a href="#tab-rules" onclick="switchLawTab('rules')"><i class="fa fa-list-ol"></i> GST Rules (Rule 88A & ITC)</a></li>
+        <li><a href="#tab-notifications" onclick="switchLawTab('notifications')"><i class="fa fa-bullhorn"></i> Notifications & Circulars</a></li>
+        <li><a href="#tab-rates" onclick="switchLawTab('rates')"><i class="fa fa-search"></i> GST Rate Matrix (HSN / SAC Finder)</a></li>
+      </ul>
+
+      <!-- ================= TAB 1: ACTS ================= -->
+      <div id="tab-acts" class="law-pane">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">Central Goods and Services Tax Act, 2017 (Key Provisions)</h4>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-default btn-xs" onclick="filterAct('all')">All Provisions</button>
+            <button class="btn btn-default btn-xs" onclick="filterAct('supply')">Levy & Supply</button>
+            <button class="btn btn-default btn-xs" onclick="filterAct('itc')">Input Tax Credit (ITC)</button>
+            <button class="btn btn-default btn-xs" onclick="filterAct('payment')">Returns & Payment</button>
+          </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section-box act-item" data-category="supply">
+          <h5 class="section-title">Section 7 &bull; Scope of Supply</h5>
+          <p class="section-text">
+            (1) Supply includes all forms of supply of goods or services or both such as sale, transfer, barter, exchange, licence, rental, lease or disposal made or agreed to be made for a consideration by a person in the course or furtherance of business, and includes import of services for a consideration whether or not in the course or furtherance of business.
+          </p>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="section-box act-item" data-category="supply">
+          <h5 class="section-title">Section 9 &bull; Levy and Collection</h5>
+          <p class="section-text">
+            (1) Subject to the provisions of sub-section (2), there shall be levied a tax called the central goods and services tax on all intra-State supplies of goods or services or both, except on the supply of alcoholic liquor for human consumption, on the value determined under section 15 and at such rates, not exceeding twenty per cent., as may be notified by the Government on the recommendations of the Council and collected in such manner as may be prescribed and shall be paid by the taxable person.
+          </p>
+        </div>
+
+        <!-- Section 16 -->
+        <div class="section-box act-item" data-category="itc">
+          <h5 class="section-title">Section 16 &bull; Eligibility and Conditions for Taking Input Tax Credit (ITC)</h5>
+          <p class="section-text">
+            (1) Every registered person shall, subject to such conditions and restrictions as may be prescribed, be entitled to take credit of input tax charged on any supply of goods or services or both to him which are used or intended to be used in the course or furtherance of his business and the said amount shall be credited to the electronic credit ledger of such person.<br>
+            (2) No registered person shall be entitled to the credit of any input tax unless (a) he is in possession of a tax invoice or debit note; (aa) the details of the invoice or debit note have been furnished by the supplier in the statement of outward supplies (GSTR-1) and communicated in Form GSTR-2B; (b) he has received the goods or services; (c) tax charged in respect of such supply has been actually paid to the Government; and (d) he has furnished the return under section 39.
+          </p>
+        </div>
+
+        <!-- Section 17(5) -->
+        <div class="section-box act-item" data-category="itc">
+          <h5 class="section-title">Section 17(5) &bull; Apportionment of Credit and Blocked Credits</h5>
+          <p class="section-text">
+            Input tax credit shall not be available in respect of the following: (a) motor vehicles for transportation of persons having approved seating capacity of not more than thirteen persons (except when used for making taxable supplies of transportation or training); (b) supply of food and beverages, outdoor catering, beauty treatment, health services; (c) goods lost, stolen, destroyed, written off or disposed of by way of gift or free samples; and (d) any tax paid in accordance with the provisions of sections 74, 129 and 130.
+          </p>
+        </div>
+
+        <!-- Section 37 -->
+        <div class="section-box act-item" data-category="payment">
+          <h5 class="section-title">Section 37 &bull; Furnishing Details of Outward Supplies (Form GSTR-1)</h5>
+          <p class="section-text">
+            (1) Every registered person shall furnish electronically the details of outward supplies of goods or services or both effected during a tax period on or before the eleventh day of the month succeeding the said tax period in Form GSTR-1 and such details shall be communicated to the recipients in Form GSTR-2B.
+          </p>
+        </div>
+
+        <!-- Section 39 -->
+        <div class="section-box act-item" data-category="payment">
+          <h5 class="section-title">Section 39 &bull; Furnishing of Returns (Form GSTR-3B)</h5>
+          <p class="section-text">
+            (1) Every registered person shall, for every calendar month or part thereof, furnish in such form and manner as may be prescribed, a return electronically of inward and outward supplies of goods or services, input tax credit availed, tax payable, tax paid and such other particulars on or before the twentieth day of the month succeeding such calendar month.
+          </p>
+        </div>
+
+        <!-- Section 49, 49A, 49B -->
+        <div class="section-box act-item" data-category="payment">
+          <h5 class="section-title">Section 49A & 49B &bull; Utilization of Input Tax Credit Subject to Certain Conditions</h5>
+          <p class="section-text">
+            Notwithstanding anything contained in section 49, the input tax credit on account of central tax, State tax or Union territory tax shall be utilised towards payment of integrated tax, central tax, State tax or Union territory tax only after the input tax credit available on account of integrated tax has first been utilised fully towards such payment.
+          </p>
+        </div>
+      </div>
+
+      <!-- ================= TAB 2: RULES ================= -->
+      <div id="tab-rules" class="law-pane" style="display:none;">
+        <h4 style="margin-top:0; color:#1b3f75; font-weight:700; margin-bottom:15px;">Central Goods and Services Tax Rules, 2017</h4>
+
+        <!-- Rule 88A -->
+        <div class="section-box" style="border-left-color:#27ae60;">
+          <h5 class="section-title" style="color:#27ae60;">
+            <i class="fa fa-calculator"></i> Rule 88A &bull; Order of Utilization of Input Tax Credit
+          </h5>
+          <p class="section-text">
+            <strong>Inserted by Notification No. 16/2019 – Central Tax dated 29th March 2019:</strong><br>
+            Input tax credit on account of integrated tax (IGST) shall first be utilised towards payment of integrated tax, and the amount remaining, if any, may be utilised towards the payment of central tax (CGST) and State tax (SGST) or Union territory tax, as the case may be, <strong>in any order and in any proportion</strong>:<br>
+            <em>Provided that the input tax credit on account of central tax, State tax or Union territory tax shall be utilised towards payment of integrated tax, central tax, State tax or Union territory tax only after the input tax credit available on account of integrated tax has first been utilised fully.</em>
+          </p>
+        </div>
+
+        <!-- Rule 36(4) -->
+        <div class="section-box">
+          <h5 class="section-title">Rule 36(4) &bull; Restriction on ITC Availment vs Auto-populated GSTR-2B</h5>
+          <p class="section-text">
+            No input tax credit shall be availed by a registered person in respect of invoices or debit notes the details of which have not been furnished by the suppliers under sub-section (1) of section 37 in Form GSTR-1 and which are not reflected in the auto-generated statement in Form GSTR-2B under sub-rule (7) of rule 60.
+          </p>
+        </div>
+
+        <!-- Rule 86B -->
+        <div class="section-box">
+          <h5 class="section-title">Rule 86B &bull; Restrictions on Use of Amount Available in Electronic Credit Ledger</h5>
+          <p class="section-text">
+            The registered person shall not use the amount available in electronic credit ledger to discharge his liability towards output tax in excess of <strong>ninety-nine per cent.</strong> of such tax liability, in cases where the value of taxable supply in a month exceeds fifty lakh rupees (other than exempt supply and zero-rated supply), subject to specified exclusions.
+          </p>
+        </div>
+
+        <!-- Rule 138 -->
+        <div class="section-box">
+          <h5 class="section-title">Rule 138 &bull; Information to be Furnished Prior to Movement of Goods & e-Way Bill</h5>
+          <p class="section-text">
+            Every registered person who causes movement of goods of consignment value exceeding <strong>fifty thousand rupees</strong> (i) in relation to a supply; or (ii) for reasons other than supply; or (iii) due to inward supply from an unregistered person, shall, before commencement of such movement, furnish information relating to the said goods in Part A of Form GST EWB-01 electronically on the common portal.
+          </p>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: NOTIFICATIONS ================= -->
+      <div id="tab-notifications" class="law-pane" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">Statutory Central Tax Notifications & Circulars</h4>
+          <input type="text" id="notifSearch" class="form-control" placeholder="Search notification number or subject..." style="width:280px;" onkeyup="filterNotifications()">
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" style="font-size:12.5px;">
+            <thead style="background:#1b3f75; color:#fff;">
+              <tr>
+                <th>Notification / Circular No.</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Subject & Description</th>
+                <th style="width:100px; text-align:center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="notifTableBody">
+              <tr>
+                <td><strong>Notif No. 16/2019 - CT</strong></td>
+                <td>29/03/2019</td>
+                <td><span class="badge" style="background:#1b3f75;">Central Tax</span></td>
+                <td>Notification of Rule 88A prescribing the statutory order of utilization of Input Tax Credit in any proportion across CGST and SGST after exhausting IGST credit.</td>
+                <td style="text-align:center;"><button class="btn btn-xs btn-default" onclick="GSTSimulation.showToast('Downloaded Notification No. 16/2019-CT.', 'info')"><i class="fa fa-download"></i> PDF</button></td>
+              </tr>
+              <tr>
+                <td><strong>Notif No. 38/2023 - CT</strong></td>
+                <td>04/08/2023</td>
+                <td><span class="badge" style="background:#1b3f75;">Central Tax</span></td>
+                <td>Amendments in CGST Rules regarding biometric-based Aadhaar authentication for registration and verification of bank account details under Rule 10A.</td>
+                <td style="text-align:center;"><button class="btn btn-xs btn-default" onclick="GSTSimulation.showToast('Downloaded Notification No. 38/2023-CT.', 'info')"><i class="fa fa-download"></i> PDF</button></td>
+              </tr>
+              <tr>
+                <td><strong>Notif No. 04/2024 - CT</strong></td>
+                <td>05/01/2024</td>
+                <td><span class="badge" style="background:#1b3f75;">Central Tax</span></td>
+                <td>Special procedure under Section 148 for registered persons engaged in manufacturing of specified goods (Pan Masala, Tobacco) and registration of machines.</td>
+                <td style="text-align:center;"><button class="btn btn-xs btn-default" onclick="GSTSimulation.showToast('Downloaded Notification No. 04/2024-CT.', 'info')"><i class="fa fa-download"></i> PDF</button></td>
+              </tr>
+              <tr>
+                <td><strong>Circular No. 199/11/2023-GST</strong></td>
+                <td>17/07/2023</td>
+                <td><span class="badge" style="background:#2c4e86;">Circular</span></td>
+                <td>Clarification regarding taxability of services provided by an office of an organisation in one State to the branch office in another State (Cross Charge vs ISD).</td>
+                <td style="text-align:center;"><button class="btn btn-xs btn-default" onclick="GSTSimulation.showToast('Downloaded Circular 199.', 'info')"><i class="fa fa-download"></i> PDF</button></td>
+              </tr>
+              <tr>
+                <td><strong>Circular No. 206/18/2023-GST</strong></td>
+                <td>31/10/2023</td>
+                <td><span class="badge" style="background:#2c4e86;">Circular</span></td>
+                <td>Clarification regarding place of supply of goods supplied to unregistered persons under Section 10(1)(ca) of IGST Act.</td>
+                <td style="text-align:center;"><button class="btn btn-xs btn-default" onclick="GSTSimulation.showToast('Downloaded Circular 206.', 'info')"><i class="fa fa-download"></i> PDF</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: RATE MATRIX ================= -->
+      <div id="tab-rates" class="law-pane" style="display:none;">
+        <div style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:6px; padding:20px; margin-bottom:20px;">
+          <h4 style="margin-top:0; color:#1b3f75; font-weight:700;"><i class="fa fa-search"></i> Interactive HSN / SAC Rate Search Engine</h4>
+          <p style="font-size:13px; color:#64748b; margin-bottom:15px;">
+            Search any 4-digit or 6-digit HSN code, Service Accounting Code (SAC), or commercial item description to instantly view statutory GST tax rates and conditions.
+          </p>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-8 form-group">
+              <input type="text" id="hsnSearchInput" class="form-control" placeholder="Type HSN code (e.g. 8471, 9983, 3923) or keyword (e.g. computer, software, rice)..." onkeyup="searchRates()">
+            </div>
+            <div class="col-md-3 col-sm-4 form-group">
+              <select class="form-control" id="slabFilter" onchange="searchRates()">
+                <option value="ALL">All Tax Slabs</option>
+                <option value="0">0% (Nil / Exempt)</option>
+                <option value="5">5% Concessional</option>
+                <option value="12">12% Standard I</option>
+                <option value="18">18% Standard II</option>
+                <option value="28">28% Demerit / Luxury</option>
+              </select>
+            </div>
+            <div class="col-md-3 form-group">
+              <button type="button" class="btn btn-primary btn-block" onclick="searchRates()" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+                <i class="fa fa-search"></i> Find Rate
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rates Table -->
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" style="font-size:12.5px;">
+            <thead style="background:#1b3f75; color:#fff;">
+              <tr>
+                <th style="width:85px;">HSN / SAC</th>
+                <th style="width:70px;">Chapter</th>
+                <th>Description of Goods / Services</th>
+                <th style="width:80px; text-align:center;">CGST %</th>
+                <th style="width:80px; text-align:center;">SGST %</th>
+                <th style="width:85px; text-align:center;">IGST Total %</th>
+                <th style="width:70px; text-align:center;">Cess</th>
+                <th>Slab Category</th>
+              </tr>
+            </thead>
+            <tbody id="rateTableBody">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer placeholder -->
+  <div id="gst-footer"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var HSN_DATABASE = [
+      { hsn: '8471', chapter: '84', desc: 'Automatic data processing machines and units thereof; magnetic or optical readers (Computers, Laptops, Hard Drives, Servers)', cgst: 9, sgst: 9, igst: 18, cess: 'Nil', slab: '18' },
+      { hsn: '9983', chapter: '99', desc: 'Information technology software development, system design, programming, IT consultancy, and technical testing services', cgst: 9, sgst: 9, igst: 18, cess: 'Nil', slab: '18' },
+      { hsn: '3923', chapter: '39', desc: 'Articles for the conveyance or packing of goods, of plastics; stoppers, lids, caps and other closures, of plastics', cgst: 9, sgst: 9, igst: 18, cess: 'Nil', slab: '18' },
+      { hsn: '1006', chapter: '10', desc: 'Rice in other than pre-packaged and labelled container (loose non-branded grains)', cgst: 0, sgst: 0, igst: 0, cess: 'Nil', slab: '0' },
+      { hsn: '1006', chapter: '10', desc: 'Rice put up in pre-packaged and labelled form unit container', cgst: 2.5, sgst: 2.5, igst: 5, cess: 'Nil', slab: '5' },
+      { hsn: '0401', chapter: '04', desc: 'Milk and cream, not concentrated nor containing added sugar or other sweetening matter (fresh pasteurised milk)', cgst: 0, sgst: 0, igst: 0, cess: 'Nil', slab: '0' },
+      { hsn: '3004', chapter: '30', desc: 'Medicaments consisting of mixed or unmixed products for therapeutic or prophylactic uses (Essential life-saving medicines)', cgst: 6, sgst: 6, igst: 12, cess: 'Nil', slab: '12' },
+      { hsn: '8703', chapter: '87', desc: 'Motor cars and other motor vehicles principally designed for the transport of persons (Petrol/Diesel Luxury Sedans)', cgst: 14, sgst: 14, igst: 28, cess: '15% to 22%', slab: '28' },
+      { hsn: '6203', chapter: '62', desc: 'Men\'s or boys\' suits, jackets, blazers, trousers, bib and brace overalls, breeches (Garments sale value exceeding ₹1000)', cgst: 6, sgst: 6, igst: 12, cess: 'Nil', slab: '12' },
+      { hsn: '9965', chapter: '99', desc: 'Goods transport agency (GTA) services in respect of transportation of goods by road (with ITC)', cgst: 6, sgst: 6, igst: 12, cess: 'Nil', slab: '12' },
+      { hsn: '9972', chapter: '99', desc: 'Real estate services involving commercial properties rental and leasing', cgst: 9, sgst: 9, igst: 18, cess: 'Nil', slab: '18' },
+      { hsn: '2202', chapter: '22', desc: 'Aerated waters containing added sugar or other sweetening matter or flavoured (Carbonated soft drinks)', cgst: 14, sgst: 14, igst: 28, cess: '12%', slab: '28' }
+    ];
+
+    function switchLawTab(tabId) {
+      ['acts', 'rules', 'notifications', 'rates'].forEach(function(t) {
+        var el = document.getElementById('tab-' + t);
+        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
+      });
+      var lis = document.querySelectorAll('#lawTabs li');
+      lis.forEach(function(li) { li.classList.remove('active'); });
+      var targetLi = Array.from(lis).find(function(li) {
+        var a = li.querySelector('a');
+        return a && a.getAttribute('onclick') && a.getAttribute('onclick').indexOf(tabId) !== -1;
+      });
+      if (targetLi) targetLi.classList.add('active');
+    }
+
+    function filterAct(category) {
+      var items = document.querySelectorAll('.act-item');
+      items.forEach(function(item) {
+        if (category === 'all' || item.getAttribute('data-category') === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function filterNotifications() {
+      var query = document.getElementById('notifSearch').value.toLowerCase().trim();
+      var rows = document.querySelectorAll('#notifTableBody tr');
+      rows.forEach(function(row) {
+        var text = row.innerText.toLowerCase();
+        row.style.display = (text.indexOf(query) !== -1) ? '' : 'none';
+      });
+    }
+
+    function searchRates() {
+      var query = document.getElementById('hsnSearchInput').value.toLowerCase().trim();
+      var slab = document.getElementById('slabFilter').value;
+
+      var tbody = document.getElementById('rateTableBody');
+      var results = HSN_DATABASE.filter(function(item) {
+        var matchesText = !query || item.hsn.indexOf(query) !== -1 || item.desc.toLowerCase().indexOf(query) !== -1;
+        var matchesSlab = (slab === 'ALL') || item.slab === slab;
+        return matchesText && matchesSlab;
+      });
+
+      if (results.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted" style="padding:20px;">No matching HSN / SAC records found for query "' + query + '".</td></tr>';
+        return;
+      }
+
+      var html = '';
+      results.forEach(function(r) {
+        html += 
+          '<tr>' +
+            '<td><strong style="color:#1b3f75; font-family:monospace; font-size:13.5px;">' + r.hsn + '</strong></td>' +
+            '<td style="text-align:center;">' + r.chapter + '</td>' +
+            '<td>' + r.desc + '</td>' +
+            '<td style="text-align:center;">' + r.cgst + '%</td>' +
+            '<td style="text-align:center;">' + r.sgst + '%</td>' +
+            '<td style="text-align:center;"><strong style="color:#1b3f75;">' + r.igst + '%</strong></td>' +
+            '<td style="text-align:center;">' + r.cess + '</td>' +
+            '<td><span class="rate-badge rate-' + r.slab + '">' + r.igst + '% GST</span></td>' +
+          '</tr>';
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    window.addEventListener('load', function() {
+      searchRates();
+      var urlParams = new URLSearchParams(window.location.search);
+      var tab = urlParams.get('tab');
+      if (tab) switchLawTab(tab);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help and Taxpayer Facilities | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .help-card {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.06);
+    }
+    .help-tabs-nav {
+      border-bottom: 2px solid #1b3f75;
+      margin-bottom: 0;
+    }
+    .help-tabs-nav > li > a {
+      color: #475f82;
+      font-weight: 700;
+      font-size: 13.5px;
+      border-radius: 4px 4px 0 0;
+      padding: 10px 20px;
+    }
+    .help-tabs-nav > li.active > a,
+    .help-tabs-nav > li.active > a:hover {
+      color: #ffffff !important;
+      background: #1b3f75 !important;
+      border: 1px solid #1b3f75 !important;
+      border-bottom-color: transparent !important;
+    }
+    .help-pane {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-top: none;
+      padding: 25px;
+      border-radius: 0 0 6px 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      margin-bottom: 30px;
+    }
+    .faq-group {
+      margin-bottom: 20px;
+    }
+    .faq-item {
+      background: #f8fafe;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 14px 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: #1b3f75;
+      font-size: 14px;
+      background: #ffffff;
+      border-bottom: 1px solid transparent;
+    }
+    .faq-question:hover {
+      background: #f1f5f9;
+    }
+    .faq-answer {
+      padding: 15px 18px;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.6;
+      background: #f8fafe;
+      border-top: 1px solid #e2e8f0;
+      display: none;
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+    .faq-item.open .faq-question {
+      border-bottom-color: #e2e8f0;
+    }
+    .contact-box {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- UI Shell Placeholders -->
+  <div id="gst-header"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+    
+    <!-- Breadcrumbs -->
+    <div id="gst-breadcrumbs"></div>
+
+    <!-- Header Card -->
+    <div class="help-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:15px;">
+        <div>
+          <h2 style="margin:0; color:#1b3f75; font-weight:700; font-size:22px;">
+            <i class="fa fa-life-ring"></i> Help and Taxpayer Facilities
+          </h2>
+          <p style="margin:4px 0 0 0; color:#64748b; font-size:13px;">
+            User Manuals, FAQs, Helpdesk Directory, and Official Grievance Redressal Portal for GST
+          </p>
+        </div>
+        <div>
+          <span class="label label-primary" style="background:#1b3f75; font-size:12px; padding:6px 10px;">
+            <i class="fa fa-phone"></i> Helpline: 1800-103-4786
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav nav-tabs help-tabs-nav" id="helpTabs" role="tablist">
+        <li class="active"><a href="#tab-faqs" onclick="switchHelpTab('faqs')"><i class="fa fa-question-circle"></i> Frequently Asked Questions (FAQs)</a></li>
+        <li><a href="#tab-grievance" onclick="switchHelpTab('grievance')"><i class="fa fa-pencil-square-o"></i> Lodge Grievance (Grievance Portal)</a></li>
+        <li><a href="#tab-track-grv" onclick="switchHelpTab('track-grv')"><i class="fa fa-search"></i> Track Grievance Status</a></li>
+        <li><a href="#tab-contact" onclick="switchHelpTab('contact')"><i class="fa fa-address-book-o"></i> Helpdesk Directory & Toll-Free</a></li>
+      </ul>
+
+      <!-- ================= TAB 1: FAQS ================= -->
+      <div id="tab-faqs" class="help-pane">
+        <div style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:6px; padding:15px 20px; margin-bottom:20px;">
+          <input type="text" id="faqSearchInput" class="form-control" placeholder="Search FAQs (e.g. Rule 88A, ITC, GSTR-1, Challan, e-Way Bill, OTP)..." onkeyup="searchFaqs()">
+        </div>
+
+        <div id="faqListContainer">
+          
+          <!-- Category: Registration -->
+          <div class="faq-group">
+            <h4 style="color:#1b3f75; font-weight:700; border-bottom:2px solid #e2e8f0; padding-bottom:6px; margin-bottom:12px;">
+              <i class="fa fa-user-plus"></i> GST Registration & TRN
+            </h4>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What is a Temporary Reference Number (TRN) in Form GST REG-01?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                A 15-digit Temporary Reference Number (TRN) is generated upon successful completion of Part-A of Form GST REG-01 after validating the applicant's PAN, Mobile Number, and Email ID via OTP. TRN is valid for 15 days, within which the applicant must complete and submit Part-B of the registration application.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What is the mandatory threshold limit for GST registration?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Under Section 22 of the CGST Act, registration is mandatory for businesses having an aggregate annual turnover exceeding ₹40 Lakhs for suppliers of goods (₹20 Lakhs for Special Category States) and ₹20 Lakhs for suppliers of services (₹10 Lakhs for Special Category States). Persons making inter-state taxable supplies must register mandatorily regardless of turnover.
+              </div>
+            </div>
+          </div>
+
+          <!-- Category: Returns & ITC -->
+          <div class="faq-group">
+            <h4 style="color:#1b3f75; font-weight:700; border-bottom:2px solid #e2e8f0; padding-bottom:6px; margin-bottom:12px;">
+              <i class="fa fa-calculator"></i> Returns, GSTR-2B & Rule 88A ITC Offset
+            </h4>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>How does Rule 88A govern the order of Input Tax Credit (ITC) utilization?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Under Rule 88A, the ITC on account of Integrated Tax (IGST) must be completely exhausted first before utilizing CGST or SGST credits. The IGST credit is first offset against IGST output liability, and any remaining IGST credit can be utilized towards CGST and SGST liabilities in <strong>any order and in any proportion</strong>. CGST credit cannot be set off against SGST liability, and SGST credit cannot be set off against CGST liability.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What is Form GSTR-2B and when is it generated?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Form GSTR-2B is an auto-drafted Input Tax Credit (ITC) statement generated on the 14th of every month based on outward supply invoices filed by suppliers in their GSTR-1 returns up to the 11th/13th of that month. It classifies available eligible ITC and ineligible ITC as per Rule 36(4).
+              </div>
+            </div>
+          </div>
+
+          <!-- Category: Payments & Challans -->
+          <div class="faq-group">
+            <h4 style="color:#1b3f75; font-weight:700; border-bottom:2px solid #e2e8f0; padding-bottom:6px; margin-bottom:12px;">
+              <i class="fa fa-money"></i> Tax Payments & PMT-06 Challans
+            </h4>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What is a CPIN and CIN in GST payment?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                A Common Portal Identification Number (CPIN) is a 14-digit unique number generated upon creating Form GST PMT-06 challan, valid for 15 days. When payment is successfully cleared by the authorized bank, the bank generates a 17-digit Challan Identification Number (CIN) containing a 3-character bank code plus a 14-digit number. Generation of CIN confirms crediting of the Electronic Cash Ledger.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What should I do if my bank account is debited but CIN is not generated?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                If the amount is debited from your bank account but the CPIN status shows Pending, you can lodge an application in Form GST PMT-07 via the Grievance Redressal Portal or wait up to 2 hours for automated payment gateway reconciliation.
+              </div>
+            </div>
+          </div>
+
+          <!-- Category: e-Way Bill -->
+          <div class="faq-group">
+            <h4 style="color:#1b3f75; font-weight:700; border-bottom:2px solid #e2e8f0; padding-bottom:6px; margin-bottom:12px;">
+              <i class="fa fa-truck"></i> e-Way Bill (EWB-01)
+            </h4>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                <span>When is generating an e-Way Bill compulsory?</span>
+                <i class="fa fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Under Rule 138, generating an e-Way Bill is mandatory prior to the movement of goods in a vehicle where the consignment value (including tax) exceeds ₹50,000 for inter-state supplies, and for intra-state movement as notified by respective State GST rules.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= TAB 2: LODGE GRIEVANCE ================= -->
+      <div id="tab-grievance" class="help-pane" style="display:none;">
+        <h4 style="margin-top:0; color:#1b3f75; font-weight:700; margin-bottom:6px;">Lodge Grievance / Complaint on GST Portal</h4>
+        <p style="font-size:13px; color:#64748b; margin-bottom:20px;">
+          Submit your issue regarding payments, returns, ledgers, or registration to the GST Helpdesk. A unique Ticket Reference Number will be issued.
+        </p>
+
+        <form id="grievanceForm" onsubmit="handleGrievanceSubmit(event)" style="max-width:750px;">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Taxpayer GSTIN / PAN <span style="color:red;">*</span></label>
+              <input type="text" class="form-control font-mono" id="grvGstin" value="27AAACB2234K1ZV" required>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Grievance Category <span style="color:red;">*</span></label>
+              <select class="form-control" id="grvCategory" required>
+                <option value="Payments & Challans (PMT-07)">Payments & Challans (Form PMT-07)</option>
+                <option value="Returns & Filing Issues">Returns & Filing (GSTR-1, 2B, 3B)</option>
+                <option value="Registration & ARN Processing">Registration, Core Amendment & ARN</option>
+                <option value="Electronic Ledgers Discrepancy">Electronic Cash/Credit Ledger Discrepancy</option>
+                <option value="e-Way Bill & e-Invoice System">e-Way Bill & e-Invoice Technical Error</option>
+                <option value="Others / General Grievance">Others / General IT Error</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Subject / Brief Summary <span style="color:red;">*</span></label>
+            <input type="text" class="form-control" id="grvSubject" placeholder="e.g. Bank debited but CPIN showing pending for over 1 hour" required>
+          </div>
+
+          <div class="form-group">
+            <label>Detailed Description of Grievance <span style="color:red;">*</span></label>
+            <textarea class="form-control" id="grvDesc" rows="4" placeholder="Provide complete facts, relevant CPIN/ARN/Invoice numbers, dates and error message encountered..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Supporting Screenshot / Bank Statement (Simulated)</label>
+            <input type="file" class="form-control" id="grvFile" accept=".pdf,.png,.jpg">
+            <span class="help-block" style="font-size:11.5px; color:#64748b;">Max file size 5MB. PDF, JPG, PNG allowed.</span>
+          </div>
+
+          <div style="margin-top:20px;">
+            <button type="submit" class="btn btn-primary" style="background:#1b3f75; border-color:#1b3f75; font-weight:700; font-size:14px; padding:8px 24px;">
+              <i class="fa fa-send"></i> Submit Grievance
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ================= TAB 3: TRACK GRIEVANCE ================= -->
+      <div id="tab-track-grv" class="help-pane" style="display:none;">
+        <h4 style="margin-top:0; color:#1b3f75; font-weight:700; margin-bottom:15px;">Track Grievance Ticket Status</h4>
+        
+        <div style="max-width:600px; margin-bottom:25px;">
+          <div class="input-group">
+            <input type="text" class="form-control" id="trackTicketInput" value="GST-GRV-2024-819204" placeholder="Enter Grievance Ticket No (e.g. GST-GRV-2024-819204)">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button" onclick="trackGrievance()" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+                <i class="fa fa-search"></i> Track Status
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div id="grvTrackResult" style="display:none;">
+          <!-- Content Injected via JS -->
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: CONTACT DIRECTORY ================= -->
+      <div id="tab-contact" class="help-pane" style="display:none;">
+        <h4 style="margin-top:0; color:#1b3f75; font-weight:700; margin-bottom:15px;">GSTN & CBIC Contact Directory</h4>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="contact-box">
+              <h5 style="margin:0 0 10px 0; color:#1b3f75; font-weight:700;"><i class="fa fa-phone"></i> National GST Helpdesk</h5>
+              <p style="margin:0 0 6px 0; font-size:13px;"><strong>Toll-Free Helpline:</strong> <a href="tel:18001034786" style="color:#1b3f75; font-weight:700; font-size:15px;">1800-103-4786</a></p>
+              <p style="margin:0 0 6px 0; font-size:13px;"><strong>Alternative Helpline:</strong> 0120-4888999</p>
+              <p style="margin:0 0 6px 0; font-size:13px;"><strong>Working Hours:</strong> Monday to Saturday (9:00 AM to 9:00 PM)</p>
+              <p style="margin:0; font-size:13px;"><strong>Helpdesk Email:</strong> <a href="mailto:helpdesk@gst.gov.in">helpdesk@gst.gov.in</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="contact-box">
+              <h5 style="margin:0 0 10px 0; color:#1b3f75; font-weight:700;"><i class="fa fa-building-o"></i> GST Network Headquarters</h5>
+              <p style="margin:0 0 6px 0; font-size:13px;"><strong>Address:</strong> Goods and Services Tax Network (GSTN)</p>
+              <p style="margin:0 0 6px 0; font-size:13px;">East Wing, 4th Floor, Worldmark 1, Aerocity</p>
+              <p style="margin:0; font-size:13px;">New Delhi - 110037, India</p>
+            </div>
+          </div>
+        </div>
+
+        <h5 style="margin:20px 0 10px 0; color:#1b3f75; font-weight:700;"><i class="fa fa-map"></i> State Nodal Officer Helplines</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" style="font-size:12.5px;">
+            <thead style="background:#1b3f75; color:#fff;">
+              <tr>
+                <th>State / Union Territory</th>
+                <th>State Tax Department</th>
+                <th>Nodal Helpline</th>
+                <th>Email Support</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Maharashtra (27)</strong></td>
+                <td>State Goods and Services Tax Department, Mazgaon, Mumbai</td>
+                <td>022-23760655</td>
+                <td>helpdesk@mahagst.gov.in</td>
+              </tr>
+              <tr>
+                <td><strong>Karnataka (29)</strong></td>
+                <td>Commercial Taxes Department, Vanijya Therige Karyalaya, Bengaluru</td>
+                <td>080-22208492</td>
+                <td>ctdhelpdesk@karnataka.gov.in</td>
+              </tr>
+              <tr>
+                <td><strong>Delhi (07)</strong></td>
+                <td>Department of Trade & Taxes, Vyapar Bhawan, IP Estate, New Delhi</td>
+                <td>011-23317777</td>
+                <td>dtt-helpdesk@delhi.gov.in</td>
+              </tr>
+              <tr>
+                <td><strong>Gujarat (24)</strong></td>
+                <td>Office of the Chief Commissioner of State Tax, Rajya Kar Bhavan, Ahmedabad</td>
+                <td>079-26578051</td>
+                <td>gstgujarat@gujarat.gov.in</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer placeholder -->
+  <div id="gst-footer"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    function switchHelpTab(tabId) {
+      ['faqs', 'grievance', 'track-grv', 'contact'].forEach(function(t) {
+        var el = document.getElementById('tab-' + t);
+        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
+      });
+      var lis = document.querySelectorAll('#helpTabs li');
+      lis.forEach(function(li) { li.classList.remove('active'); });
+      var targetLi = Array.from(lis).find(function(li) {
+        var a = li.querySelector('a');
+        return a && a.getAttribute('onclick') && a.getAttribute('onclick').indexOf(tabId) !== -1;
+      });
+      if (targetLi) targetLi.classList.add('active');
+    }
+
+    function toggleFaq(btn) {
+      var item = btn.parentElement;
+      item.classList.toggle('open');
+      var icon = btn.querySelector('i');
+      if (item.classList.contains('open')) {
+        icon.className = 'fa fa-chevron-up';
+      } else {
+        icon.className = 'fa fa-chevron-down';
+      }
+    }
+
+    function searchFaqs() {
+      var q = document.getElementById('faqSearchInput').value.toLowerCase().trim();
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function(item) {
+        var text = item.innerText.toLowerCase();
+        if (!q || text.indexOf(q) !== -1) {
+          item.style.display = 'block';
+          if (q) item.classList.add('open');
+        } else {
+          item.style.display = 'none';
+          item.classList.remove('open');
+        }
+      });
+    }
+
+    function handleGrievanceSubmit(e) {
+      e.preventDefault();
+      var gstin = document.getElementById('grvGstin').value.trim();
+      var category = document.getElementById('grvCategory').value;
+      var subject = document.getElementById('grvSubject').value.trim();
+      var desc = document.getElementById('grvDesc').value.trim();
+
+      fetch('/api/grievance/lodge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gstin: gstin,
+          category: category,
+          subject: subject,
+          description: desc
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success && data.ticketNo) {
+          GSTSimulation.showToast('Grievance Ticket Generated: ' + data.ticketNo, 'success', 'Grievance Lodged');
+          document.getElementById('trackTicketInput').value = data.ticketNo;
+          switchHelpTab('track-grv');
+          trackGrievance();
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        GSTSimulation.showToast('Failed to lodge grievance.', 'danger');
+      });
+    }
+
+    function trackGrievance() {
+      var ticketNo = document.getElementById('trackTicketInput').value.trim();
+      if (!ticketNo) {
+        GSTSimulation.showToast('Please enter a valid ticket number.', 'warning');
+        return;
+      }
+
+      fetch('/api/grievance/track?ticket=' + encodeURIComponent(ticketNo))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var container = document.getElementById('grvTrackResult');
+          container.style.display = 'block';
+          if (data.success && data.grievance) {
+            var g = data.grievance;
+            container.innerHTML = 
+              '<div style="background:#f8fafe; border:1px solid #cbd5e1; border-radius:6px; padding:20px; max-width:750px;">' +
+                '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">' +
+                  '<h4 style="margin:0; color:#1b3f75; font-weight:700;"><i class="fa fa-ticket"></i> Ticket: ' + g.ticketNo + '</h4>' +
+                  '<span class="label label-success" style="font-size:12px;">' + g.status + '</span>' +
+                '</div>' +
+                '<table class="table table-bordered table-condensed" style="background:#fff; font-size:13px; margin-bottom:12px;">' +
+                  '<tr><th style="width:30%;">Date Lodged</th><td>' + g.date + '</td></tr>' +
+                  '<tr><th>Taxpayer GSTIN</th><td><code style="color:#1b3f75;">' + g.gstin + '</code></td></tr>' +
+                  '<tr><th>Grievance Category</th><td>' + g.category + '</td></tr>' +
+                  '<tr><th>Subject</th><td><strong>' + g.subject + '</strong></td></tr>' +
+                '</table>' +
+                '<div style="background:#fff; border:1px solid #e2e8f0; border-radius:4px; padding:12px; margin-top:10px;">' +
+                  '<h5 style="margin:0 0 6px 0; color:#1b3f75; font-weight:700;"><i class="fa fa-reply"></i> Official Helpdesk Resolution / Response:</h5>' +
+                  '<p style="margin:0; font-size:13px; color:#2d3748; line-height:1.5;">' + (g.reply || 'Ticket under active investigation by Central GST Technical Desk.') + '</p>' +
+                '</div>' +
+              '</div>';
+          } else {
+            container.innerHTML = 
+              '<div class="alert alert-warning" style="max-width:750px;">' +
+                '<i class="fa fa-exclamation-circle"></i> No grievance ticket found for <strong>' + ticketNo + '</strong>. Please verify the ticket number.' +
+              '</div>';
+          }
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
+    }
+
+    window.addEventListener('load', function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var tab = urlParams.get('tab');
+      if (tab) switchHelpTab(tab);
+    });
+  </script>
+
+</body>
+</html>

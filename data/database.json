@@ -1,0 +1,653 @@
+{
+  "taxpayers": [
+    {
+      "gstin": "27AAACB2234K1ZV",
+      "legalName": "BHARAT ENTERPRISES PRIVATE LIMITED",
+      "tradeName": "BHARAT ENTERPRISES",
+      "pan": "AAACB2234K",
+      "state": "Maharashtra",
+      "stateCode": "27",
+      "type": "Regular",
+      "constitution": "Private Limited Company",
+      "registrationDate": "01/07/2017",
+      "status": "Active",
+      "centerJurisdiction": "COMMISSIONERATE MUMBAI SOUTH, DIVISION-IV, RANGE-II",
+      "stateJurisdiction": "NODAL DIVISION 1, MUMBAI",
+      "address": "Plot No. 42, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051",
+      "email": "contact@bharatenterprises.in",
+      "mobile": "9820123456",
+      "natureOfBusiness": "Wholesale Business, Retail Business, Factory / Manufacturing",
+      "cashLedger": {
+        "igst": {
+          "tax": 45000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "cgst": {
+          "tax": 28000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "sgst": {
+          "tax": 28000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "cess": {
+          "tax": 5000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        }
+      },
+      "creditLedger": {
+        "igst": 62000,
+        "cgst": 75000,
+        "sgst": 75000,
+        "cess": 0
+      },
+      "liabilityRegister": {
+        "igst": 0,
+        "cgst": 0,
+        "sgst": 0,
+        "cess": 0
+      },
+      "bankAccounts": [
+        {
+          "accountNumber": "0002102000034891",
+          "accountType": "Current Account",
+          "ifsc": "SBIN0001248",
+          "bankName": "State Bank of India",
+          "branch": "BKC Special Commercial Branch, Mumbai",
+          "status": "Verified by PFMS"
+        },
+        {
+          "accountNumber": "50200034182910",
+          "accountType": "Cash Credit Account",
+          "ifsc": "HDFC0000060",
+          "bankName": "HDFC Bank Ltd",
+          "branch": "Fort Branch, Mumbai",
+          "status": "Verified by PFMS"
+        }
+      ],
+      "premises": [
+        {
+          "type": "Principal Place of Business",
+          "address": "Plot No. 42, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051",
+          "contact": "contact@bharatenterprises.in | 022-26590012",
+          "possession": "Owned",
+          "activity": "Head Office, Factory, Warehouse"
+        },
+        {
+          "type": "Additional Place of Business",
+          "address": "Gala No. 14, MIDC Industrial Area, Taloja, Raigad, Navi Mumbai, Maharashtra 410208",
+          "contact": "warehouse.taloja@bharatenterprises.in | 022-27411029",
+          "possession": "Rented / Leased",
+          "activity": "Central Distribution Warehouse"
+        }
+      ],
+      "signatories": [
+        {
+          "name": "Rajesh Kumar Sharma",
+          "designation": "Managing Director",
+          "pan": "AAYPS4419K",
+          "din": "02194820",
+          "mobile": "9820123456",
+          "email": "rajesh.sharma@bharatenterprises.in",
+          "isPrimary": true
+        },
+        {
+          "name": "Anil Ramesh Mehta",
+          "designation": "Whole-time Director",
+          "pan": "AAMPM9918B",
+          "din": "03829104",
+          "mobile": "9819987654",
+          "email": "anil.mehta@bharatenterprises.in",
+          "isPrimary": false
+        }
+      ],
+      "returns": {
+        "2024-25": {
+          "August": {
+            "gstr1": {
+              "status": "FILED",
+              "arn": "AA2709268979507",
+              "filedDate": "05/09/2026",
+              "invoices": [
+                {
+                  "receiverGstin": "29AABCS5544N1ZR",
+                  "receiverName": "SOUTHERN TECH SOLUTIONS LLP",
+                  "invoiceNumber": "INV-PRACTICE-001",
+                  "invoiceDate": "10/08/2024",
+                  "posCode": "29",
+                  "posState": "Karnataka",
+                  "rate": 18,
+                  "taxableValue": 100000,
+                  "igst": 18000,
+                  "cgst": 0,
+                  "sgst": 0,
+                  "total": 118000
+                }
+              ],
+              "tables": {
+                "b2b": [
+                  {
+                    "invoiceNumber": "INV-PRACTICE-001",
+                    "taxableValue": 100000,
+                    "total": 118000
+                  }
+                ],
+                "b2cl": [
+                  {
+                    "invoiceNumber": "B2CL-001",
+                    "taxableValue": 125000,
+                    "total": 147500
+                  }
+                ],
+                "exp": [
+                  {
+                    "invoiceNumber": "EXP-001",
+                    "taxableValue": 250000,
+                    "total": 295000
+                  }
+                ],
+                "b2cs": [
+                  {
+                    "taxableValue": 35000,
+                    "total": 41300
+                  }
+                ],
+                "nil": {
+                  "r8a": {
+                    "nil": 5000,
+                    "exm": 0,
+                    "nonGst": 0
+                  }
+                },
+                "cdnr": [
+                  {
+                    "noteNumber": "CN-001",
+                    "taxableValue": 15000,
+                    "noteType": "Credit Note"
+                  }
+                ],
+                "cdnur": [
+                  {
+                    "noteNumber": "CNUR-001",
+                    "taxableValue": 10000,
+                    "noteType": "Credit Note"
+                  }
+                ],
+                "hsn": [
+                  {
+                    "code": "8471",
+                    "taxableValue": 100000
+                  }
+                ],
+                "doc": [
+                  {
+                    "name": "Invoices for outward supply",
+                    "total": 10,
+                    "cancelled": 1
+                  }
+                ]
+              },
+              "summary": {}
+            },
+            "gstr2b": {
+              "status": "AVAILABLE",
+              "eligibleItc": {
+                "igst": 45000,
+                "cgst": 9000,
+                "sgst": 9000,
+                "cess": 0
+              }
+            },
+            "gstr3b": {
+              "status": "FILED",
+              "arn": "AA2709265550532",
+              "filedDate": "05/09/2026",
+              "liabilitySummary": {}
+            }
+          },
+          "July": {
+            "gstr1": {
+              "status": "FILED",
+              "arn": "AA2707240019283",
+              "filedDate": "11/08/2024"
+            },
+            "gstr2b": {
+              "status": "AVAILABLE",
+              "eligibleItc": {
+                "igst": 38000,
+                "cgst": 24000,
+                "sgst": 24000,
+                "cess": 0
+              }
+            },
+            "gstr3b": {
+              "status": "FILED",
+              "arn": "AA2707240049211",
+              "filedDate": "20/08/2024"
+            }
+          }
+        },
+        "2023-24": {
+          "annual": {
+            "gstr9": {
+              "status": "FILED",
+              "arn": "AA2712240091823",
+              "filedDate": "24/12/2024",
+              "turnover": 45200000,
+              "taxPaid": 8136000
+            }
+          }
+        },
+        "2025-26": {
+          "April": {
+            "gstr1": {
+              "status": "FILED",
+              "arn": "AA2709264960614",
+              "filedDate": "05/09/2026",
+              "invoices": []
+            },
+            "gstr3b": {
+              "status": "FILED",
+              "arn": "AA2709267497828",
+              "filedDate": "05/09/2026",
+              "liabilitySummary": {}
+            }
+          }
+        }
+      },
+      "notices": [
+        {
+          "referenceNo": "ZA270824001928V",
+          "issueDate": "18/08/2024",
+          "type": "Intimation of Tax Ascertained (DRC-01A)",
+          "section": "Section 73(5) of the CGST Act",
+          "issuingAuthority": "Deputy Commissioner of State Tax, Nodal Division 1, Mumbai",
+          "dueDate": "17/09/2024",
+          "taxDemand": {
+            "tax": 14200,
+            "interest": 1278,
+            "penalty": 0,
+            "total": 15478
+          },
+          "description": "Mismatch noticed between ITC claimed in Form GSTR-3B and ITC auto-populated in Form GSTR-2B for the financial period 2023-24 (Q3).",
+          "status": "PENDING_REPLY",
+          "reply": null
+        },
+        {
+          "referenceNo": "ZA270524000381B",
+          "issueDate": "12/05/2024",
+          "type": "Scrutiny Notice of Returns (ASMT-10)",
+          "section": "Section 61 of the CGST Act read with Rule 99",
+          "issuingAuthority": "Assistant Commissioner of Central Tax, Range-II, Mumbai South",
+          "dueDate": "11/06/2024",
+          "taxDemand": {
+            "tax": 0,
+            "interest": 0,
+            "penalty": 0,
+            "total": 0
+          },
+          "description": "Discrepancy identified in Outward Supply reported in Table 4 of GSTR-3B vs Table 4 of GSTR-1 for March 2024.",
+          "status": "REPLIED",
+          "reply": {
+            "replyRefNo": "REP270524000189",
+            "replyDate": "28/05/2024",
+            "remarks": "Clarified that invoice INV-2024-88 was amended via Table 9A in April 2024. Differential tax paid via DRC-03 with ARN AA270524002910.",
+            "status": "Accepted by Tax Officer (ASMT-12 Issued)"
+          }
+        }
+      ],
+      "transactions": [
+        {
+          "date": "05/09/2024",
+          "refNo": "CPIN2409281920",
+          "desc": "Tax Payment via Net Banking (SBI)",
+          "type": "Credit",
+          "majorHead": "IGST",
+          "amount": 45000
+        },
+        {
+          "date": "05/09/2024",
+          "refNo": "CPIN2409281920",
+          "desc": "Tax Payment via Net Banking (SBI)",
+          "type": "Credit",
+          "majorHead": "CGST",
+          "amount": 28000
+        },
+        {
+          "date": "05/09/2024",
+          "refNo": "CPIN2409281920",
+          "desc": "Tax Payment via Net Banking (SBI)",
+          "type": "Credit",
+          "majorHead": "SGST",
+          "amount": 28000
+        },
+        {
+          "date": "20/08/2024",
+          "refNo": "RET2707240049211",
+          "desc": "Liability offset against July GSTR-3B",
+          "type": "Debit",
+          "majorHead": "CGST",
+          "amount": 24000
+        },
+        {
+          "date": "20/08/2024",
+          "refNo": "RET2707240049211",
+          "desc": "Liability offset against July GSTR-3B",
+          "type": "Debit",
+          "majorHead": "SGST",
+          "amount": 24000
+        }
+      ],
+      "challans": []
+    },
+    {
+      "gstin": "29AABCS5544N1ZR",
+      "legalName": "SOUTHERN TECH SOLUTIONS LLP",
+      "tradeName": "SOUTHERN TECH",
+      "pan": "AABCS5544N",
+      "state": "Karnataka",
+      "stateCode": "29",
+      "type": "Regular",
+      "constitution": "Limited Liability Partnership",
+      "registrationDate": "15/09/2018",
+      "status": "Active",
+      "centerJurisdiction": "COMMISSIONERATE BENGALURU EAST, RANGE-1",
+      "stateJurisdiction": "LGSTO 045, BENGALURU",
+      "address": "Level 4, Prestige Tech Park, Marathahalli, Bengaluru, Karnataka 560103",
+      "email": "finance@southerntech.in",
+      "mobile": "9988776655",
+      "natureOfBusiness": "Software Development & IT Consultancy Services",
+      "cashLedger": {
+        "igst": {
+          "tax": 60000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "cgst": {
+          "tax": 35000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "sgst": {
+          "tax": 35000,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "cess": {
+          "tax": 0,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        }
+      },
+      "creditLedger": {
+        "igst": 180000,
+        "cgst": 95000,
+        "sgst": 95000,
+        "cess": 0
+      },
+      "liabilityRegister": {
+        "igst": 0,
+        "cgst": 0,
+        "sgst": 0,
+        "cess": 0
+      },
+      "bankAccounts": [
+        {
+          "accountNumber": "004010200049182",
+          "accountType": "Current Account",
+          "ifsc": "ICIC0000040",
+          "bankName": "ICICI Bank Ltd",
+          "branch": "Koramangala, Bengaluru",
+          "status": "Verified by PFMS"
+        }
+      ],
+      "premises": [
+        {
+          "type": "Principal Place of Business",
+          "address": "Level 4, Prestige Tech Park, Marathahalli, Bengaluru, Karnataka 560103",
+          "contact": "finance@southerntech.in | 080-41920044",
+          "possession": "Leased",
+          "activity": "Software Development Center"
+        }
+      ],
+      "signatories": [
+        {
+          "name": "Karthik Subramanian",
+          "designation": "Designated Partner",
+          "pan": "AAXPK1290L",
+          "din": "07481923",
+          "mobile": "9988776655",
+          "email": "karthik@southerntech.in",
+          "isPrimary": true
+        }
+      ],
+      "returns": {},
+      "notices": [],
+      "transactions": [],
+      "challans": []
+    },
+    {
+      "gstin": "07AABCG1234F1ZQ",
+      "legalName": "GUPTA KIRANA & GENERAL STORES",
+      "tradeName": "GUPTA STORES",
+      "pan": "AABCG1234F",
+      "state": "Delhi",
+      "stateCode": "07",
+      "type": "Composition",
+      "constitution": "Proprietorship",
+      "registrationDate": "01/01/2019",
+      "status": "Active",
+      "centerJurisdiction": "COMMISSIONERATE DELHI CENTRAL, RANGE-3",
+      "stateJurisdiction": "WARD 12, NEW DELHI",
+      "address": "Shop No. 12, Main Market, Chandni Chowk, Delhi 110006",
+      "email": "guptastoresdelhi@gmail.com",
+      "mobile": "9811223344",
+      "natureOfBusiness": "Retail Trading of Groceries & General Merchandise",
+      "cashLedger": {
+        "igst": {
+          "tax": 0,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "cgst": {
+          "tax": 12500,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "sgst": {
+          "tax": 12500,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        },
+        "cess": {
+          "tax": 0,
+          "interest": 0,
+          "penalty": 0,
+          "fee": 0,
+          "other": 0
+        }
+      },
+      "creditLedger": {
+        "igst": 0,
+        "cgst": 0,
+        "sgst": 0,
+        "cess": 0
+      },
+      "liabilityRegister": {
+        "igst": 0,
+        "cgst": 0,
+        "sgst": 0,
+        "cess": 0
+      },
+      "bankAccounts": [
+        {
+          "accountNumber": "0123002100014819",
+          "accountType": "Savings / Business Account",
+          "ifsc": "PUNB0012300",
+          "bankName": "Punjab National Bank",
+          "branch": "Chandni Chowk, Delhi",
+          "status": "Verified by PFMS"
+        }
+      ],
+      "premises": [
+        {
+          "type": "Principal Place of Business",
+          "address": "Shop No. 12, Main Market, Chandni Chowk, Delhi 110006",
+          "contact": "guptastoresdelhi@gmail.com | 011-23841029",
+          "possession": "Owned",
+          "activity": "Retail Grocery Store"
+        }
+      ],
+      "signatories": [
+        {
+          "name": "Rameshwar Prasad Gupta",
+          "designation": "Proprietor",
+          "pan": "AABCG1234F",
+          "din": "",
+          "mobile": "9811223344",
+          "email": "guptastoresdelhi@gmail.com",
+          "isPrimary": true
+        }
+      ],
+      "returns": {},
+      "notices": [],
+      "transactions": [],
+      "challans": []
+    }
+  ],
+  "applications": [
+    {
+      "arn": "AA2708240091823",
+      "trn": "272400019284TRN",
+      "legalName": "HINDUSTAN LOGISTICS & FREIGHT CARRIERS",
+      "pan": "AABCH9912K",
+      "state": "Maharashtra",
+      "appliedDate": "28/08/2024",
+      "status": "Approved",
+      "stage": "GSTIN Generated",
+      "generatedGstin": "27AABCH9912K1ZT"
+    },
+    {
+      "arn": "AA2709240012948",
+      "trn": "272400038172TRN",
+      "legalName": "OMEGA CHEMICALS & POLYMERS LLP",
+      "pan": "AAFCO4411P",
+      "state": "Maharashtra",
+      "appliedDate": "02/09/2024",
+      "status": "Pending for Processing",
+      "stage": "Verification in Progress",
+      "generatedGstin": null
+    }
+  ],
+  "ewayBills": [
+    {
+      "ewbNo": "271048291042",
+      "ewbDate": "04/09/2024 10:30 AM",
+      "generatedBy": "27AAACB2234K1ZV",
+      "validUpto": "06/09/2024 11:59 PM",
+      "supplyType": "Outward - Supply",
+      "docType": "Tax Invoice",
+      "docNo": "INV-2024-001",
+      "docDate": "04/09/2024",
+      "fromGstin": "27AAACB2234K1ZV",
+      "fromTrader": "BHARAT ENTERPRISES PVT LTD",
+      "fromState": "Maharashtra (27)",
+      "fromAddress": "Plot No. 42, Bandra Kurla Complex, Mumbai 400051",
+      "toGstin": "29AABCS5544N1ZR",
+      "toTrader": "SOUTHERN TECH SOLUTIONS LLP",
+      "toState": "Karnataka (29)",
+      "toAddress": "Level 4, Prestige Tech Park, Marathahalli, Bengaluru 560103",
+      "taxableAmount": 250000,
+      "igst": 45000,
+      "cgst": 0,
+      "sgst": 0,
+      "cess": 0,
+      "totalAmount": 295000,
+      "hsn": "8471",
+      "itemDesc": "Cloud Server Hardware & Infrastructure",
+      "mode": "Road",
+      "vehicleNo": "MH04JK8842",
+      "approxDistance": 985,
+      "transporterId": "27AABCH9912K1ZT",
+      "transporterName": "HINDUSTAN LOGISTICS & FREIGHT",
+      "status": "ACT - Active"
+    }
+  ],
+  "grievances": [
+    {
+      "ticketNo": "GST-GRV-2024-819204",
+      "date": "01/09/2024",
+      "gstin": "27AAACB2234K1ZV",
+      "category": "Payments & Challans (PMT-07)",
+      "subject": "Amount debited via SBI Net Banking but CPIN status showing Pending for 30 minutes",
+      "status": "Resolved",
+      "reply": "System reconciled CIN generated via payment gateway. Electronic cash ledger updated successfully."
+    }
+  ],
+  "sampleInvoices": [
+    {
+      "invoiceNumber": "INV-2024-001",
+      "invoiceDate": "05/08/2024",
+      "recipientGstin": "29AABCS5544N1ZR",
+      "recipientName": "SOUTHERN TECH SOLUTIONS LLP",
+      "posState": "Karnataka",
+      "posCode": "29",
+      "items": [
+        {
+          "itemDescription": "Cloud Server Hardware & Infrastructure",
+          "hsn": "8471",
+          "rate": 18,
+          "taxableValue": 250000,
+          "igst": 45000,
+          "cgst": 0,
+          "sgst": 0
+        }
+      ]
+    },
+    {
+      "invoiceNumber": "INV-2024-002",
+      "invoiceDate": "12/08/2024",
+      "recipientGstin": "27AAACB2234K1ZV",
+      "recipientName": "BHARAT ENTERPRISES PRIVATE LIMITED",
+      "posState": "Maharashtra",
+      "posCode": "27",
+      "items": [
+        {
+          "itemDescription": "Industrial Packaging Materials",
+          "hsn": "3923",
+          "rate": 18,
+          "taxableValue": 100000,
+          "igst": 0,
+          "cgst": 9000,
+          "sgst": 9000
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Taxpayer Profile | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .profile-hero {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin-top: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(27,63,117,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .profile-hero-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .profile-avatar-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #eef4fc;
+      border: 2px solid #1b3f75;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1b3f75;
+      font-size: 30px;
+    }
+    .profile-title-block h2 {
+      margin: 0;
+      color: #1b3f75;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .profile-title-block p {
+      margin: 4px 0 0 0;
+      color: #666;
+      font-size: 13px;
+    }
+    .profile-tabs-nav {
+      margin-bottom: 0;
+      border-bottom: 2px solid #1b3f75;
+    }
+    .profile-tabs-nav > li > a {
+      color: #475f82;
+      font-weight: 600;
+      font-size: 13px;
+      border-radius: 4px 4px 0 0;
+      padding: 10px 16px;
+    }
+    .profile-tabs-nav > li.active > a,
+    .profile-tabs-nav > li.active > a:hover {
+      color: #ffffff !important;
+      background: #1b3f75 !important;
+      border: 1px solid #1b3f75 !important;
+      border-bottom-color: transparent !important;
+    }
+    .profile-pane {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-top: none;
+      padding: 25px;
+      border-radius: 0 0 6px 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      margin-bottom: 30px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .detail-item {
+      background: #f8fafe;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .detail-item .label-text {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .detail-item .val-text {
+      font-size: 14px;
+      color: #1b3f75;
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .card-block {
+      background: #ffffff;
+      border: 1px solid #dbeafe;
+      border-left: 4px solid #1b3f75;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- UI Shell Placeholders -->
+  <div id="gst-header"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+    
+    <!-- Breadcrumbs -->
+    <div id="gst-breadcrumbs"></div>
+
+    <!-- Profile Hero Card -->
+    <div class="profile-hero">
+      <div class="profile-hero-left">
+        <div class="profile-avatar-circle">
+          <i class="fa fa-building-o"></i>
+        </div>
+        <div class="profile-title-block">
+          <h2 id="profTradeName">BHARAT ENTERPRISES PRIVATE LIMITED</h2>
+          <p>
+            GSTIN: <strong id="profGstin" style="color:#1b3f75;font-family:monospace;font-size:15px;">27AAACB2234K1ZV</strong> 
+            &nbsp;|&nbsp; PAN: <strong id="profPan">AAACB2234K</strong>
+            &nbsp;|&nbsp; Status: <span class="label label-success" id="profStatus" style="font-size:11px;">Active</span>
+            &nbsp;|&nbsp; Type: <span class="badge" id="profType" style="background:#1b3f75;">Regular</span>
+          </p>
+        </div>
+      </div>
+      <div class="profile-hero-actions">
+        <button type="button" class="btn btn-default" onclick="downloadRegCert()" style="font-weight:600; font-size:12.5px; border-color:#1b3f75; color:#1b3f75;">
+          <i class="fa fa-download"></i> Download REG-06 Certificate
+        </button>
+        <button type="button" class="btn btn-primary" onclick="window.print()" style="background:#1b3f75; border-color:#1b3f75; font-weight:600; font-size:12.5px;">
+          <i class="fa fa-print"></i> Print Profile
+        </button>
+      </div>
+    </div>
+
+    <!-- Profile Nav Tabs -->
+    <ul class="nav nav-tabs profile-tabs-nav" id="profileTabs" role="tablist">
+      <li class="active"><a href="#tab-general" data-toggle="tab" onclick="switchProfileTab('general')"><i class="fa fa-info-circle"></i> Business Details</a></li>
+      <li><a href="#tab-principal" data-toggle="tab" onclick="switchProfileTab('principal')"><i class="fa fa-map-marker"></i> Principal Place of Business</a></li>
+      <li><a href="#tab-additional" data-toggle="tab" onclick="switchProfileTab('additional')"><i class="fa fa-sitemap"></i> Additional Premises</a></li>
+      <li><a href="#tab-bank" data-toggle="tab" onclick="switchProfileTab('bank')"><i class="fa fa-university"></i> Bank Accounts</a></li>
+      <li><a href="#tab-signatories" data-toggle="tab" onclick="switchProfileTab('signatories')"><i class="fa fa-users"></i> Authorized Signatories & Partners</a></li>
+    </ul>
+
+    <!-- Tab 1: General Business Details -->
+    <div id="tab-general" class="profile-pane">
+      <h4 style="margin-top:0; margin-bottom:20px; color:#1b3f75; font-weight:700; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">
+        <i class="fa fa-id-card"></i> Statutory & Tax Registration Details
+      </h4>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="label-text">Legal Name of Business</span>
+          <span class="val-text" id="detLegalName">BHARAT ENTERPRISES PRIVATE LIMITED</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Trade Name</span>
+          <span class="val-text" id="detTradeName">BHARAT ENTERPRISES</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Goods and Services Taxpayer Identification Number (GSTIN)</span>
+          <span class="val-text" id="detGstin">27AAACB2234K1ZV</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Permanent Account Number (PAN)</span>
+          <span class="val-text" id="detPan">AAACB2234K</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Constitution of Business</span>
+          <span class="val-text" id="detConstitution">Private Limited Company</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Date of Registration under GST</span>
+          <span class="val-text" id="detRegDate">01/07/2017</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Center Tax Jurisdiction</span>
+          <span class="val-text" id="detCenterJur">COMMISSIONERATE MUMBAI SOUTH, DIVISION-IV, RANGE-II</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">State Tax Jurisdiction</span>
+          <span class="val-text" id="detStateJur">NODAL DIVISION 1, MUMBAI</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">Core Business Activity Description</span>
+          <span class="val-text" id="detCoreActivity">Wholesale Business, Retail Business, Factory / Manufacturing</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">GST Filing Frequency</span>
+          <span class="val-text">Monthly (GSTR-1 & GSTR-3B)</span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">e-Invoice Status</span>
+          <span class="val-text"><span class="label label-primary" style="background:#1b3f75;">Enabled (AATO > ₹ 5 Cr)</span></span>
+        </div>
+        <div class="detail-item">
+          <span class="label-text">e-Way Bill Generation</span>
+          <span class="val-text"><span class="label label-success" style="background:#27ae60;">Active / Unblocked</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Principal Place of Business -->
+    <div id="tab-principal" class="profile-pane" style="display:none;">
+      <h4 style="margin-top:0; margin-bottom:20px; color:#1b3f75; font-weight:700; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">
+        <i class="fa fa-map-marker"></i> Principal Place of Business (Registered Office)
+      </h4>
+      <div id="principalPremisesContainer">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <!-- Tab 3: Additional Premises -->
+    <div id="tab-additional" class="profile-pane" style="display:none;">
+      <h4 style="margin-top:0; margin-bottom:20px; color:#1b3f75; font-weight:700; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">
+        <i class="fa fa-sitemap"></i> Additional Places of Business (Warehouses & Branches)
+      </h4>
+      <div id="additionalPremisesContainer">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <!-- Tab 4: Bank Accounts -->
+    <div id="tab-bank" class="profile-pane" style="display:none;">
+      <h4 style="margin-top:0; margin-bottom:20px; color:#1b3f75; font-weight:700; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">
+        <i class="fa fa-university"></i> Bank Accounts Validated with PFMS / NPCI
+      </h4>
+      <div id="bankAccountsContainer">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <!-- Tab 5: Authorized Signatories -->
+    <div id="tab-signatories" class="profile-pane" style="display:none;">
+      <h4 style="margin-top:0; margin-bottom:20px; color:#1b3f75; font-weight:700; border-bottom:1px solid #e2e8f0; padding-bottom:10px;">
+        <i class="fa fa-users"></i> Key Personnel, Directors & Authorized Signatories
+      </h4>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped" style="font-size:13px;">
+          <thead style="background:#1b3f75; color:#ffffff;">
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Designation / Role</th>
+              <th>PAN</th>
+              <th>DIN (if applicable)</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Primary Signatory</th>
+            </tr>
+          </thead>
+          <tbody id="signatoriesTableBody">
+            <!-- Injected via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer placeholder -->
+  <div id="gst-footer"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentTaxpayer = null;
+
+    function switchProfileTab(tabId) {
+      ['general', 'principal', 'additional', 'bank', 'signatories'].forEach(function(t) {
+        var el = document.getElementById('tab-' + t);
+        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
+      });
+      var lis = document.querySelectorAll('#profileTabs li');
+      lis.forEach(function(li) { li.classList.remove('active'); });
+      var targetLi = Array.from(lis).find(function(li) {
+        var a = li.querySelector('a');
+        return a && a.getAttribute('onclick') && a.getAttribute('onclick').indexOf(tabId) !== -1;
+      });
+      if (targetLi) targetLi.classList.add('active');
+    }
+
+    function loadTaxpayerProfile() {
+      var user = (window.GSTSimulation && GSTSimulation.getUser && GSTSimulation.getUser()) || null;
+      var gstin = (user && user.gstin) || '27AAACB2234K1ZV';
+
+      fetch('/api/profile?gstin=' + encodeURIComponent(gstin))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success && data.taxpayer) {
+            renderProfile(data.taxpayer);
+          }
+        })
+        .catch(function(err) {
+          console.error(err);
+        });
+    }
+
+    function renderProfile(tp) {
+      currentTaxpayer = tp;
+      document.getElementById('profTradeName').innerText = tp.legalName || tp.tradeName;
+      document.getElementById('profGstin').innerText = tp.gstin;
+      document.getElementById('profPan').innerText = tp.pan;
+      document.getElementById('profStatus').innerText = tp.status;
+      document.getElementById('profType').innerText = tp.type;
+
+      document.getElementById('detLegalName').innerText = tp.legalName;
+      document.getElementById('detTradeName').innerText = tp.tradeName;
+      document.getElementById('detGstin').innerText = tp.gstin;
+      document.getElementById('detPan').innerText = tp.pan;
+      document.getElementById('detConstitution').innerText = tp.constitution;
+      document.getElementById('detRegDate').innerText = tp.registrationDate;
+      document.getElementById('detCenterJur').innerText = tp.centerJurisdiction;
+      document.getElementById('detStateJur').innerText = tp.stateJurisdiction;
+      document.getElementById('detCoreActivity').innerText = tp.natureOfBusiness || 'Goods and Services Supply';
+
+      // Principal Premises
+      var principalHtml = '';
+      var additionalHtml = '';
+      (tp.premises || []).forEach(function(p, idx) {
+        var html = 
+          '<div class="card-block">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">' +
+              '<h5 style="margin:0; font-weight:700; color:#1b3f75;">' + p.type + '</h5>' +
+              '<span class="badge" style="background:#2c4e86;">Possession: ' + p.possession + '</span>' +
+            '</div>' +
+            '<p style="margin:0 0 6px 0; font-size:13.5px; color:#2d2d2d;"><i class="fa fa-building"></i> ' + p.address + '</p>' +
+            '<p style="margin:0; font-size:12.5px; color:#64748b;"><strong>Contact:</strong> ' + p.contact + ' &nbsp;|&nbsp; <strong>Nature of Activity:</strong> ' + p.activity + '</p>' +
+          '</div>';
+        if (p.type.indexOf('Principal') !== -1) {
+          principalHtml += html;
+        } else {
+          additionalHtml += html;
+        }
+      });
+      document.getElementById('principalPremisesContainer').innerHTML = principalHtml || '<p class="text-muted">No principal premises record.</p>';
+      document.getElementById('additionalPremisesContainer').innerHTML = additionalHtml || '<p class="text-muted">No additional places of business registered.</p>';
+
+      // Bank Accounts
+      var bankHtml = '<div class="row">';
+      (tp.bankAccounts || []).forEach(function(b, idx) {
+        bankHtml += 
+          '<div class="col-md-6 col-sm-12" style="margin-bottom:15px;">' +
+            '<div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:6px; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.02);">' +
+              '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">' +
+                '<strong style="color:#1b3f75; font-size:15px;"><i class="fa fa-university"></i> ' + b.bankName + '</strong>' +
+                '<span class="label label-success" style="background:#27ae60;"><i class="fa fa-check-circle"></i> ' + b.status + '</span>' +
+              '</div>' +
+              '<table class="table table-condensed" style="margin:0; font-size:12.5px;">' +
+                '<tr><td style="color:#64748b; width:40%;">Account Number:</td><td><strong style="font-family:monospace; color:#1b3f75;">' + b.accountNumber + '</strong></td></tr>' +
+                '<tr><td style="color:#64748b;">Account Type:</td><td>' + b.accountType + '</td></tr>' +
+                '<tr><td style="color:#64748b;">IFSC Code:</td><td><strong style="font-family:monospace;">' + b.ifsc + '</strong></td></tr>' +
+                '<tr><td style="color:#64748b;">Branch:</td><td>' + b.branch + '</td></tr>' +
+              '</table>' +
+            '</div>' +
+          '</div>';
+      });
+      bankHtml += '</div>';
+      document.getElementById('bankAccountsContainer').innerHTML = bankHtml;
+
+      // Signatories
+      var sigRows = '';
+      (tp.signatories || []).forEach(function(s, idx) {
+        sigRows += 
+          '<tr>' +
+            '<td>' + (idx + 1) + '</td>' +
+            '<td><strong>' + s.name + '</strong></td>' +
+            '<td>' + s.designation + '</td>' +
+            '<td><code style="color:#1b3f75;">' + s.pan + '</code></td>' +
+            '<td>' + (s.din || 'N/A') + '</td>' +
+            '<td>' + s.mobile + '</td>' +
+            '<td>' + s.email + '</td>' +
+            '<td>' + (s.isPrimary ? '<span class="label label-primary" style="background:#1b3f75;">Primary Signatory</span>' : '<span class="text-muted">Signatory</span>') + '</td>' +
+          '</tr>';
+      });
+      document.getElementById('signatoriesTableBody').innerHTML = sigRows;
+    }
+
+    function downloadRegCert() {
+      if (!currentTaxpayer) return;
+      var certData = 
+        "==========================================================\n" +
+        "GOVERNMENT OF INDIA / GST COUNCIL\n" +
+        "FORM GST REG-06\n" +
+        "REGISTRATION CERTIFICATE\n" +
+        "==========================================================\n\n" +
+        "Registration Number (GSTIN): " + currentTaxpayer.gstin + "\n" +
+        "Legal Name: " + currentTaxpayer.legalName + "\n" +
+        "Trade Name: " + currentTaxpayer.tradeName + "\n" +
+        "Constitution of Business: " + currentTaxpayer.constitution + "\n" +
+        "Address of Principal Place: " + currentTaxpayer.address + "\n" +
+        "Date of Liability: 01/07/2017\n" +
+        "Period of Validity: From " + currentTaxpayer.registrationDate + " To Ongoing\n" +
+        "Type of Registration: " + currentTaxpayer.type + "\n" +
+        "Jurisdictional Center Office: " + currentTaxpayer.centerJurisdiction + "\n" +
+        "Jurisdictional State Office: " + currentTaxpayer.stateJurisdiction + "\n\n" +
+        "Verified by GST Common Portal System.\n" +
+        "==========================================================\n";
+
+      var blob = new Blob([certData], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "GST_REG06_Certificate_" + currentTaxpayer.gstin + ".txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      GSTSimulation.showToast('Registration Certificate (Form GST REG-06) downloaded successfully.', 'success', 'Certificate Export');
+    }
+
+    window.addEventListener('load', function() {
+      loadTaxpayerProfile();
+    });
+
+    window.addEventListener('gstUserChanged', function() {
+      loadTaxpayerProfile();
+    });
+  </script>
+
+</body>
+</html>

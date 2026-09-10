@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Challan (PMT-06) | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .challan-table th {
+      background: #1b3f75;
+      color: #ffffff;
+      text-align: center;
+      font-size: 13px;
+      vertical-align: middle !important;
+    }
+    .challan-table td input {
+      text-align: right;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .bank-card {
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 15px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .bank-card.selected {
+      border-color: #1b3f75;
+      background: #f0f5fc;
+      box-shadow: 0 0 0 2px #1b3f75;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- Breadcrumbs -->
+  <div class="container" style="margin-top: 15px;">
+    <ol class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 10px; font-size: 12px;">
+      <li><a href="index.html" style="color: #337ab7;"><i class="fa fa-home"></i> Home</a></li>
+      <li>Services</li>
+      <li>Payments</li>
+      <li class="active">Create Challan (Form GST PMT-06)</li>
+    </ol>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper" id="main-content" style="min-height: 550px; padding-bottom: 40px;">
+    <div class="container">
+      
+      <!-- ================= STEP 1: CREATE CHALLAN ================= -->
+      <div id="viewCreateChallan" class="panel panel-default" style="border: 1px solid #c9d8eb; box-shadow: 0 2px 8px rgba(27,63,117,0.06);">
+        <div class="panel-heading" style="background: #f0f5fc; border-bottom: 1px solid #c9d8eb; padding: 15px 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div>
+              <h4 style="margin: 0; color: #1b3f75; font-weight: 700;"><i class="fa fa-file-text-o" style="color: #17c4bb;"></i> Form GST PMT-06: Create Challan</h4>
+              <span style="font-size: 13px; color: #666;">Enter tax amounts to be deposited into the Electronic Cash Ledger.</span>
+            </div>
+            <div style="font-size: 13px;">
+              GSTIN: <strong id="challanGstin" class="font-mono" style="color: #1b3f75;">27AAACB2234K1ZV</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-body" style="padding: 25px;">
+          
+          <div class="table-responsive">
+            <table class="table table-bordered challan-table">
+              <thead>
+                <tr>
+                  <th rowspan="2">Major Head</th>
+                  <th colspan="5">Minor Heads (₹)</th>
+                  <th rowspan="2" style="width: 160px;">Total (₹)</th>
+                </tr>
+                <tr>
+                  <th>Tax</th>
+                  <th>Interest</th>
+                  <th>Penalty</th>
+                  <th>Fee</th>
+                  <th>Other</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Integrated Tax (IGST)</strong></td>
+                  <td><input type="number" id="amt_igst_tax" class="form-control" value="25000" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_igst_int" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_igst_pen" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_igst_fee" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_igst_oth" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td id="tot_igst" style="font-weight: 700; text-align: right; vertical-align: middle;">₹ 25,000.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Central Tax (CGST)</strong></td>
+                  <td><input type="number" id="amt_cgst_tax" class="form-control" value="15000" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cgst_int" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cgst_pen" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cgst_fee" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cgst_oth" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td id="tot_cgst" style="font-weight: 700; text-align: right; vertical-align: middle;">₹ 15,000.00</td>
+                </tr>
+                <tr>
+                  <td><strong>State Tax (SGST)</strong></td>
+                  <td><input type="number" id="amt_sgst_tax" class="form-control" value="15000" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_sgst_int" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_sgst_pen" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_sgst_fee" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_sgst_oth" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td id="tot_sgst" style="font-weight: 700; text-align: right; vertical-align: middle;">₹ 15,000.00</td>
+                </tr>
+                <tr>
+                  <td><strong>Cess</strong></td>
+                  <td><input type="number" id="amt_cess_tax" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cess_int" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cess_pen" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cess_fee" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td><input type="number" id="amt_cess_oth" class="form-control" value="0" min="0" oninput="calculateTotal()"></td>
+                  <td id="tot_cess" style="font-weight: 700; text-align: right; vertical-align: middle;">₹ 0.00</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style="background: #f8fafe; font-size: 15px;">
+                  <td colspan="6" style="text-align: right; font-weight: 700; color: #1b3f75;">Total Challan Amount:</td>
+                  <td id="grandTotalDisplay" style="font-weight: 800; color: #27ae60; text-align: right; font-size: 17px;">₹ 55,000.00</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- Payment Mode Selection -->
+          <div style="margin-top: 25px; background: #f8fafe; border: 1px solid #d9e2ec; border-radius: 6px; padding: 20px;">
+            <h5 style="margin-top: 0; color: #1b3f75; font-weight: 700;"><i class="fa fa-credit-card"></i> Select Payment Mode:</h5>
+            <div style="display: flex; gap: 20px; margin-top: 10px;">
+              <label class="radio-inline" style="font-weight: 600;">
+                <input type="radio" name="paymentMode" value="E-Payment" checked> E-Payment (Net Banking / Debit Card)
+              </label>
+              <label class="radio-inline" style="font-weight: 600;">
+                <input type="radio" name="paymentMode" value="Over-the-Counter"> Over The Counter (Cash / Cheque)
+              </label>
+              <label class="radio-inline" style="font-weight: 600;">
+                <input type="radio" name="paymentMode" value="NEFT/RTGS"> NEFT / RTGS
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top: 25px; display: flex; justify-content: flex-end; gap: 10px;">
+            <a href="dashboard.html" class="btn btn-default">Cancel</a>
+            <button type="button" class="btn btn-primary" onclick="proceedToPayment()" style="background: #1b3f75; border-color: #1b3f75; padding: 8px 30px; font-weight: 700;">
+              Generate Challan &amp; Pay <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= STEP 2: SIMULATED NET BANKING ================= -->
+      <div id="viewNetBanking" class="panel panel-default" style="display: none; border: 1px solid #c9d8eb;">
+        <div class="panel-heading" style="background: #1b3f75; color: #ffffff; padding: 15px 20px;">
+          <h4 style="margin: 0; font-weight: 700;"><i class="fa fa-university"></i> Simulated Net Banking Gateway</h4>
+        </div>
+        <div class="panel-body" style="padding: 30px;">
+          <div class="alert alert-info">
+            <strong>Challan Details:</strong> CPIN: <span id="nbCpin" class="font-mono font-bold"></span> &nbsp;|&nbsp;
+            Amount Payable: <strong id="nbAmount" style="color: #27ae60; font-size: 16px;"></strong>
+          </div>
+
+          <h5 style="font-weight: 700; color: #1b3f75; margin-bottom: 15px;">Select Your Authorized Bank:</h5>
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px;">
+              <div class="bank-card selected" id="bank_sbi" onclick="selectBank('State Bank of India', 'bank_sbi')">
+                <i class="fa fa-university" style="font-size: 28px; color: #1b3f75;"></i>
+                <div style="font-weight: 700; margin-top: 8px;">State Bank of India</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px;">
+              <div class="bank-card" id="bank_hdfc" onclick="selectBank('HDFC Bank', 'bank_hdfc')">
+                <i class="fa fa-university" style="font-size: 28px; color: #004c8f;"></i>
+                <div style="font-weight: 700; margin-top: 8px;">HDFC Bank</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px;">
+              <div class="bank-card" id="bank_icici" onclick="selectBank('ICICI Bank', 'bank_icici')">
+                <i class="fa fa-university" style="font-size: 28px; color: #b94a48;"></i>
+                <div style="font-weight: 700; margin-top: 8px;">ICICI Bank</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12" style="margin-bottom: 15px;">
+              <div class="bank-card" id="bank_pnb" onclick="selectBank('Punjab National Bank', 'bank_pnb')">
+                <i class="fa fa-university" style="font-size: 28px; color: #a94442;"></i>
+                <div style="font-weight: 700; margin-top: 8px;">Punjab National Bank</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <button type="button" class="btn btn-default" onclick="backToChallan()"><i class="fa fa-arrow-left"></i> Modify Challan</button>
+            <button type="button" class="btn btn-success" onclick="authorizePayment()" style="background: #27ae60; border-color: #27ae60; padding: 10px 35px; font-weight: 700; font-size: 15px;">
+              <i class="fa fa-check-circle"></i> Authorize &amp; Complete Payment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= STEP 3: PAYMENT RECEIPT ================= -->
+      <div id="viewReceipt" class="panel panel-default" style="display: none; border: 1px solid #27ae60;">
+        <div class="panel-body" style="padding: 40px; text-align: center;">
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: #e2f7eb; color: #27ae60; font-size: 36px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+            <i class="fa fa-check"></i>
+          </div>
+          <h3 style="color: #27ae60; font-weight: 800; margin: 0 0 10px 0;">Payment Successful!</h3>
+          <p style="font-size: 14px; color: #4a5568;">Your tax payment has been received and credited to the Electronic Cash Ledger.</p>
+
+          <div style="max-width: 550px; margin: 25px auto; background: #f8fafe; border: 1px solid #c9d8eb; border-radius: 6px; padding: 20px; text-align: left; font-size: 13px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="text-muted">Challan Identification Number (CIN):</span>
+              <strong id="recCin" class="font-mono text-primary" style="font-size: 15px;"></strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="text-muted">Common Portal ID (CPIN):</span>
+              <strong id="recCpin" class="font-mono"></strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span class="text-muted">Amount Deposited:</span>
+              <strong id="recAmount" style="color: #27ae60; font-size: 15px;"></strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span class="text-muted">Payment Bank:</span>
+              <strong id="recBank"></strong>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 15px;">
+            <a href="ledgers.html?tab=cash" class="btn btn-primary" style="background: #1b3f75; border-color: #1b3f75; font-weight: 700; padding: 10px 25px;">
+              <i class="fa fa-book"></i> View Electronic Cash Ledger
+            </a>
+            <a href="dashboard.html" class="btn btn-default" style="font-weight: 700; padding: 10px 25px;">
+              Return to Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell Component -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentGstin = '27AAACB2234K1ZV';
+    var currentAmounts = { igst: 25000, cgst: 15000, sgst: 15000, cess: 0 };
+    var currentTotal = 55000;
+    var currentCpin = '';
+    var selectedBankName = 'State Bank of India';
+
+    function calculateTotal() {
+      var igst = (parseInt(document.getElementById('amt_igst_tax').value) || 0) + (parseInt(document.getElementById('amt_igst_int').value) || 0) + (parseInt(document.getElementById('amt_igst_pen').value) || 0) + (parseInt(document.getElementById('amt_igst_fee').value) || 0) + (parseInt(document.getElementById('amt_igst_oth').value) || 0);
+      var cgst = (parseInt(document.getElementById('amt_cgst_tax').value) || 0) + (parseInt(document.getElementById('amt_cgst_int').value) || 0) + (parseInt(document.getElementById('amt_cgst_pen').value) || 0) + (parseInt(document.getElementById('amt_cgst_fee').value) || 0) + (parseInt(document.getElementById('amt_cgst_oth').value) || 0);
+      var sgst = (parseInt(document.getElementById('amt_sgst_tax').value) || 0) + (parseInt(document.getElementById('amt_sgst_int').value) || 0) + (parseInt(document.getElementById('amt_sgst_pen').value) || 0) + (parseInt(document.getElementById('amt_sgst_fee').value) || 0) + (parseInt(document.getElementById('amt_sgst_oth').value) || 0);
+      var cess = (parseInt(document.getElementById('amt_cess_tax').value) || 0) + (parseInt(document.getElementById('amt_cess_int').value) || 0) + (parseInt(document.getElementById('amt_cess_pen').value) || 0) + (parseInt(document.getElementById('amt_cess_fee').value) || 0) + (parseInt(document.getElementById('amt_cess_oth').value) || 0);
+
+      document.getElementById('tot_igst').innerText = '₹ ' + igst.toLocaleString('en-IN') + '.00';
+      document.getElementById('tot_cgst').innerText = '₹ ' + cgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('tot_sgst').innerText = '₹ ' + sgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('tot_cess').innerText = '₹ ' + cess.toLocaleString('en-IN') + '.00';
+
+      currentAmounts = { igst: igst, cgst: cgst, sgst: sgst, cess: cess };
+      currentTotal = igst + cgst + sgst + cess;
+      document.getElementById('grandTotalDisplay').innerText = '₹ ' + currentTotal.toLocaleString('en-IN') + '.00';
+    }
+
+    function proceedToPayment() {
+      if (currentTotal <= 0) {
+        GSTSimulation.showToast('Total Challan amount must be greater than ₹ 0.', 'warning', 'Invalid Amount');
+        return;
+      }
+
+      fetch('/api/challan/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gstin: currentGstin,
+          amounts: currentAmounts,
+          totalAmount: currentTotal
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success && data.challan) {
+          currentCpin = data.challan.cpin;
+          document.getElementById('viewCreateChallan').style.display = 'none';
+          document.getElementById('viewNetBanking').style.display = 'block';
+          document.getElementById('nbCpin').innerText = currentCpin;
+          document.getElementById('nbAmount').innerText = '₹ ' + currentTotal.toLocaleString('en-IN') + '.00';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          GSTSimulation.showToast('Challan CPIN generated: ' + currentCpin, 'info', 'Challan Ready');
+        }
+      });
+    }
+
+    function selectBank(bankName, elemId) {
+      selectedBankName = bankName;
+      ['bank_sbi', 'bank_hdfc', 'bank_icici', 'bank_pnb'].forEach(function(id) {
+        document.getElementById(id).className = 'bank-card';
+      });
+      document.getElementById(elemId).className = 'bank-card selected';
+    }
+
+    function backToChallan() {
+      document.getElementById('viewNetBanking').style.display = 'none';
+      document.getElementById('viewCreateChallan').style.display = 'block';
+    }
+
+    function authorizePayment() {
+      GSTSimulation.showConfirm({
+        title: 'Authorize Net Banking Payment',
+        message: 'Authorize payment of ₹ ' + currentTotal.toLocaleString('en-IN') + ' from ' + selectedBankName + '?',
+        confirmText: 'Confirm & Pay',
+        onConfirm: function() {
+          fetch('/api/challan/pay', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              gstin: currentGstin,
+              cpin: currentCpin,
+              amounts: currentAmounts,
+              totalAmount: currentTotal,
+              bank: selectedBankName
+            })
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.success) {
+              document.getElementById('viewNetBanking').style.display = 'none';
+              document.getElementById('viewReceipt').style.display = 'block';
+              document.getElementById('recCin').innerText = data.cin;
+              document.getElementById('recCpin').innerText = currentCpin;
+              document.getElementById('recAmount').innerText = '₹ ' + currentTotal.toLocaleString('en-IN') + '.00';
+              document.getElementById('recBank').innerText = selectedBankName;
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              GSTSimulation.showToast('Electronic Cash Ledger successfully credited!', 'success', 'Paid');
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('load', function() {
+      var storedUser = localStorage.getItem('gst_current_taxpayer');
+      if (storedUser) {
+        try { currentGstin = JSON.parse(storedUser).gstin || currentGstin; } catch(e) {}
+      }
+      document.getElementById('challanGstin').innerText = currentGstin;
+      calculateTotal();
+    });
+  </script>
+
+</body>
+</html>

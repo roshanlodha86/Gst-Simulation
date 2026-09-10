@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goods and Services Tax (GST) | Home</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+
+  <!-- GST Simulation Custom Design System -->
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    /* Homepage Specific Authentic Styling */
+    .hero-banner-container {
+      position: relative;
+      background: #0f274a url('images/banner_image1.jpg') no-repeat center center;
+      background-size: cover;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+    }
+    .hero-overlay {
+      background: rgba(15, 39, 74, 0.75);
+      padding: 30px;
+      border-radius: 8px;
+      color: #ffffff;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-overlay h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .hero-overlay p {
+      font-size: 14px;
+      color: #e0e9f5;
+      margin-bottom: 20px;
+    }
+    .hero-search-box {
+      display: flex;
+      max-width: 500px;
+      gap: 10px;
+    }
+    .hero-search-box input {
+      flex: 1;
+      height: 44px;
+      font-size: 14px;
+      border: 1px solid #17c4bb;
+      border-radius: 4px;
+      padding: 0 15px;
+      background: #ffffff;
+      color: #2d2d2d;
+    }
+    .hero-search-box button {
+      height: 44px;
+      background: #17c4bb;
+      color: #0b1e59;
+      font-weight: 700;
+      border: none;
+      border-radius: 4px;
+      padding: 0 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .hero-search-box button:hover {
+      background: #13a89e;
+    }
+
+    /* News Ticker */
+    .news-ticker-bar {
+      background: #fdf5e6;
+      border-bottom: 1px solid #faebcc;
+      padding: 10px 0;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-label {
+      background: #c0392b;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-right: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .ticker-content {
+      overflow: hidden;
+      white-space: nowrap;
+      flex: 1;
+      color: #8a6d3b;
+    }
+    .ticker-content marquee {
+      vertical-align: middle;
+    }
+
+    /* Service Tiles */
+    .service-tile {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 22px 18px;
+      text-align: center;
+      margin-bottom: 25px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      color: #2d2d2d;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .service-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(27, 63, 117, 0.12);
+      border-color: #17c4bb;
+      text-decoration: none;
+      color: #1b3f75;
+    }
+    .service-tile .tile-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 15px;
+      background: #f0f5fc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #1b3f75;
+      transition: all 0.25s ease;
+    }
+    .service-tile:hover .tile-icon {
+      background: #17c4bb;
+      color: #0b1e59;
+    }
+    .service-tile h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      color: #1b3f75;
+    }
+    .service-tile p {
+      font-size: 12px;
+      color: #666666;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: #1b3f75;
+      color: #ffffff;
+      padding: 40px 0;
+      margin: 30px 0;
+    }
+    .stat-box {
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      padding: 0 15px;
+    }
+    .stat-box:last-child {
+      border-right: none;
+    }
+    .stat-number {
+      font-size: 32px;
+      font-weight: 800;
+      color: #17c4bb;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: #e0e9f5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Help Topics */
+    .help-card {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .help-card h4 {
+      margin-top: 0;
+      color: #1b3f75;
+      font-size: 16px;
+      font-weight: 700;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    .help-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .help-list li {
+      padding: 8px 0;
+      border-bottom: 1px dashed #eef2f6;
+      font-size: 13px;
+    }
+    .help-list li:last-child {
+      border-bottom: none;
+    }
+    .help-list a {
+      color: #337ab7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .help-list a:hover {
+      color: #1b3f75;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar (Auto-mounted by shell.js) -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header (Auto-mounted by shell.js) -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Mega-Menu Navigation (Auto-mounted by shell.js) -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- News & Updates Marquee Ticker -->
+  <div class="news-ticker-bar">
+    <div class="container" style="display: flex; align-items: center;">
+      <span class="ticker-label"><i class="fa fa-bullhorn"></i> Latest Updates</span>
+      <div class="ticker-content">
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+          🔔 <strong>Advisory:</strong> Biometric-based Aadhaar Authentication for GST Registration rollout is now active. &nbsp;&nbsp;|&nbsp;&nbsp;
+          📅 <strong>Due Date:</strong> Due date for filing Form GSTR-3B for the month of August is <strong>20th September</strong>. &nbsp;&nbsp;|&nbsp;&nbsp;
+          💳 <strong>Payment Facility:</strong> Enhanced e-Payment options including UPI and Instant Net Banking available for PMT-06 Challan payment. &nbsp;&nbsp;|&nbsp;&nbsp;
+          🧾 <strong>Invoice Management System (IMS):</strong> IMS is now live for recipient taxpayers to accept, reject, or mark pending inward supplies.
+        </marquee>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <div class="content-wrapper" id="main-content">
+    
+    <!-- Hero Banner Section -->
+    <div class="hero-banner-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 col-sm-9 col-xs-12">
+            <div class="hero-overlay">
+              <h1>Goods and Services Tax Portal</h1>
+              <p>One Nation, One Tax, One Market. Access registration, file returns, create payment challans, and track tax liabilities on the simulated GST platform.</p>
+              
+              <div class="hero-search-box">
+                <input type="text" id="quickGstinInput" placeholder="Enter GSTIN / UIN to Search Taxpayer..." maxlength="15">
+                <button type="button" onclick="quickSearchTaxpayer()"><i class="fa fa-search"></i> Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Services Grid -->
+    <div class="container" style="margin-top: 35px;">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 style="font-size: 20px; font-weight: 700; color: #1b3f75; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <i class="fa fa-th-large" style="color: #17c4bb;"></i> Popular GST Services
+          </h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Tile 1: Search Taxpayer -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="search-taxpayer.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-search"></i></div>
+            <h3>Search Taxpayer</h3>
+            <p>Verify GSTIN details, active status, taxpayer constitution, and center/state jurisdiction.</p>
+          </a>
+        </div>
+
+        <!-- Tile 2: Track Application Status -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="track-status.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-clock-o"></i></div>
+            <h3>Track Application</h3>
+            <p>Track the real-time processing status of your ARN for new registration or amendment.</p>
+          </a>
+        </div>
+
+        <!-- Tile 3: New Registration (REG-01) -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="registration.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-id-card-o"></i></div>
+            <h3>New Registration</h3>
+            <p>Apply for new GST registration under Form GST REG-01 with TRN & ARN simulation.</p>
+          </a>
+        </div>
+
+        <!-- Tile 4: Returns Dashboard -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="returns.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-file-text-o"></i></div>
+            <h3>Returns Dashboard</h3>
+            <p>File GSTR-1 outward supplies, view GSTR-2B ITC statement, and file GSTR-3B summary.</p>
+          </a>
+        </div>
+
+        <!-- Tile 5: Payments & Challans -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="challan.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-credit-card"></i></div>
+            <h3>Create Challan</h3>
+            <p>Generate Form GST PMT-06 challan and pay taxes using the simulated Net Banking gateway.</p>
+          </a>
+        </div>
+
+        <!-- Tile 6: Electronic Ledgers -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="ledgers.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-book"></i></div>
+            <h3>Electronic Ledgers</h3>
+            <p>Inspect Electronic Cash Ledger, Credit Ledger (ITC), and Liability Register balances.</p>
+          </a>
+        </div>
+
+        <!-- Tile 7: User Login -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="login.html" class="service-tile">
+            <div class="tile-icon"><i class="fa fa-sign-in"></i></div>
+            <h3>Taxpayer Login</h3>
+            <p>Access your dashboard with simulated Captcha and 2FA OTP verification.</p>
+          </a>
+        </div>
+
+        <!-- Tile 8: System Test Bench -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="shell-test.html" class="service-tile" style="border-left: 3px solid #f39c12;">
+            <div class="tile-icon" style="color: #f39c12;"><i class="fa fa-cogs"></i></div>
+            <h3>Design System & Lab</h3>
+            <p>Interactive test bench for toast alerts, OTP modals, persona switcher, and asset check.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Statistics -->
+    <div class="stats-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12 stat-box">
+            <div class="stat-number">1.46 Cr+</div>
+            <div class="stat-label">Active Taxpayers</div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 stat-box">
+            <div class="stat-number">128 Cr+</div>
+            <div class="stat-label">Returns Filed</div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 stat-box">
+            <div class="stat-number">185 Cr+</div>
+            <div class="stat-label">Challans Processed</div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12 stat-box">
+            <div class="stat-number">₹ 1.87 L Cr</div>
+            <div class="stat-label">Monthly Average Collection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help & Taxpayer Resources -->
+    <div class="container" style="margin-bottom: 40px;">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="help-card">
+            <h4><i class="fa fa-question-circle" style="color: #17c4bb;"></i> Help & FAQs</h4>
+            <ul class="help-list">
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('How to File GSTR-1: Enter outward supply invoices under Table 4A/5/7 and verify with EVC.', 'info', 'User Manual')"><i class="fa fa-file-text-o"></i> How to file Form GSTR-1</a></li>
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('Rule 88A dictates IGST credit must be fully utilized before CGST/SGST credit is touched.', 'info', 'Tax Rule')"><i class="fa fa-file-text-o"></i> Understanding Rule 88A ITC Offset</a></li>
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('PMT-06 Challan allows payment through Net Banking, NEFT/RTGS, or OTC cash deposits.', 'info', 'Payment Guide')"><i class="fa fa-file-text-o"></i> Step-by-step Challan Creation</a></li>
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('New Registration REG-01 requires PAN, Business Address, and Authorized Signatory proofs.', 'info', 'Registration Guide')"><i class="fa fa-file-text-o"></i> New Registration Checklist</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="help-card">
+            <h4><i class="fa fa-gavel" style="color: #17c4bb;"></i> GST Law & Regulations</h4>
+            <ul class="help-list">
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('Central Goods and Services Tax (CGST) Act, 2017 with latest amendments.', 'info', 'CGST Act')"><i class="fa fa-external-link"></i> CGST Act, 2017</a></li>
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('Integrated Goods and Services Tax (IGST) Act for inter-state supplies and imports.', 'info', 'IGST Act')"><i class="fa fa-external-link"></i> IGST Act, 2017</a></li>
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('Central Goods and Services Tax Rules, 2017 as updated up to 2026.', 'info', 'CGST Rules')"><i class="fa fa-external-link"></i> CGST Rules, 2017</a></li>
+              <li><a href="javascript:void(0)" onclick="GSTSimulation.showToast('GST Rate Schedules: 0% (Essential), 5%, 12%, 18% (Standard), 28% (Demerit/Luxury).', 'info', 'Rate Matrix')"><i class="fa fa-external-link"></i> GST Rate Finder & HSN Codes</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="help-card" style="background: #fdfefe; border-top: 3px solid #1b3f75;">
+            <h4><i class="fa fa-user-circle" style="color: #1b3f75;"></i> Demo Taxpayer Accounts</h4>
+            <p style="font-size: 12px; color: #666; margin-bottom: 12px;">Switch immediately between simulated business entities to test various filing and payment scenarios:</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="btn btn-default btn-sm" style="text-align: left; padding: 8px 12px; font-size: 12px;" onclick="switchUser('regular')">
+                <strong>Bharat Enterprises Pvt Ltd</strong> <span class="label label-primary" style="float: right;">Regular (27)</span>
+                <div style="font-size: 10px; color: #777;">27AAACB2234K1ZV • Maharashtra Goods</div>
+              </button>
+
+              <button type="button" class="btn btn-default btn-sm" style="text-align: left; padding: 8px 12px; font-size: 12px;" onclick="switchUser('composition')">
+                <strong>Sharma General Stores</strong> <span class="label label-warning" style="float: right;">Composition (07)</span>
+                <div style="font-size: 10px; color: #777;">07AAAPS1234C1Z9 • Delhi Retail</div>
+              </button>
+
+              <button type="button" class="btn btn-default btn-sm" style="text-align: left; padding: 8px 12px; font-size: 12px;" onclick="switchUser('sez')">
+                <strong>TechPark Infra SEZ Ltd</strong> <span class="label label-info" style="float: right;">SEZ Unit (24)</span>
+                <div style="font-size: 10px; color: #777;">24AAACT5678K1ZG • Gujarat SEZ</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Standard GST Footer (Auto-mounted by shell.js) -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell Component Script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    function quickSearchTaxpayer() {
+      var gstin = document.getElementById('quickGstinInput').value.trim();
+      if (!gstin) {
+        GSTSimulation.showToast('Please enter a valid 15-digit GSTIN or PAN to search.', 'warning', 'Input Required');
+        return;
+      }
+      window.location.href = 'search-taxpayer.html?query=' + encodeURIComponent(gstin);
+    }
+
+    function switchUser(type) {
+      if (type === 'regular') {
+        GSTSimulation.loginAs('regular');
+      } else if (type === 'composition') {
+        GSTSimulation.loginAs('composition');
+      } else if (type === 'sez') {
+        GSTSimulation.loginAs('sez');
+      }
+      GSTSimulation.showToast('Switched to simulated profile: ' + (type.toUpperCase()), 'success', 'Session Active');
+    }
+
+    // Enter key for quick search
+    document.getElementById('quickGstinInput').addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') {
+        quickSearchTaxpayer();
+      }
+    });
+  </script>
+
+</body>
+</html>

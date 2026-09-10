@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form GSTR-3B (Monthly Return & Payment) | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .gstr3b-panel {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.05);
+    }
+    .gstr3b-header {
+      background: #ffffff;
+      border-bottom: 1px solid #c9d8eb;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .tile-table-section {
+      padding: 20px 24px;
+      border-bottom: 1px solid #eef2f6;
+    }
+    .tile-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b3f75;
+      margin-top: 0;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .table-gstr3b th {
+      background: #1b3f75;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+      vertical-align: middle !important;
+    }
+    .table-gstr3b td {
+      font-size: 12px;
+      vertical-align: middle !important;
+    }
+    .table-gstr3b td input {
+      text-align: right;
+      font-size: 12.5px;
+      font-weight: 700;
+      height: 32px;
+    }
+    .variance-alert {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid #ef4444;
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #991b1b;
+      margin-bottom: 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+
+    <div class="gstr3b-panel">
+      
+      <!-- Header -->
+      <div class="gstr3b-header">
+        <div>
+          <h2 style="margin:0 0 5px 0; font-size:20px; font-weight:700; color:#1b3f75;">
+            <i class="fa fa-calculator" style="color:#17c4bb;"></i> FORM GSTR-3B: MONTHLY RETURN &amp; PAYMENT OF TAX
+          </h2>
+          <span style="font-size:13px; color:#64748b;">
+            Taxpayer: <strong id="g3LegalName" style="color:#1b3f75;">BHARAT ENTERPRISES PRIVATE LIMITED</strong> 
+            &nbsp;|&nbsp; GSTIN: <strong id="g3Gstin" style="font-family:monospace; color:#1b3f75;">27AAACB2234K1ZV</strong> 
+            &nbsp;|&nbsp; Period: <strong id="g3PeriodDisplay">August 2024 (FY 2024-25)</strong>
+          </span>
+        </div>
+        <div id="g3StatusBadge">
+          <span class="label label-warning" style="font-size:12px; padding:6px 12px;">STATUS: TO BE FILED</span>
+        </div>
+      </div>
+
+      <!-- Action Utility Buttons Bar (Matching User Guide Specification) -->
+      <div style="background:#f8fafe; border-bottom:1px solid #e2e8f0; padding:12px 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-default btn-sm" onclick="previewDraftGstr3b()">
+            <i class="fa fa-file-pdf-o text-danger"></i> System Generated GSTR-3B (Draft)
+          </button>
+          <button type="button" class="btn btn-default btn-sm" onclick="exportGstr3bJson()">
+            <i class="fa fa-download"></i> Export GSTR-3B JSON
+          </button>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-default btn-sm" onclick="saveGstr3bDraft()">
+            <i class="fa fa-save text-primary"></i> Save GSTR3B
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="recomputeInterest()">
+            <i class="fa fa-refresh"></i> Re-Compute Interest
+          </button>
+        </div>
+      </div>
+
+      <!-- Table 3.1: Outward Supplies -->
+      <div class="tile-table-section">
+        <h4 class="tile-title">
+          <span><i class="fa fa-arrow-circle-up text-primary"></i> 3.1 Tax on Outward and Reverse Charge Inward Supplies</span>
+          <span class="badge" style="background:#1b3f75;">Auto-populated from GSTR-1</span>
+        </h4>
+        <div class="variance-alert" id="varAlert31">
+          <i class="fa fa-exclamation-triangle"></i> <strong>Warning:</strong> Value entered is at variance with data auto-populated from Form GSTR-1.
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-gstr3b">
+            <thead>
+              <tr>
+                <th style="width:38%;">Nature of Supplies</th>
+                <th style="width:16%;">Total Taxable Value (₹)</th>
+                <th style="width:12%;">Integrated Tax (₹)</th>
+                <th style="width:11%;">Central Tax (₹)</th>
+                <th style="width:11%;">State Tax (₹)</th>
+                <th style="width:12%;">Cess (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>(a) Outward taxable supplies (other than zero rated, nil rated and exempted)</td>
+                <td><input type="number" id="t31_taxable" class="form-control" value="100000" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t31_igst" class="form-control" value="18000" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t31_cgst" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t31_sgst" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t31_cess" class="form-control" value="0" oninput="onDataChanged()"></td>
+              </tr>
+              <tr>
+                <td>(b) Outward taxable supplies (zero rated exports)</td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td>(c) Other outward supplies (Nil rated, exempted)</td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+              </tr>
+              <tr>
+                <td>(d) Inward supplies (liable to reverse charge)</td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td>(e) Non-GST outward supplies</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 3.1.1: Supplies u/s 9(5) -->
+      <div class="tile-table-section">
+        <h4 class="tile-title">
+          <span><i class="fa fa-shopping-cart text-info"></i> 3.1.1 Supplies Notified under Section 9(5) of the CGST Act, 2017</span>
+          <span class="badge" style="background:#2c4e86;">E-Commerce Operators</span>
+        </h4>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-gstr3b">
+            <thead>
+              <tr>
+                <th style="width:38%;">Nature of Supplies</th>
+                <th style="width:16%;">Total Taxable Value (₹)</th>
+                <th style="width:12%;">Integrated Tax (₹)</th>
+                <th style="width:11%;">Central Tax (₹)</th>
+                <th style="width:11%;">State Tax (₹)</th>
+                <th style="width:12%;">Cess (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>(i) Taxable supplies on which electronic commerce operator pays tax u/s 9(5)</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td>(ii) Taxable supplies made by registered person through e-commerce operator</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 4: Eligible ITC -->
+      <div class="tile-table-section">
+        <h4 class="tile-title">
+          <span><i class="fa fa-arrow-circle-down text-success"></i> 4. Eligible Input Tax Credit (ITC)</span>
+          <span class="badge" style="background:#27ae60;">Auto-populated from GSTR-2B</span>
+        </h4>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-gstr3b">
+            <thead>
+              <tr>
+                <th style="width:40%;">Details</th>
+                <th style="width:15%;">Integrated Tax (₹)</th>
+                <th style="width:15%;">Central Tax (₹)</th>
+                <th style="width:15%;">State Tax (₹)</th>
+                <th style="width:15%;">Cess (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:#f8fafe; font-weight:700;">
+                <td colspan="5">(A) ITC Available (whether in full or part)</td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(1) Import of goods</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(2) Import of services</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td class="text-center text-muted">-</td>
+                <td class="text-center text-muted">-</td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(3) Inward supplies liable to reverse charge</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(4) Inward supplies from ISD</td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+                <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(5) All other ITC (From Inward Invoices)</td>
+                <td><input type="number" id="t4_igst" class="form-control" value="45000" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t4_cgst" class="form-control" value="9000" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t4_sgst" class="form-control" value="9000" oninput="onDataChanged()"></td>
+                <td><input type="number" id="t4_cess" class="form-control" value="0" oninput="onDataChanged()"></td>
+              </tr>
+              <tr style="background:#f8fafe; font-weight:700;">
+                <td colspan="5">(B) ITC Reversed</td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(1) As per rules 38, 42 and 43 and section 17(5)</td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+              </tr>
+              <tr>
+                <td style="padding-left:25px;">(2) Others (Rule 37, 37A)</td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+                <td><input type="number" class="form-control" value="0" oninput="onDataChanged()"></td>
+              </tr>
+              <tr style="background:#eef4fc; font-weight:700;">
+                <td>(C) Net ITC Available (A - B)</td>
+                <td style="text-align:right; color:#17c4bb;" id="dispNetItcIgst">₹ 45,000.00</td>
+                <td style="text-align:right; color:#27ae60;" id="dispNetItcCgst">₹ 9,000.00</td>
+                <td style="text-align:right; color:#27ae60;" id="dispNetItcSgst">₹ 9,000.00</td>
+                <td style="text-align:right;" id="dispNetItcCess">₹ 0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 6.1: Payment of Tax (Rule 88A ITC Offset Engine) -->
+      <div class="tile-table-section" style="background:#fafcfe;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h4 class="tile-title" style="margin-bottom:0;">
+            <span><i class="fa fa-balance-scale text-primary"></i> 6.1 Payment of Tax (Rule 88A ITC Offset &amp; Cash Ledger Debit)</span>
+          </h4>
+          <button type="button" class="btn btn-default btn-sm" onclick="runRule88AOffset()">
+            <i class="fa fa-refresh"></i> Auto-Offset ITC (Rule 88A)
+          </button>
+        </div>
+
+        <p style="font-size:12.5px; color:#64748b; margin-bottom:15px;">
+          Statutory Rule 88A: IGST credit must be utilized 100% first towards IGST, then towards CGST and SGST in any order/proportion. CGST credit cannot offset SGST, and SGST credit cannot offset CGST. Shortfall is debited from Electronic Cash Ledger.
+        </p>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-gstr3b">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Tax Payable (₹)</th>
+                <th>Paid through ITC (₹)</th>
+                <th>Tax Paid in Cash (₹)</th>
+                <th>Cash Ledger Available (₹)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Integrated Tax (IGST)</strong></td>
+                <td id="pay_liab_igst" style="text-align:right; font-weight:700;">₹ 18,000.00</td>
+                <td id="pay_itc_igst" style="text-align:right; color:#17c4bb; font-weight:700;">₹ 18,000.00</td>
+                <td id="pay_cash_igst" style="text-align:right; color:#27ae60; font-weight:700;">₹ 0.00</td>
+                <td id="avail_cash_igst" style="text-align:right;">₹ 45,000.00</td>
+                <td id="status_igst" style="text-align:center;"><span class="label label-success">Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>Central Tax (CGST)</strong></td>
+                <td id="pay_liab_cgst" style="text-align:right; font-weight:700;">₹ 0.00</td>
+                <td id="pay_itc_cgst" style="text-align:right; color:#17c4bb; font-weight:700;">₹ 0.00</td>
+                <td id="pay_cash_cgst" style="text-align:right; color:#27ae60; font-weight:700;">₹ 0.00</td>
+                <td id="avail_cash_cgst" style="text-align:right;">₹ 28,000.00</td>
+                <td id="status_cgst" style="text-align:center;"><span class="label label-success">Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>State Tax (SGST)</strong></td>
+                <td id="pay_liab_sgst" style="text-align:right; font-weight:700;">₹ 0.00</td>
+                <td id="pay_itc_sgst" style="text-align:right; color:#17c4bb; font-weight:700;">₹ 0.00</td>
+                <td id="pay_cash_sgst" style="text-align:right; color:#27ae60; font-weight:700;">₹ 0.00</td>
+                <td id="avail_cash_sgst" style="text-align:right;">₹ 28,000.00</td>
+                <td id="status_sgst" style="text-align:center;"><span class="label label-success">Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>Cess</strong></td>
+                <td id="pay_liab_cess" style="text-align:right; font-weight:700;">₹ 0.00</td>
+                <td id="pay_itc_cess" style="text-align:right; color:#17c4bb; font-weight:700;">₹ 0.00</td>
+                <td id="pay_cash_cess" style="text-align:right; color:#27ae60; font-weight:700;">₹ 0.00</td>
+                <td id="avail_cash_cess" style="text-align:right;">₹ 5,000.00</td>
+                <td id="status_cess" style="text-align:center;"><span class="label label-success">Cleared</span></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr style="background:#f0f5fc; font-size:13.5px; font-weight:700;">
+                <td>Total Tax Discharged</td>
+                <td id="pay_liab_tot" style="text-align:right; color:#1b3f75;">₹ 18,000.00</td>
+                <td id="pay_itc_tot" style="text-align:right; color:#17c4bb;">₹ 18,000.00</td>
+                <td id="pay_cash_tot" style="text-align:right; color:#27ae60;">₹ 0.00</td>
+                <td colspan="2" id="finalFilingStatus" style="text-align:center; color:#27ae60;">
+                  <i class="fa fa-check-circle"></i> Ready to File (Taxes Fully Cleared)
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bottom Verification & Filing Bar -->
+      <div style="padding:20px 24px; background:#ffffff; border-top:1px solid #eef2f6; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <a href="returns.html" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Returns Dashboard</a>
+        
+        <div style="display:flex; gap:10px;">
+          <a href="challan.html" class="btn btn-default" id="btnChallanLink" style="display:none; font-weight:700; color:#c0392b;">
+            <i class="fa fa-credit-card"></i> Create Challan (Pay Shortfall)
+          </a>
+          <button type="button" id="btnOffset" class="btn btn-primary" onclick="runRule88AOffset()" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+            <i class="fa fa-check"></i> Make Payment / Set-Off Liability
+          </button>
+          <button type="button" id="btnFileGstr3b" class="btn btn-success" onclick="fileGstr3b()" style="background:#27ae60; border-color:#27ae60; font-weight:700; padding:8px 30px;">
+            <i class="fa fa-lock"></i> File GSTR-3B with EVC
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+  <script src="js/gst-engine.js"></script>
+
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var currentFy = urlParams.get('fy') || '2024-25';
+    var currentPeriod = urlParams.get('period') || 'August';
+    var currentGstin = '27AAACB2234K1ZV';
+    var availableCash = { igst: 45000, cgst: 28000, sgst: 28000, cess: 5000 };
+    var currentOffsetResult = null;
+
+    function onDataChanged() {
+      var origIgst = 18000;
+      var curIgst = parseFloat(document.getElementById('t31_igst').value) || 0;
+      if (curIgst !== origIgst) {
+        document.getElementById('varAlert31').style.display = 'block';
+      } else {
+        document.getElementById('varAlert31').style.display = 'none';
+      }
+      runRule88AOffset();
+    }
+
+    function runRule88AOffset() {
+      var liability = {
+        igst: parseFloat(document.getElementById('t31_igst').value) || 0,
+        cgst: parseFloat(document.getElementById('t31_cgst').value) || 0,
+        sgst: parseFloat(document.getElementById('t31_sgst').value) || 0,
+        cess: parseFloat(document.getElementById('t31_cess').value) || 0
+      };
+
+      var itcAvailable = {
+        igst: parseFloat(document.getElementById('t4_igst').value) || 0,
+        cgst: parseFloat(document.getElementById('t4_cgst').value) || 0,
+        sgst: parseFloat(document.getElementById('t4_sgst').value) || 0,
+        cess: parseFloat(document.getElementById('t4_cess').value) || 0
+      };
+
+      document.getElementById('dispNetItcIgst').innerText = '₹ ' + itcAvailable.igst.toLocaleString('en-IN') + '.00';
+      document.getElementById('dispNetItcCgst').innerText = '₹ ' + itcAvailable.cgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('dispNetItcSgst').innerText = '₹ ' + itcAvailable.sgst.toLocaleString('en-IN') + '.00';
+
+      var res = GSTEngine.offsetItcRule88A(liability, itcAvailable, availableCash);
+      currentOffsetResult = res;
+
+      document.getElementById('pay_liab_igst').innerText = '₹ ' + liability.igst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_liab_cgst').innerText = '₹ ' + liability.cgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_liab_sgst').innerText = '₹ ' + liability.sgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_liab_cess').innerText = '₹ ' + liability.cess.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_liab_tot').innerText = '₹ ' + (liability.igst + liability.cgst + liability.sgst + liability.cess).toLocaleString('en-IN') + '.00';
+
+      document.getElementById('pay_itc_igst').innerText = '₹ ' + res.totalItcUtilized.igst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_itc_cgst').innerText = '₹ ' + res.totalItcUtilized.cgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_itc_sgst').innerText = '₹ ' + res.totalItcUtilized.sgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_itc_cess').innerText = '₹ ' + res.totalItcUtilized.cess.toLocaleString('en-IN') + '.00';
+      var totItc = res.totalItcUtilized.igst + res.totalItcUtilized.cgst + res.totalItcUtilized.sgst + res.totalItcUtilized.cess;
+      document.getElementById('pay_itc_tot').innerText = '₹ ' + totItc.toLocaleString('en-IN') + '.00';
+
+      document.getElementById('pay_cash_igst').innerText = '₹ ' + res.paidWithCash.igst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_cash_cgst').innerText = '₹ ' + res.paidWithCash.cgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_cash_sgst').innerText = '₹ ' + res.paidWithCash.sgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('pay_cash_cess').innerText = '₹ ' + res.paidWithCash.cess.toLocaleString('en-IN') + '.00';
+      var totCash = res.paidWithCash.igst + res.paidWithCash.cgst + res.paidWithCash.sgst + res.paidWithCash.cess;
+      document.getElementById('pay_cash_tot').innerText = '₹ ' + totCash.toLocaleString('en-IN') + '.00';
+
+      var challanLink = document.getElementById('btnChallanLink');
+      if (res.canDischarge) {
+        document.getElementById('finalFilingStatus').innerHTML = '<span class="text-success" style="font-weight:700;"><i class="fa fa-check-circle"></i> Ready to File (Taxes Fully Cleared)</span>';
+        document.getElementById('btnFileGstr3b').disabled = false;
+        challanLink.style.display = 'none';
+      } else {
+        document.getElementById('finalFilingStatus').innerHTML = '<span class="text-danger" style="font-weight:700;"><i class="fa fa-exclamation-triangle"></i> Shortfall: ₹ ' + res.totalShortfall.toLocaleString('en-IN') + '</span>';
+        document.getElementById('btnFileGstr3b').disabled = true;
+        challanLink.style.display = 'inline-block';
+      }
+    }
+
+    function recomputeInterest() {
+      GSTSimulation.showToast('Recomputing interest based on latest period parameters... Interest computed as ₹ 0.00.', 'info', 'Interest Recomputed');
+    }
+
+    function saveGstr3bDraft() {
+      GSTSimulation.showToast('GSTR-3B draft saved successfully in common portal cache.', 'success');
+    }
+
+    function previewDraftGstr3b() {
+      GSTSimulation.showToast('Generated system draft Form GSTR-3B summary PDF with DRAFT watermark.', 'info', 'Draft Preview');
+    }
+
+    function exportGstr3bJson() {
+      var payload = {
+        gstin: currentGstin,
+        ret_period: currentPeriod + "_" + currentFy,
+        filing_typ: "GSTR3B",
+        sup_details: {
+          osup_det: {
+            txval: parseFloat(document.getElementById('t31_taxable').value) || 0,
+            iamt: parseFloat(document.getElementById('t31_igst').value) || 0,
+            camt: parseFloat(document.getElementById('t31_cgst').value) || 0,
+            samt: parseFloat(document.getElementById('t31_sgst').value) || 0,
+            csamt: 0
+          }
+        },
+        itc_elg: {
+          itc_avl: [{
+            ty: "OTH",
+            iamt: parseFloat(document.getElementById('t4_igst').value) || 0,
+            camt: parseFloat(document.getElementById('t4_cgst').value) || 0,
+            samt: parseFloat(document.getElementById('t4_sgst').value) || 0,
+            csamt: 0
+          }]
+        }
+      };
+
+      var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "GSTR3B_" + currentGstin + "_" + currentPeriod + "_" + currentFy + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      GSTSimulation.showToast('GSTR-3B JSON exported for ' + currentPeriod + ' (' + currentFy + ').', 'success');
+    }
+
+    function fileGstr3b() {
+      if (!currentOffsetResult || !currentOffsetResult.canDischarge) {
+        GSTSimulation.showToast('Taxes must be fully offset before filing GSTR-3B.', 'warning', 'Action Required');
+        return;
+      }
+
+      GSTSimulation.showOtpModal({
+        title: 'File Form GSTR-3B via Aadhaar / PAN EVC',
+        mobile: '9820123456',
+        email: 'rajesh.sharma@bharatenterprises.in',
+        expectedOtp: '123456',
+        onVerify: function() {
+          fetch('/api/returns/gstr3b/file', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              gstin: currentGstin,
+              period: currentPeriod,
+              fy: currentFy,
+              paidCash: currentOffsetResult.paidWithCash,
+              paidItc: currentOffsetResult.totalItcUtilized
+            })
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.success) {
+              GSTSimulation.showToast(data.message + ' ARN: ' + data.arn, 'success', 'GSTR-3B Filed');
+              document.getElementById('g3StatusBadge').innerHTML = '<span class="label label-success" style="font-size:12px; padding:6px 12px;"><i class="fa fa-check"></i> FILED (ARN: ' + data.arn + ')</span>';
+              document.getElementById('btnFileGstr3b').disabled = true;
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+            GSTSimulation.showToast('Network error filing GSTR-3B.', 'danger');
+          });
+        }
+      });
+    }
+
+    window.addEventListener('load', function() {
+      var periodElem = document.getElementById('g3PeriodDisplay');
+      if (periodElem) {
+        periodElem.innerText = currentPeriod + ' (FY ' + currentFy + ')';
+      }
+      runRule88AOffset();
+    });
+  </script>
+
+</body>
+</html>
