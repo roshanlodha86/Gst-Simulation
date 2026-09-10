@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-Way Bill System | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .ewb-header-card {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 22px 26px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.06);
+    }
+    .ewb-section-title {
+      background: #1b3f75;
+      color: #ffffff;
+      padding: 8px 14px;
+      font-size: 13.5px;
+      font-weight: 700;
+      border-radius: 4px;
+      margin-top: 20px;
+      margin-bottom: 14px;
+    }
+    .ewb-tabs-nav {
+      border-bottom: 2px solid #1b3f75;
+      margin-bottom: 0;
+    }
+    .ewb-tabs-nav > li > a {
+      color: #475f82;
+      font-weight: 700;
+      font-size: 13px;
+      border-radius: 4px 4px 0 0;
+      padding: 10px 18px;
+    }
+    .ewb-tabs-nav > li.active > a,
+    .ewb-tabs-nav > li.active > a:hover {
+      color: #ffffff !important;
+      background: #1b3f75 !important;
+      border: 1px solid #1b3f75 !important;
+      border-bottom-color: transparent !important;
+    }
+    .ewb-pane {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-top: none;
+      padding: 25px;
+      border-radius: 0 0 6px 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      margin-bottom: 30px;
+    }
+
+    /* Authentic e-Way Bill Certificate Layout */
+    .ewb-certificate {
+      background: #ffffff;
+      border: 2px solid #1b3f75;
+      padding: 30px;
+      border-radius: 4px;
+      max-width: 900px;
+      margin: 0 auto;
+      font-family: Arial, Helvetica, sans-serif;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .ewb-cert-header {
+      text-align: center;
+      border-bottom: 2px solid #1b3f75;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .ewb-cert-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ewb-cert-table td {
+      font-size: 12px;
+      vertical-align: middle !important;
+    }
+    .barcode-box {
+      font-family: monospace;
+      font-size: 26px;
+      letter-spacing: 6px;
+      background: #f8fafe;
+      border: 1px dashed #94a3b8;
+      padding: 6px 16px;
+      display: inline-block;
+      margin-top: 5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .qr-mock {
+      width: 100px;
+      height: 100px;
+      background: #ffffff;
+      border: 2px solid #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      margin: 0 auto;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- UI Shell Placeholders -->
+  <div id="gst-header"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+    
+    <!-- Breadcrumbs -->
+    <div id="gst-breadcrumbs"></div>
+
+    <!-- Header Card -->
+    <div class="ewb-header-card no-print">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:15px;">
+        <div>
+          <h2 style="margin:0; color:#1b3f75; font-weight:700; font-size:22px;">
+            <i class="fa fa-truck"></i> National e-Way Bill Portal (Simulation)
+          </h2>
+          <p style="margin:4px 0 0 0; color:#64748b; font-size:13px;">
+            Rule 138 of CGST Rules &bull; Electronic Way Bill Generation for Inter-State and Intra-State Movement of Goods
+          </p>
+        </div>
+        <div>
+          <span class="label label-primary" style="background:#1b3f75; font-size:12px; padding:6px 10px;">
+            <i class="fa fa-shield"></i> National Informatics Centre (NIC)
+          </span>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <ul class="nav nav-tabs ewb-tabs-nav" id="ewbTabs" role="tablist">
+        <li class="active"><a href="#tab-generate" onclick="switchEwbTab('generate')"><i class="fa fa-plus-circle"></i> Generate e-Way Bill (EWB-01)</a></li>
+        <li><a href="#tab-view" onclick="switchEwbTab('view')"><i class="fa fa-file-text-o"></i> View & Print Generated Certificate</a></li>
+        <li><a href="#tab-history" onclick="switchEwbTab('history')"><i class="fa fa-list"></i> Search / Registered e-Way Bills</a></li>
+      </ul>
+
+      <!-- ================= TAB 1: GENERATE EWB ================= -->
+      <div id="tab-generate" class="ewb-pane">
+        <form id="ewbForm" onsubmit="handleEwbSubmit(event)">
+          
+          <!-- 1. Transaction Details -->
+          <div class="ewb-section-title"><i class="fa fa-info-circle"></i> 1. Transaction & Document Details</div>
+          <div class="row">
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Supply Type <span style="color:red;">*</span></label>
+              <select class="form-control" id="ewbSupplyType" required>
+                <option value="Outward - Supply" selected>Outward - Supply</option>
+                <option value="Outward - Export">Outward - Export</option>
+                <option value="Outward - Job Work">Outward - Job Work</option>
+                <option value="Inward - Supply">Inward - Supply</option>
+                <option value="Inward - Import">Inward - Import</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Document Type <span style="color:red;">*</span></label>
+              <select class="form-control" id="ewbDocType" required>
+                <option value="Tax Invoice" selected>Tax Invoice</option>
+                <option value="Bill of Supply">Bill of Supply</option>
+                <option value="Delivery Challan">Delivery Challan</option>
+                <option value="Credit Note">Credit Note</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Document No. <span style="color:red;">*</span></label>
+              <input type="text" class="form-control" id="ewbDocNo" value="INV-2024-001" required>
+            </div>
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Document Date <span style="color:red;">*</span></label>
+              <input type="text" class="form-control" id="ewbDocDate" value="05/09/2024" required>
+            </div>
+          </div>
+
+          <!-- 2. Part A: Consignor & Consignee -->
+          <div class="row">
+            <!-- Consignor (Bill From) -->
+            <div class="col-md-6">
+              <div class="ewb-section-title"><i class="fa fa-paper-plane-o"></i> 2. Bill From (Consignor / Supplier)</div>
+              <div class="form-group">
+                <label>Supplier GSTIN <span style="color:red;">*</span></label>
+                <input type="text" class="form-control font-mono" id="ewbFromGstin" value="27AAACB2234K1ZV" required onchange="updateTaxComputation()">
+              </div>
+              <div class="form-group">
+                <label>Legal / Trade Name</label>
+                <input type="text" class="form-control" id="ewbFromTrader" value="BHARAT ENTERPRISES PRIVATE LIMITED" required>
+              </div>
+              <div class="form-group">
+                <label>State & Code</label>
+                <input type="text" class="form-control" id="ewbFromState" value="Maharashtra (27)" required>
+              </div>
+              <div class="form-group">
+                <label>Dispatch From Address</label>
+                <textarea class="form-control" id="ewbFromAddress" rows="2" required>Plot No. 42, Bandra Kurla Complex, Mumbai 400051</textarea>
+              </div>
+            </div>
+
+            <!-- Consignee (Bill To) -->
+            <div class="col-md-6">
+              <div class="ewb-section-title"><i class="fa fa-map-marker"></i> 3. Bill To (Consignee / Recipient)</div>
+              <div class="form-group">
+                <label>Recipient GSTIN <span style="color:red;">*</span></label>
+                <div class="input-group">
+                  <input type="text" class="form-control font-mono" id="ewbToGstin" value="29AABCS5544N1ZR" required onchange="onRecipientGstinChange()">
+                  <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" onclick="setQuickRecipient('karnataka')">Karnataka</button>
+                    <button type="button" class="btn btn-default" onclick="setQuickRecipient('mumbai')">Mumbai</button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Legal / Trade Name</label>
+                <input type="text" class="form-control" id="ewbToTrader" value="SOUTHERN TECH SOLUTIONS LLP" required>
+              </div>
+              <div class="form-group">
+                <label>State & Code</label>
+                <input type="text" class="form-control" id="ewbToState" value="Karnataka (29)" required>
+              </div>
+              <div class="form-group">
+                <label>Ship To Address</label>
+                <textarea class="form-control" id="ewbToAddress" rows="2" required>Level 4, Prestige Tech Park, Marathahalli, Bengaluru 560103</textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Item Details & Tax -->
+          <div class="ewb-section-title"><i class="fa fa-cubes"></i> 4. Item Particulars & Value</div>
+          <div class="row">
+            <div class="col-md-3 form-group">
+              <label>Product Name</label>
+              <input type="text" class="form-control" id="ewbItemName" value="Cloud Hardware Servers" required>
+            </div>
+            <div class="col-md-2 form-group">
+              <label>HSN Code</label>
+              <input type="text" class="form-control font-mono" id="ewbHsn" value="8471" required>
+            </div>
+            <div class="col-md-3 form-group">
+              <label>Taxable Value (₹) <span style="color:red;">*</span></label>
+              <input type="number" class="form-control" id="ewbTaxableVal" value="250000" min="1" step="any" required onchange="updateTaxComputation()">
+            </div>
+            <div class="col-md-2 form-group">
+              <label>Tax Rate (%)</label>
+              <select class="form-control" id="ewbRate" onchange="updateTaxComputation()">
+                <option value="5">5%</option>
+                <option value="12">12%</option>
+                <option value="18" selected>18%</option>
+                <option value="28">28%</option>
+              </select>
+            </div>
+            <div class="col-md-2 form-group">
+              <label>Total Invoice Value (₹)</label>
+              <input type="text" class="form-control" id="ewbTotalVal" value="₹ 2,95,000.00" readonly style="font-weight:700; color:#1b3f75; background:#eef4fc;">
+            </div>
+          </div>
+
+          <div id="taxBreakdownPill" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:10px 15px; margin-bottom:15px; font-size:12.5px;">
+            <span>Tax Supply Category: <strong id="ewbSupplyCategory" style="color:#1b3f75;">INTER-STATE (IGST Applicable)</strong></span> &bull;
+            <span>IGST: <strong id="ewbIgstVal">₹ 45,000.00</strong></span> &bull;
+            <span>CGST: <strong id="ewbCgstVal">₹ 0.00</strong></span> &bull;
+            <span>SGST: <strong id="ewbSgstVal">₹ 0.00</strong></span>
+          </div>
+
+          <!-- 5. Part B: Transportation Details -->
+          <div class="ewb-section-title"><i class="fa fa-road"></i> 5. Part B: Transportation & Vehicle Details</div>
+          <div class="row">
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Mode of Transport <span style="color:red;">*</span></label>
+              <select class="form-control" id="ewbMode" required>
+                <option value="Road" selected>1 - Road</option>
+                <option value="Rail">2 - Rail</option>
+                <option value="Air">3 - Air</option>
+                <option value="Ship">4 - Ship</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Approx. Distance (in KM) <span style="color:red;">*</span></label>
+              <input type="number" class="form-control" id="ewbDistance" value="985" min="1" required onchange="updateValidity()">
+              <span class="help-block" style="font-size:11px; color:#64748b;" id="ewbValidityNotice">Validity: Approx 5 Days (Rule 138(10))</span>
+            </div>
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Transporter Name / ID</label>
+              <input type="text" class="form-control" id="ewbTransporter" value="HINDUSTAN LOGISTICS & FREIGHT (27AABCH9912K1ZT)">
+            </div>
+            <div class="col-md-3 col-sm-6 form-group">
+              <label>Vehicle Number <span style="color:red;">*</span></label>
+              <input type="text" class="form-control" id="ewbVehicleNo" value="MH04JK8842" placeholder="e.g. MH04JK8842" required>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; text-align:right;">
+            <button type="reset" class="btn btn-default" style="margin-right:10px;">Reset Fields</button>
+            <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700; font-size:14px; padding:8px 24px;">
+              <i class="fa fa-check-circle"></i> Generate e-Way Bill
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- ================= TAB 2: CERTIFICATE VIEW ================= -->
+      <div id="tab-view" class="ewb-pane" style="display:none;">
+        <div style="text-align:right; margin-bottom:20px;" class="no-print">
+          <button type="button" class="btn btn-primary" onclick="window.print()" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+            <i class="fa fa-print"></i> Print Official e-Way Bill
+          </button>
+          <button type="button" class="btn btn-default" onclick="downloadEwbCertificateText()">
+            <i class="fa fa-download"></i> Download Slip
+          </button>
+        </div>
+
+        <!-- Printable Certificate -->
+        <div id="printArea">
+          <div class="ewb-certificate">
+            <div class="ewb-cert-header">
+              <img src="images/Emblem_of_India-white.svg" alt="Emblem" style="height:55px; filter:invert(1); margin-bottom:6px;">
+              <h3 style="margin:0; font-weight:700; color:#1b3f75; font-size:19px;">e-Way Bill System</h3>
+              <p style="margin:2px 0 0 0; font-size:12px; color:#475569; font-weight:600;">Government of India &bull; Ministry of Finance &bull; Goods and Services Tax</p>
+              
+              <div style="margin-top:14px;">
+                <div style="font-size:11.5px; font-weight:700; color:#64748b; text-transform:uppercase;">e-Way Bill Number</div>
+                <div class="barcode-box" id="certEwbNo">2710 4829 1042</div>
+              </div>
+            </div>
+
+            <!-- Header Key Facts -->
+            <div class="row" style="margin-bottom:15px; font-size:12.5px;">
+              <div class="col-xs-8">
+                <table class="table table-condensed" style="margin:0;">
+                  <tr><td style="width:38%; font-weight:700;">e-Way Bill Date:</td><td id="certEwbDate">05/09/2024 10:30 AM</td></tr>
+                  <tr><td style="font-weight:700;">Generated By:</td><td id="certGenBy">27AAACB2234K1ZV (BHARAT ENTERPRISES)</td></tr>
+                  <tr><td style="font-weight:700;">Valid From:</td><td id="certValidFrom">05/09/2024 10:30 AM</td></tr>
+                  <tr><td style="font-weight:700;">Valid Until:</td><td><strong id="certValidTo" style="color:#c0392b;">10/09/2024 11:59 PM</strong></td></tr>
+                  <tr><td style="font-weight:700;">Approx. Distance:</td><td id="certDistance">985 KM</td></tr>
+                </table>
+              </div>
+              <div class="col-xs-4 text-center">
+                <div class="qr-mock">
+                  <i class="fa fa-qrcode" style="font-size:78px; color:#000;"></i>
+                </div>
+                <span style="font-size:10px; color:#64748b; font-weight:700;">NIC QR VERIFIED</span>
+              </div>
+            </div>
+
+            <!-- Part A Details -->
+            <h5 style="background:#1b3f75; color:#fff; padding:5px 10px; font-size:12.5px; font-weight:700; margin:0 0 10px 0;">PART - A</h5>
+            <table class="table table-bordered table-condensed ewb-cert-table">
+              <tr>
+                <th style="width:20%;">GSTIN of Supplier</th>
+                <td style="width:30%;" id="certFromGstin">27AAACB2234K1ZV</td>
+                <th style="width:20%;">GSTIN of Recipient</th>
+                <td style="width:30%;" id="certToGstin">29AABCS5544N1ZR</td>
+              </tr>
+              <tr>
+                <th>Place of Dispatch</th>
+                <td id="certFromAddr">Plot No. 42, Bandra Kurla Complex, Mumbai 400051 (Maharashtra - 27)</td>
+                <th>Place of Delivery</th>
+                <td id="certToAddr">Level 4, Prestige Tech Park, Marathahalli, Bengaluru 560103 (Karnataka - 29)</td>
+              </tr>
+              <tr>
+                <th>Document Details</th>
+                <td id="certDocDetails">Tax Invoice No. INV-2024-001 dated 05/09/2024</td>
+                <th>Transaction Type</th>
+                <td id="certSupplyType">Outward - Supply</td>
+              </tr>
+              <tr>
+                <th>Value of Goods</th>
+                <td id="certTaxable">₹ 2,50,000.00</td>
+                <th>Total Value with Tax</th>
+                <td><strong id="certTotal" style="color:#1b3f75; font-size:13px;">₹ 2,95,000.00</strong></td>
+              </tr>
+              <tr>
+                <th>HSN Code & Goods</th>
+                <td id="certHsn">8471 - Cloud Hardware Servers</td>
+                <th>Tax Breakdown</th>
+                <td id="certTaxSplit">IGST: ₹ 45,000.00 | CGST: ₹ 0.00 | SGST: ₹ 0.00</td>
+              </tr>
+            </table>
+
+            <!-- Part B Details -->
+            <h5 style="background:#1b3f75; color:#fff; padding:5px 10px; font-size:12.5px; font-weight:700; margin:15px 0 10px 0;">PART - B (Vehicle & Conveyance History)</h5>
+            <table class="table table-bordered table-condensed ewb-cert-table">
+              <thead>
+                <tr>
+                  <th>Mode</th>
+                  <th>Vehicle No / Trans Doc No</th>
+                  <th>From</th>
+                  <th>Entered Date</th>
+                  <th>Entered By</th>
+                  <th>Multi-Vehicle Info</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="certMode">Road</td>
+                  <td><strong id="certVehicleNo" style="font-family:monospace; color:#1b3f75; font-size:13px;">MH04JK8842</strong></td>
+                  <td>Mumbai (Maharashtra)</td>
+                  <td id="certEnteredDate">05/09/2024</td>
+                  <td>27AAACB2234K1ZV</td>
+                  <td>No</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="border-top:1px solid #cbd5e1; padding-top:10px; margin-top:15px; display:flex; justify-content:space-between; font-size:10.5px; color:#64748b;">
+              <span>Generated on Government of India GST Common Portal System</span>
+              <span>Barring vehicle updates, validity expires automatically after designated transit timeline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: REGISTERED E-WAY BILLS ================= -->
+      <div id="tab-history" class="ewb-pane" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">List of e-Way Bills Generated for Consignments</h4>
+          <button type="button" class="btn btn-default btn-xs" onclick="loadEwbHistory()"><i class="fa fa-refresh"></i> Refresh</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" style="font-size:12.5px;">
+            <thead style="background:#1b3f75; color:#fff;">
+              <tr>
+                <th>e-Way Bill No.</th>
+                <th>EWB Date</th>
+                <th>Doc No.</th>
+                <th>Recipient GSTIN & Name</th>
+                <th>To State</th>
+                <th>Vehicle No.</th>
+                <th>Total Value (₹)</th>
+                <th>Status</th>
+                <th style="width:90px; text-align:center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="ewbHistoryBody">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer placeholder -->
+  <div id="gst-footer"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var latestEwb = null;
+    var allEwbs = [];
+
+    function switchEwbTab(tabId) {
+      ['generate', 'view', 'history'].forEach(function(t) {
+        var el = document.getElementById('tab-' + t);
+        if (el) el.style.display = (t === tabId) ? 'block' : 'none';
+      });
+      var lis = document.querySelectorAll('#ewbTabs li');
+      lis.forEach(function(li) { li.classList.remove('active'); });
+      var targetLi = Array.from(lis).find(function(li) {
+        var a = li.querySelector('a');
+        return a && a.getAttribute('onclick') && a.getAttribute('onclick').indexOf(tabId) !== -1;
+      });
+      if (targetLi) targetLi.classList.add('active');
+    }
+
+    function setQuickRecipient(dest) {
+      if (dest === 'karnataka') {
+        document.getElementById('ewbToGstin').value = '29AABCS5544N1ZR';
+        document.getElementById('ewbToTrader').value = 'SOUTHERN TECH SOLUTIONS LLP';
+        document.getElementById('ewbToState').value = 'Karnataka (29)';
+        document.getElementById('ewbToAddress').value = 'Level 4, Prestige Tech Park, Marathahalli, Bengaluru 560103';
+        document.getElementById('ewbDistance').value = 985;
+      } else {
+        document.getElementById('ewbToGstin').value = '27AABCT9988M1Z2';
+        document.getElementById('ewbToTrader').value = 'MAHARASHTRA RETAIL DEPOT';
+        document.getElementById('ewbToState').value = 'Maharashtra (27)';
+        document.getElementById('ewbToAddress').value = 'Plot 12, APMC Market, Vashi, Navi Mumbai 400703';
+        document.getElementById('ewbDistance').value = 45;
+      }
+      updateTaxComputation();
+      updateValidity();
+    }
+
+    function onRecipientGstinChange() {
+      var g = document.getElementById('ewbToGstin').value.trim().toUpperCase();
+      var stateCode = g.substring(0, 2);
+      if (stateCode === '27') {
+        document.getElementById('ewbToState').value = 'Maharashtra (27)';
+      } else if (stateCode === '29') {
+        document.getElementById('ewbToState').value = 'Karnataka (29)';
+      } else if (stateCode === '07') {
+        document.getElementById('ewbToState').value = 'Delhi (07)';
+      }
+      updateTaxComputation();
+    }
+
+    function updateTaxComputation() {
+      var fromGstin = document.getElementById('ewbFromGstin').value.trim();
+      var toGstin = document.getElementById('ewbToGstin').value.trim();
+      var taxable = parseFloat(document.getElementById('ewbTaxableVal').value) || 0;
+      var rate = parseFloat(document.getElementById('ewbRate').value) || 18;
+
+      var fromCode = fromGstin.substring(0, 2);
+      var toCode = toGstin.substring(0, 2);
+      var isInterState = (fromCode !== toCode);
+
+      var igst = 0, cgst = 0, sgst = 0;
+      if (isInterState) {
+        igst = Math.round(taxable * (rate / 100));
+        document.getElementById('ewbSupplyCategory').innerText = 'INTER-STATE (IGST Applicable)';
+      } else {
+        cgst = Math.round(taxable * (rate / 200));
+        sgst = Math.round(taxable * (rate / 200));
+        document.getElementById('ewbSupplyCategory').innerText = 'INTRA-STATE (CGST + SGST Applicable)';
+      }
+
+      var total = taxable + igst + cgst + sgst;
+      document.getElementById('ewbIgstVal').innerText = '₹ ' + igst.toLocaleString('en-IN') + '.00';
+      document.getElementById('ewbCgstVal').innerText = '₹ ' + cgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('ewbSgstVal').innerText = '₹ ' + sgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('ewbTotalVal').value = '₹ ' + total.toLocaleString('en-IN') + '.00';
+    }
+
+    function updateValidity() {
+      var dist = parseFloat(document.getElementById('ewbDistance').value) || 100;
+      var days = Math.ceil(dist / 200);
+      if (days < 1) days = 1;
+      document.getElementById('ewbValidityNotice').innerText = 'Validity: Approx ' + days + ' Day(s) based on ' + dist + ' KM (Rule 138(10))';
+    }
+
+    function handleEwbSubmit(e) {
+      e.preventDefault();
+
+      var fromGstin = document.getElementById('ewbFromGstin').value.trim();
+      var toGstin = document.getElementById('ewbToGstin').value.trim();
+      var taxable = parseFloat(document.getElementById('ewbTaxableVal').value) || 0;
+      var rate = parseFloat(document.getElementById('ewbRate').value) || 18;
+      var fromCode = fromGstin.substring(0, 2);
+      var toCode = toGstin.substring(0, 2);
+      var isInterState = (fromCode !== toCode);
+
+      var igst = isInterState ? Math.round(taxable * (rate / 100)) : 0;
+      var cgst = !isInterState ? Math.round(taxable * (rate / 200)) : 0;
+      var sgst = !isInterState ? Math.round(taxable * (rate / 200)) : 0;
+
+      var payload = {
+        fromStateCode: fromCode,
+        fromGstin: fromGstin,
+        fromTrader: document.getElementById('ewbFromTrader').value,
+        fromState: document.getElementById('ewbFromState').value,
+        fromAddress: document.getElementById('ewbFromAddress').value,
+        toGstin: toGstin,
+        toTrader: document.getElementById('ewbToTrader').value,
+        toState: document.getElementById('ewbToState').value,
+        toAddress: document.getElementById('ewbToAddress').value,
+        supplyType: document.getElementById('ewbSupplyType').value,
+        docType: document.getElementById('ewbDocType').value,
+        docNo: document.getElementById('ewbDocNo').value,
+        docDate: document.getElementById('ewbDocDate').value,
+        taxableAmount: taxable,
+        igst: igst,
+        cgst: cgst,
+        sgst: sgst,
+        cess: 0,
+        totalAmount: taxable + igst + cgst + sgst,
+        hsn: document.getElementById('ewbHsn').value,
+        itemDesc: document.getElementById('ewbItemName').value,
+        mode: document.getElementById('ewbMode').value,
+        approxDistance: parseFloat(document.getElementById('ewbDistance').value) || 150,
+        vehicleNo: document.getElementById('ewbVehicleNo').value.trim().toUpperCase(),
+        transporterName: document.getElementById('ewbTransporter').value
+      };
+
+      fetch('/api/ewaybill/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success && data.ewayBill) {
+          latestEwb = data.ewayBill;
+          displayEwbCertificate(latestEwb);
+          GSTSimulation.showToast('e-Way Bill Generated: ' + latestEwb.ewbNo, 'success', 'E-Way Bill Created');
+          switchEwbTab('view');
+          loadEwbHistory();
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        GSTSimulation.showToast('Failed to create e-Way Bill.', 'danger');
+      });
+    }
+
+    function displayEwbCertificate(ewb) {
+      if (!ewb) return;
+      document.getElementById('certEwbNo').innerText = ewb.ewbNo.replace(/(\d{4})/g, '$1 ').trim();
+      document.getElementById('certEwbDate').innerText = ewb.ewbDate;
+      document.getElementById('certGenBy').innerText = ewb.generatedBy + ' (' + ewb.fromTrader + ')';
+      document.getElementById('certValidFrom').innerText = ewb.ewbDate;
+      document.getElementById('certValidTo').innerText = ewb.validUpto;
+      document.getElementById('certDistance').innerText = ewb.approxDistance + ' KM';
+
+      document.getElementById('certFromGstin').innerText = ewb.fromGstin;
+      document.getElementById('certToGstin').innerText = ewb.toGstin;
+      document.getElementById('certFromAddr').innerText = ewb.fromAddress + ' (' + ewb.fromState + ')';
+      document.getElementById('certToAddr').innerText = ewb.toAddress + ' (' + ewb.toState + ')';
+      document.getElementById('certDocDetails').innerText = ewb.docType + ' No. ' + ewb.docNo + ' dated ' + ewb.docDate;
+      document.getElementById('certSupplyType').innerText = ewb.supplyType;
+      document.getElementById('certTaxable').innerText = '₹ ' + parseFloat(ewb.taxableAmount).toLocaleString('en-IN') + '.00';
+      document.getElementById('certTotal').innerText = '₹ ' + parseFloat(ewb.totalAmount).toLocaleString('en-IN') + '.00';
+      document.getElementById('certHsn').innerText = ewb.hsn + ' - ' + ewb.itemDesc;
+      document.getElementById('certTaxSplit').innerText = 'IGST: ₹ ' + parseFloat(ewb.igst).toLocaleString('en-IN') + ' | CGST: ₹ ' + parseFloat(ewb.cgst).toLocaleString('en-IN') + ' | SGST: ₹ ' + parseFloat(ewb.sgst).toLocaleString('en-IN');
+      document.getElementById('certMode').innerText = ewb.mode;
+      document.getElementById('certVehicleNo').innerText = ewb.vehicleNo;
+      document.getElementById('certEnteredDate').innerText = ewb.docDate;
+    }
+
+    function loadEwbHistory() {
+      fetch('/api/ewaybill/list')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success && data.ewayBills) {
+            allEwbs = data.ewayBills;
+            renderEwbHistory(allEwbs);
+            if (!latestEwb && allEwbs.length > 0) {
+              latestEwb = allEwbs[0];
+              displayEwbCertificate(latestEwb);
+            }
+          }
+        });
+    }
+
+    function renderEwbHistory(list) {
+      var tbody = document.getElementById('ewbHistoryBody');
+      if (!list || list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted" style="padding:20px;">No e-Way bills on record.</td></tr>';
+        return;
+      }
+
+      var html = '';
+      list.forEach(function(b, idx) {
+        html += 
+          '<tr>' +
+            '<td><strong style="color:#1b3f75; font-family:monospace;">' + b.ewbNo + '</strong></td>' +
+            '<td>' + b.ewbDate + '</td>' +
+            '<td>' + b.docNo + '</td>' +
+            '<td>' + b.toTrader + '<br><code style="color:#1b3f75;">' + b.toGstin + '</code></td>' +
+            '<td>' + b.toState + '</td>' +
+            '<td><strong>' + b.vehicleNo + '</strong></td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + parseFloat(b.totalAmount).toLocaleString('en-IN') + '</td>' +
+            '<td><span class="label label-success">' + b.status + '</span></td>' +
+            '<td style="text-align:center;">' +
+              '<button type="button" class="btn btn-xs btn-default" onclick="selectAndShowEwb(' + idx + ')"><i class="fa fa-eye"></i> View</button>' +
+            '</td>' +
+          '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function selectAndShowEwb(idx) {
+      latestEwb = allEwbs[idx];
+      displayEwbCertificate(latestEwb);
+      switchEwbTab('view');
+    }
+
+    function downloadEwbCertificateText() {
+      if (!latestEwb) return;
+      var text = 
+        "==========================================================\n" +
+        "GOVERNMENT OF INDIA - NATIONAL E-WAY BILL SYSTEM\n" +
+        "==========================================================\n\n" +
+        "e-Way Bill No: " + latestEwb.ewbNo + "\n" +
+        "Generated Date: " + latestEwb.ewbDate + "\n" +
+        "Generated By: " + latestEwb.generatedBy + "\n" +
+        "Valid Upto: " + latestEwb.validUpto + "\n\n" +
+        "PART-A (Consignment Details)\n" +
+        "----------------------------\n" +
+        "From: " + latestEwb.fromTrader + " (" + latestEwb.fromGstin + ")\n" +
+        "Dispatch Address: " + latestEwb.fromAddress + "\n" +
+        "To: " + latestEwb.toTrader + " (" + latestEwb.toGstin + ")\n" +
+        "Delivery Address: " + latestEwb.toAddress + "\n" +
+        "Doc Type & No: " + latestEwb.docType + " - " + latestEwb.docNo + "\n" +
+        "Taxable Value: ₹ " + latestEwb.taxableAmount + "\n" +
+        "Total Invoice Value: ₹ " + latestEwb.totalAmount + "\n" +
+        "HSN & Item: " + latestEwb.hsn + " - " + latestEwb.itemDesc + "\n\n" +
+        "PART-B (Vehicle Details)\n" +
+        "------------------------\n" +
+        "Mode: " + latestEwb.mode + "\n" +
+        "Vehicle Number: " + latestEwb.vehicleNo + "\n" +
+        "Approx. Distance: " + latestEwb.approxDistance + " KM\n" +
+        "==========================================================\n";
+
+      var blob = new Blob([text], { type: 'text/plain' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "eWayBill_" + latestEwb.ewbNo + ".txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      GSTSimulation.showToast('Downloaded e-Way Bill certificate text.', 'success');
+    }
+
+    window.addEventListener('load', function() {
+      updateTaxComputation();
+      updateValidity();
+      loadEwbHistory();
+    });
+  </script>
+
+</body>
+</html>

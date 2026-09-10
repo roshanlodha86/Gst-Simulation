@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taxpayer Login | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .login-container {
+      max-width: 500px;
+      margin: 30px auto;
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(27,63,117,0.08);
+    }
+    .login-header {
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .login-header h3 {
+      margin: 0;
+      color: #1b3f75;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .quick-login-card {
+      background: #f8fafe;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper" id="main-content" style="min-height: 550px; padding: 20px 0 40px;">
+    <div class="container">
+      
+      <div class="login-container">
+        
+        <!-- Quick Switcher for Simulation Testing -->
+        <div class="quick-login-card">
+          <div style="font-size: 11px; font-weight: 700; color: #1b3f75; text-transform: uppercase; margin-bottom: 8px;">
+            <i class="fa fa-magic"></i> 1-Click Simulation Demo Accounts:
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <button type="button" class="btn btn-default btn-xs" style="text-align: left; padding: 5px 10px;" onclick="quickLogin('27AAACB2234K1ZV', 'Bharat@123')">
+              <strong>Bharat Enterprises</strong> <span class="text-muted">(27AAACB2234K1ZV • Regular)</span>
+            </button>
+            <button type="button" class="btn btn-default btn-xs" style="text-align: left; padding: 5px 10px;" onclick="quickLogin('29AABCS5544N1ZR', 'Southern@123')">
+              <strong>Southern Tech LLP</strong> <span class="text-muted">(29AABCS5544N1ZR • Karnataka)</span>
+            </button>
+            <button type="button" class="btn btn-default btn-xs" style="text-align: left; padding: 5px 10px;" onclick="quickLogin('07AABCG1234F1ZQ', 'Gupta@123')">
+              <strong>Gupta Traders</strong> <span class="text-muted">(07AABCG1234F1ZQ • Composition)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-header">
+          <h3><i class="fa fa-lock" style="color: #17c4bb;"></i> Login to GST Portal</h3>
+          <span style="font-size: 12px; color: #777;">Enter your GSTIN / Username and Password to access your taxpayer dashboard.</span>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="usernameInput" class="control-label" style="font-weight: 700; color: #1b3f75;">Username / GSTIN <span style="color: red;">*</span></label>
+            <input type="text" id="usernameInput" class="form-control" placeholder="Enter Username or 15-digit GSTIN" value="27AAACB2234K1ZV" required>
+          </div>
+
+          <div class="form-group">
+            <label for="passwordInput" class="control-label" style="font-weight: 700; color: #1b3f75;">Password <span style="color: red;">*</span></label>
+            <input type="password" id="passwordInput" class="form-control" placeholder="Enter Password" value="Password@123" required>
+          </div>
+
+          <!-- Captcha Box -->
+          <div class="form-group">
+            <label class="control-label" style="font-weight: 700; color: #1b3f75;">Characters shown in image <span style="color: red;">*</span></label>
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+              <div id="captchaBox" style="background: #eef2f6; border: 1px dashed #99aab5; font-family: monospace; font-size: 20px; font-weight: bold; letter-spacing: 5px; padding: 6px 16px; border-radius: 4px; color: #1b3f75; user-select: none;"></div>
+              <button type="button" class="btn btn-default btn-sm" onclick="refreshCaptcha()" title="Reload Captcha"><i class="fa fa-refresh"></i></button>
+            </div>
+            <input type="text" id="captchaInput" class="form-control" placeholder="Enter Captcha Code" maxlength="6" required>
+          </div>
+
+          <div style="margin-top: 25px;">
+            <button type="submit" class="btn btn-primary btn-block" style="background: #1b3f75; border-color: #1b3f75; padding: 10px; font-weight: 700; font-size: 15px;">
+              <i class="fa fa-sign-in"></i> Login
+            </button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 12px;">
+            <a href="javascript:void(0)" onclick="GSTSimulation.showToast('Password reset link will be sent to registered email.', 'info', 'Forgot Password')" style="color: #337ab7;">Forgot Password?</a>
+            <a href="registration.html" style="color: #337ab7;">First time login? Register here</a>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell Component -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentCaptcha = '';
+
+    function refreshCaptcha() {
+      var chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+      var code = '';
+      for (var i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      currentCaptcha = code;
+      document.getElementById('captchaBox').innerText = code;
+      document.getElementById('captchaInput').value = code; // Pre-filled for smooth simulation
+    }
+
+    function quickLogin(username, pwd) {
+      document.getElementById('usernameInput').value = username;
+      document.getElementById('passwordInput').value = pwd;
+      refreshCaptcha();
+      handleLogin(new Event('submit'));
+    }
+
+    function handleLogin(e) {
+      if (e) e.preventDefault();
+      var username = document.getElementById('usernameInput').value.trim();
+      var password = document.getElementById('passwordInput').value.trim();
+      var captcha = document.getElementById('captchaInput').value.trim().toUpperCase();
+
+      if (captcha !== currentCaptcha) {
+        GSTSimulation.showToast('Invalid Captcha code. Please try again.', 'danger', 'Login Failed');
+        refreshCaptcha();
+        return;
+      }
+
+      fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username, password: password, captcha: captcha })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success && data.taxpayer) {
+          // Show simulated 2FA OTP modal
+          GSTSimulation.showOtpModal({
+            mobile: '9876543210',
+            email: 'auth@' + data.taxpayer.tradeName.toLowerCase().replace(/[^a-z]/g, '') + '.com',
+            expectedOtp: data.otp,
+            onVerify: function() {
+              // Store logged in taxpayer session in localStorage
+              localStorage.setItem('gst_current_taxpayer', JSON.stringify(data.taxpayer));
+              localStorage.setItem('gst_sim_session', JSON.stringify({
+                isLoggedIn: true,
+                user: data.taxpayer
+              }));
+              GSTSimulation.showToast('Welcome, ' + data.taxpayer.legalName, 'success', 'Login Successful');
+              setTimeout(function() {
+                window.location.href = 'dashboard.html';
+              }, 800);
+            }
+          });
+        } else {
+          GSTSimulation.showToast('Invalid username or credentials.', 'danger', 'Login Error');
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        GSTSimulation.showToast('Server connection failed.', 'danger', 'Network Error');
+      });
+    }
+
+    window.addEventListener('load', refreshCaptcha);
+  </script>
+
+</body>
+</html>

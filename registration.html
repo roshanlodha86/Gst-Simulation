@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Registration (Form GST REG-01) | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .reg-panel {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 4px;
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .reg-panel h3 {
+      margin-top: 0;
+      color: #1b3f75;
+      font-size: 20px;
+      font-weight: 700;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 12px;
+      margin-bottom: 25px;
+    }
+    .reg-step-bar {
+      display: flex;
+      margin-bottom: 25px;
+      background: #f0f5fc;
+      border-radius: 6px;
+      padding: 6px;
+    }
+    .reg-step {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #718096;
+      border-radius: 4px;
+      cursor: default;
+    }
+    .reg-step.active {
+      background: #1b3f75;
+      color: #ffffff;
+      box-shadow: 0 2px 5px rgba(27,63,117,0.2);
+    }
+    .reg-step.completed {
+      background: #e2f7eb;
+      color: #27ae60;
+    }
+    .tab-section-header {
+      background: #f8fafe;
+      border-left: 4px solid #1b3f75;
+      padding: 10px 15px;
+      font-weight: 700;
+      color: #1b3f75;
+      margin: 20px 0 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- Breadcrumbs Bar -->
+  <div class="container" style="margin-top: 15px;">
+    <ol class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 10px; font-size: 12px;">
+      <li><a href="index.html" style="color: #337ab7;"><i class="fa fa-home"></i> Home</a></li>
+      <li>Services</li>
+      <li>Registration</li>
+      <li class="active">New Registration</li>
+    </ol>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper" id="main-content" style="min-height: 550px; padding-bottom: 40px;">
+    <div class="container">
+      
+      <!-- Progress Bar (Part A -> Part B -> Acknowledged) -->
+      <div class="reg-step-bar">
+        <div class="reg-step active" id="stepIndicatorA"><i class="fa fa-pencil-square-o"></i> Part-A: Basic Details (TRN Generation)</div>
+        <div class="reg-step" id="stepIndicatorB"><i class="fa fa-building-o"></i> Part-B: Business Particulars &amp; Verification</div>
+        <div class="reg-step" id="stepIndicatorC"><i class="fa fa-check-circle"></i> Part-C: ARN Acknowledgement</div>
+      </div>
+
+      <!-- ================= PART A ================= -->
+      <div id="sectionPartA" class="reg-panel">
+        <h3><i class="fa fa-id-card-o" style="color: #17c4bb;"></i> Form GST REG-01: Part A (Application for Registration)</h3>
+        <p style="font-size: 13px; color: #666; margin-bottom: 25px;">Provide your Permanent Account Number (PAN), State, and Authorized Signatory details. An OTP will be simulated for instant verification.</p>
+
+        <form id="formPartA" onsubmit="submitPartA(event)">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">I am a <span style="color: red;">*</span></label>
+                <select id="partA_userType" class="form-control" required>
+                  <option value="Taxpayer">Taxpayer (Regular)</option>
+                  <option value="Composition">Taxpayer (Composition Dealer)</option>
+                  <option value="Tax Deductor">Tax Deductor (TDS)</option>
+                  <option value="GST Practitioner">GST Practitioner (GSTP)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">State / UT <span style="color: red;">*</span></label>
+                <select id="partA_state" class="form-control" onchange="updateStateCode()" required>
+                  <option value="27|Maharashtra">Maharashtra (27)</option>
+                  <option value="29|Karnataka">Karnataka (29)</option>
+                  <option value="07|Delhi">Delhi (07)</option>
+                  <option value="24|Gujarat">Gujarat (24)</option>
+                  <option value="33|Tamil Nadu">Tamil Nadu (33)</option>
+                  <option value="09|Uttar Pradesh">Uttar Pradesh (09)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Legal Name of Business (as per PAN) <span style="color: red;">*</span></label>
+                <input type="text" id="partA_legalName" class="form-control" placeholder="e.g. SKYLINE COMMERCE PRIVATE LIMITED" style="text-transform: uppercase;" required>
+                <small class="help-block">Must match exactly as printed on the PAN card.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Permanent Account Number (PAN) <span style="color: red;">*</span></label>
+                <input type="text" id="partA_pan" class="form-control" placeholder="e.g. AABCS9988K" maxlength="10" style="text-transform: uppercase; font-family: monospace; font-size: 15px;" required>
+                <small class="help-block">10-digit PAN of the business entity or proprietor.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Email Address of Authorized Signatory <span style="color: red;">*</span></label>
+                <input type="email" id="partA_email" class="form-control" placeholder="signatory@example.com" value="signatory@business.in" required>
+                <small class="help-block">OTP will be simulated for this email.</small>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Mobile Number of Authorized Signatory <span style="color: red;">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-addon">+91</span>
+                  <input type="tel" id="partA_mobile" class="form-control" placeholder="9876543210" maxlength="10" value="9876543210" required>
+                </div>
+                <small class="help-block">OTP will be simulated for this mobile number.</small>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eef2f6; display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn btn-primary" style="background: #1b3f75; border-color: #1b3f75; padding: 10px 35px; font-weight: 700; font-size: 14px;">
+              Proceed &amp; Generate TRN <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ================= PART B ================= -->
+      <div id="sectionPartB" class="reg-panel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eef2f6; padding-bottom: 12px; margin-bottom: 25px;">
+          <h3 style="margin: 0; border: none; padding: 0;"><i class="fa fa-building" style="color: #17c4bb;"></i> Form GST REG-01: Part B</h3>
+          <div>
+            <span style="font-size: 13px; color: #666;">Generated TRN:</span>
+            <strong id="displayTrn" style="font-family: monospace; font-size: 16px; color: #1b3f75; margin-left: 5px;"></strong>
+          </div>
+        </div>
+
+        <form id="formPartB" onsubmit="submitPartB(event)">
+          <div class="tab-section-header">1. Business Details</div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Trade Name <span style="color: red;">*</span></label>
+                <input type="text" id="partB_tradeName" class="form-control" placeholder="e.g. SKYLINE ENTERPRISES" required>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Constitution of Business <span style="color: red;">*</span></label>
+                <select id="partB_constitution" class="form-control" required>
+                  <option value="Private Limited Company">Private Limited Company</option>
+                  <option value="Partnership">Partnership Firm</option>
+                  <option value="Limited Liability Partnership">Limited Liability Partnership (LLP)</option>
+                  <option value="Proprietorship">Proprietorship</option>
+                  <option value="Public Limited Company">Public Limited Company</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-section-header">2. Principal Place of Business</div>
+          <div class="row">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Address / Building / Road <span style="color: red;">*</span></label>
+                <input type="text" id="partB_address" class="form-control" placeholder="Shop / Office No, Building Name, Commercial Street" value="Unit 402, Trade Hub, Commercial Complex" required>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">PIN Code <span style="color: red;">*</span></label>
+                <input type="text" id="partB_pincode" class="form-control" placeholder="e.g. 400051" maxlength="6" value="400051" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-section-header">3. Top Goods &amp; Services (HSN / SAC Codes)</div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Primary Goods (HSN Code)</label>
+                <select id="partB_hsn" class="form-control">
+                  <option value="8471|Electronic Computing Machines & Hardware">8471 - Computing Machines, Laptops & Hardware</option>
+                  <option value="3923|Packaging Articles of Plastics">3923 - Plastic Packaging Articles & Boxes</option>
+                  <option value="6109|T-Shirts and Knitted Apparel">6109 - T-Shirts & Apparel</option>
+                  <option value="3004|Medicaments & Pharmaceuticals">3004 - Medicaments & Pharmaceuticals</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label class="control-label" style="font-weight: 700; color: #1b3f75;">Primary Services (SAC Code)</label>
+                <select id="partB_sac" class="form-control">
+                  <option value="9983|Information Technology & Consulting Services">9983 - IT, Software & Management Consulting</option>
+                  <option value="9967|Cargo Handling & Logistics Services">9967 - Cargo Handling, Transport & Logistics</option>
+                  <option value="9972|Real Estate & Commercial Leasing">9972 - Real Estate & Leasing Services</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-section-header">4. Verification &amp; Declaration</div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="checkbox" style="margin-top: 0;">
+                <label style="font-size: 13px; color: #444;">
+                  <input type="checkbox" id="partB_agree" required checked>
+                  I hereby solemnly affirm and declare that the information given herein above is true and correct to the best of my knowledge and belief and nothing has been concealed therefrom.
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eef2f6; display: flex; justify-content: space-between; align-items: center;">
+            <button type="button" class="btn btn-default" onclick="backToPartA()"><i class="fa fa-arrow-left"></i> Back</button>
+            <button type="submit" class="btn btn-success" style="background: #27ae60; border-color: #27ae60; padding: 10px 35px; font-weight: 700; font-size: 14px;">
+              <i class="fa fa-lock"></i> Submit with Simulated EVC (OTP) &amp; Register
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ================= PART C (ACKNOWLEDGEMENT) ================= -->
+      <div id="sectionPartC" class="reg-panel" style="display: none; text-align: center; padding: 50px 30px;">
+        <div style="width: 72px; height: 72px; border-radius: 50%; background: #e2f7eb; color: #27ae60; font-size: 36px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+          <i class="fa fa-check"></i>
+        </div>
+        <h3 style="margin: 0 0 10px 0; color: #1b3f75; font-size: 24px;">Application Submitted Successfully!</h3>
+        <p style="font-size: 15px; color: #4a5568; max-width: 600px; margin: 0 auto 25px;">Your Form GST REG-01 application has been processed. Below are your newly issued credentials:</p>
+
+        <div style="background: #f8fafe; border: 1px solid #c9d8eb; border-radius: 8px; max-width: 600px; margin: 0 auto 30px; padding: 25px; text-align: left;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+            <span style="color: #666;">Application Reference Number (ARN):</span>
+            <strong id="resArn" class="font-mono" style="color: #1b3f75; font-size: 16px;"></strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+            <span style="color: #666;">Generated GSTIN / UIN:</span>
+            <strong id="resGstin" class="font-mono" style="color: #27ae60; font-size: 18px;"></strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px;">
+            <span style="color: #666;">Legal Name:</span>
+            <strong id="resLegalName"></strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 14px;">
+            <span style="color: #666;">Taxpayer Type:</span>
+            <strong id="resType"></strong>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 15px;">
+          <a id="btnTrackArn" href="track-status.html" class="btn btn-primary" style="background: #1b3f75; border-color: #1b3f75; padding: 10px 25px; font-weight: 700;">
+            <i class="fa fa-clock-o"></i> Track ARN Status
+          </a>
+          <a id="btnSearchGstin" href="search-taxpayer.html" class="btn btn-success" style="background: #27ae60; border-color: #27ae60; padding: 10px 25px; font-weight: 700;">
+            <i class="fa fa-search"></i> View Registered Taxpayer Card
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell JS Component -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentRegData = {
+      stateCode: '27',
+      state: 'Maharashtra',
+      legalName: '',
+      pan: '',
+      email: '',
+      mobile: '',
+      type: 'Regular',
+      trn: ''
+    };
+
+    function updateStateCode() {
+      var parts = document.getElementById('partA_state').value.split('|');
+      currentRegData.stateCode = parts[0];
+      currentRegData.state = parts[1];
+    }
+
+    function submitPartA(e) {
+      e.preventDefault();
+      updateStateCode();
+      currentRegData.legalName = document.getElementById('partA_legalName').value.trim().toUpperCase();
+      currentRegData.pan = document.getElementById('partA_pan').value.trim().toUpperCase();
+      currentRegData.type = document.getElementById('partA_userType').value;
+      currentRegData.email = document.getElementById('partA_email').value.trim();
+      currentRegData.mobile = document.getElementById('partA_mobile').value.trim();
+
+      // Call server Part-A
+      fetch('/api/registration/part-a', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentRegData)
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success) {
+          currentRegData.trn = data.trn;
+          // Show simulated OTP modal
+          GSTSimulation.showOtpModal({
+            mobile: currentRegData.mobile,
+            email: currentRegData.email,
+            expectedOtp: data.otp,
+            onVerify: function(enteredOtp) {
+              GSTSimulation.showToast('TRN Generated: ' + data.trn, 'success', 'Part-A Complete');
+              goToPartB();
+            }
+          });
+        }
+      })
+      .catch(function(err) {
+        console.error(err);
+        GSTSimulation.showToast('Error connecting to server.', 'danger', 'Network Error');
+      });
+    }
+
+    function goToPartB() {
+      document.getElementById('sectionPartA').style.display = 'none';
+      document.getElementById('sectionPartB').style.display = 'block';
+      document.getElementById('stepIndicatorA').className = 'reg-step completed';
+      document.getElementById('stepIndicatorB').className = 'reg-step active';
+      document.getElementById('displayTrn').innerText = currentRegData.trn;
+      document.getElementById('partB_tradeName').value = currentRegData.legalName;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToPartA() {
+      document.getElementById('sectionPartA').style.display = 'block';
+      document.getElementById('sectionPartB').style.display = 'none';
+      document.getElementById('stepIndicatorA').className = 'reg-step active';
+      document.getElementById('stepIndicatorB').className = 'reg-step';
+    }
+
+    function submitPartB(e) {
+      e.preventDefault();
+      var tradeName = document.getElementById('partB_tradeName').value.trim();
+      var constitution = document.getElementById('partB_constitution').value;
+      var address = document.getElementById('partB_address').value.trim() + ', PIN ' + document.getElementById('partB_pincode').value.trim();
+
+      var payload = Object.assign({}, currentRegData, {
+        tradeName: tradeName,
+        constitution: constitution,
+        address: address
+      });
+
+      // Show simulated EVC Verification OTP modal
+      var finalOtp = '123456';
+      GSTSimulation.showOtpModal({
+        mobile: currentRegData.mobile,
+        email: currentRegData.email,
+        expectedOtp: finalOtp,
+        onVerify: function() {
+          // Submit final registration to server
+          fetch('/api/registration/part-b', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.success) {
+              showAcknowledgement(data);
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+            GSTSimulation.showToast('Registration failed.', 'danger', 'Error');
+          });
+        }
+      });
+    }
+
+    function showAcknowledgement(data) {
+      document.getElementById('sectionPartB').style.display = 'none';
+      document.getElementById('sectionPartC').style.display = 'block';
+      document.getElementById('stepIndicatorB').className = 'reg-step completed';
+      document.getElementById('stepIndicatorC').className = 'reg-step active';
+
+      document.getElementById('resArn').innerText = data.arn;
+      document.getElementById('resGstin').innerText = data.gstin;
+      document.getElementById('resLegalName').innerText = data.taxpayer.legalName;
+      document.getElementById('resType').innerText = data.taxpayer.type;
+
+      document.getElementById('btnTrackArn').href = 'track-status.html?arn=' + data.arn;
+      document.getElementById('btnSearchGstin').href = 'search-taxpayer.html?query=' + data.gstin;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      GSTSimulation.showToast('New Taxpayer Profile Registered with GSTIN ' + data.gstin, 'success', 'Registered');
+    }
+  </script>
+
+</body>
+</html>

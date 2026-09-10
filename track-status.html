@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Application Status | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .track-panel {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 4px;
+      padding: 25px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .track-panel h3 {
+      margin-top: 0;
+      color: #1b3f75;
+      font-size: 20px;
+      font-weight: 700;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    .timeline-container {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 40px 0 30px;
+    }
+    .timeline-container:before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 40px;
+      right: 40px;
+      height: 4px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+    .timeline-step {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 20%;
+    }
+    .timeline-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #718096;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin: 0 auto 10px;
+      border: 3px solid #ffffff;
+      transition: all 0.3s ease;
+    }
+    .timeline-step.completed .timeline-circle {
+      background: #27ae60;
+      color: #ffffff;
+    }
+    .timeline-step.current .timeline-circle {
+      background: #1b3f75;
+      color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(27,63,117,0.2);
+    }
+    .timeline-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #4a5568;
+    }
+    .timeline-date {
+      font-size: 11px;
+      color: #a0aec0;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- Breadcrumbs Bar -->
+  <div class="container" style="margin-top: 15px;">
+    <ol class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 10px; font-size: 12px;">
+      <li><a href="index.html" style="color: #337ab7;"><i class="fa fa-home"></i> Home</a></li>
+      <li>Services</li>
+      <li>Registration</li>
+      <li class="active">Track Application Status</li>
+    </ol>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper" id="main-content" style="min-height: 500px; padding-bottom: 40px;">
+    <div class="container">
+      
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="track-panel">
+            <h3><i class="fa fa-clock-o" style="color: #17c4bb;"></i> Track Application Status</h3>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Enter your Application Reference Number (ARN) to check the latest stage and processing status of your registration application.</p>
+
+            <form id="trackForm" onsubmit="handleTrack(event)">
+              <div class="row">
+                <div class="col-md-6 col-sm-8 col-xs-12">
+                  <div class="form-group">
+                    <label for="arnInput" class="control-label" style="font-weight: 700; color: #1b3f75;">Application Reference Number (ARN) <span style="color: red;">*</span></label>
+                    <input type="text" id="arnInput" class="form-control" placeholder="e.g. AA2708240091823" maxlength="15" style="text-transform: uppercase; font-size: 15px; font-weight: 600; letter-spacing: 1px;" required>
+                    <small class="help-block">Format: 2 letters (AA) + 2 digits (State) + 4 digits (MMYY) + 7 digits (Serial)</small>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-sm-4 col-xs-12" style="padding-top: 25px;">
+                  <button type="submit" class="btn btn-primary" style="background: #1b3f75; border-color: #1b3f75; padding: 8px 30px; font-weight: 700; font-size: 14px;">
+                    <i class="fa fa-search"></i> Track
+                  </button>
+                  <button type="button" class="btn btn-default" onclick="clearTrack()" style="padding: 8px 20px; font-weight: 600; font-size: 14px; margin-left: 8px;">
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #e1e8ed; font-size: 12px; color: #777;">
+              <strong>Try Sample ARNs:</strong>
+              <a href="javascript:void(0)" onclick="quickTrack('AA2708240091823')" style="margin-left: 10px; color: #337ab7;">AA2708240091823 (Approved • Hindustan Logistics)</a> |
+              <a href="javascript:void(0)" onclick="quickTrack('AA2709240012948')" style="margin-left: 10px; color: #337ab7;">AA2709240012948 (In Progress • Omega Chemicals)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Timeline Card -->
+      <div id="trackResultContainer" style="display: none; margin-top: 25px;"></div>
+
+    </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell JS Component -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    function quickTrack(arn) {
+      document.getElementById('arnInput').value = arn;
+      handleTrack(new Event('submit'));
+    }
+
+    function clearTrack() {
+      document.getElementById('arnInput').value = '';
+      document.getElementById('trackResultContainer').style.display = 'none';
+      document.getElementById('trackResultContainer').innerHTML = '';
+    }
+
+    function handleTrack(e) {
+      if (e) e.preventDefault();
+      var arn = document.getElementById('arnInput').value.trim().toUpperCase();
+      if (!arn) {
+        GSTSimulation.showToast('Please enter an ARN to track status.', 'warning', 'Input Required');
+        return;
+      }
+
+      fetch('/api/application/track?arn=' + encodeURIComponent(arn))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success && data.application) {
+            renderTimeline(data.application);
+            GSTSimulation.showToast('Application details retrieved.', 'success', 'Status Loaded');
+          } else {
+            renderNotFound(arn);
+            GSTSimulation.showToast('No registration record found for this ARN.', 'warning', 'ARN Not Found');
+          }
+        })
+        .catch(function(err) {
+          console.error(err);
+          GSTSimulation.showToast('Failed to connect to simulation server.', 'danger', 'Server Error');
+        });
+    }
+
+    function renderTimeline(app) {
+      var container = document.getElementById('trackResultContainer');
+      container.style.display = 'block';
+
+      var isApproved = (app.status === 'Approved');
+      var html = '';
+
+      html += '<div class="panel panel-default" style="border: 1px solid #c9d8eb; box-shadow: 0 4px 15px rgba(27,63,117,0.08);">';
+      html += '  <div class="panel-heading" style="background: #f0f5fc; border-bottom: 1px solid #c9d8eb; padding: 15px 20px;">';
+      html += '    <div style="display: flex; justify-content: space-between; align-items: center;">';
+      html += '      <div>';
+      html += '        <h4 style="margin: 0; color: #1b3f75; font-weight: 700;">' + app.legalName + '</h4>';
+      html += '        <span style="font-size: 13px; color: #666;">ARN: <strong class="font-mono" style="color: #1b3f75;">' + app.arn + '</strong></span>';
+      html += '      </div>';
+      html += '      <span class="label ' + (isApproved ? 'label-success' : 'label-warning') + '" style="font-size: 13px; padding: 6px 14px;">';
+      html += '        <i class="fa ' + (isApproved ? 'fa-check' : 'fa-hourglass-half') + '"></i> ' + app.status.toUpperCase();
+      html += '      </span>';
+      html += '    </div>';
+      html += '  </div>';
+
+      html += '  <div class="panel-body" style="padding: 25px;">';
+      
+      // Timeline Component
+      html += '    <div class="timeline-container">';
+      html += '      <div class="timeline-step completed">';
+      html += '        <div class="timeline-circle"><i class="fa fa-file-text-o"></i></div>';
+      html += '        <div class="timeline-label">Application Submitted</div>';
+      html += '        <div class="timeline-date">' + (app.appliedDate || '28/08/2024') + '</div>';
+      html += '      </div>';
+
+      html += '      <div class="timeline-step completed">';
+      html += '        <div class="timeline-circle"><i class="fa fa-cogs"></i></div>';
+      html += '        <div class="timeline-label">Under Verification</div>';
+      html += '        <div class="timeline-date">Automated Checks Pass</div>';
+      html += '      </div>';
+
+      html += '      <div class="timeline-step ' + (isApproved ? 'completed' : 'current') + '">';
+      html += '        <div class="timeline-circle"><i class="fa fa-user"></i></div>';
+      html += '        <div class="timeline-label">Officer Processing</div>';
+      html += '        <div class="timeline-date">' + (isApproved ? 'Officer Approved' : 'In Progress') + '</div>';
+      html += '      </div>';
+
+      html += '      <div class="timeline-step ' + (isApproved ? 'completed' : '') + '">';
+      html += '        <div class="timeline-circle"><i class="fa fa-id-card-o"></i></div>';
+      html += '        <div class="timeline-label">GSTIN Generated</div>';
+      html += '        <div class="timeline-date">' + (isApproved ? app.generatedGstin : 'Pending') + '</div>';
+      html += '      </div>';
+      html += '    </div>';
+
+      if (isApproved && app.generatedGstin) {
+        html += '    <div class="alert alert-success" style="margin-top: 20px; display: flex; align-items: center; justify-content: space-between;">';
+        html += '      <div>';
+        html += '        <strong><i class="fa fa-check-circle"></i> Registration Approved!</strong><br>';
+        html += '        Your GST Identification Number (GSTIN) has been successfully issued: <span class="font-mono" style="font-size: 16px; font-weight: bold;">' + app.generatedGstin + '</span>';
+        html += '      </div>';
+        html += '      <a href="search-taxpayer.html?query=' + app.generatedGstin + '" class="btn btn-success btn-sm"><i class="fa fa-external-link"></i> View Taxpayer Profile</a>';
+        html += '    </div>';
+      }
+
+      html += '  </div>';
+      html += '</div>';
+
+      container.innerHTML = html;
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderNotFound(arn) {
+      var container = document.getElementById('trackResultContainer');
+      container.style.display = 'block';
+      container.innerHTML = `
+        <div class="alert alert-warning" style="margin-top: 25px; padding: 20px; text-align: center;">
+          <i class="fa fa-exclamation-triangle" style="font-size: 32px; color: #f39c12; margin-bottom: 10px;"></i>
+          <h4>ARN Record Not Found</h4>
+          <p>We could not find any active application matching ARN <strong>${arn}</strong>.</p>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Taxpayer | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .search-panel {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 4px;
+      padding: 25px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .search-panel h3 {
+      margin-top: 0;
+      color: #1b3f75;
+      font-size: 20px;
+      font-weight: 700;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    .taxpayer-card {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 25px;
+      margin-top: 25px;
+      box-shadow: 0 4px 12px rgba(27,63,117,0.08);
+      position: relative;
+    }
+    .taxpayer-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e1e9f2;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .status-badge-active {
+      background: #27ae60;
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .detail-row {
+      display: flex;
+      border-bottom: 1px solid #f2f5f9;
+      padding: 10px 0;
+      font-size: 13px;
+    }
+    .detail-label {
+      width: 35%;
+      color: #666666;
+      font-weight: 600;
+    }
+    .detail-value {
+      width: 65%;
+      color: #1f2d3d;
+      font-weight: 700;
+    }
+    .filing-table th {
+      background-color: #1b3f75;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+    }
+    .filing-table td {
+      font-size: 12px;
+      text-align: center;
+      vertical-align: middle !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- Breadcrumbs Bar -->
+  <div class="container" style="margin-top: 15px;">
+    <ol class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 10px; font-size: 12px;">
+      <li><a href="index.html" style="color: #337ab7;"><i class="fa fa-home"></i> Home</a></li>
+      <li>Search Taxpayer</li>
+      <li class="active" id="searchBreadcrumbCurrent">Search by GSTIN / UIN</li>
+    </ol>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper" id="main-content" style="min-height: 500px; padding-bottom: 40px;">
+    <div class="container">
+      
+      <!-- Search Mode Tabs -->
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="nav nav-tabs" style="border-bottom: 2px solid #1b3f75; font-weight: 600;">
+            <li class="active" id="tabGstin"><a href="javascript:void(0)" onclick="setSearchMode('gstin')"><i class="fa fa-id-card-o"></i> Search by GSTIN / UIN</a></li>
+            <li id="tabPan"><a href="javascript:void(0)" onclick="setSearchMode('pan')"><i class="fa fa-credit-card"></i> Search by PAN</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Search Box Panel -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="search-panel">
+            <h3 id="panelTitle"><i class="fa fa-search" style="color: #17c4bb;"></i> Search Taxpayer by GSTIN / UIN</h3>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;" id="panelSubtitle">Enter a 15-character Goods and Services Taxpayer Identification Number (GSTIN) to view taxpayer credentials and filing status.</p>
+
+            <form id="searchForm" onsubmit="handleSearch(event)">
+              <div class="row">
+                <div class="col-md-6 col-sm-8 col-xs-12">
+                  <div class="form-group">
+                    <label for="searchInput" class="control-label" id="inputLabel" style="font-weight: 700; color: #1b3f75;">GSTIN / UIN of the Taxpayer <span style="color: red;">*</span></label>
+                    <input type="text" id="searchInput" class="form-control" placeholder="e.g. 27AAACB2234K1ZV" maxlength="15" style="text-transform: uppercase; font-size: 15px; font-weight: 600; letter-spacing: 1px;" required>
+                    <small class="help-block" id="inputHint">Format: 2 digits (State) + 10 chars (PAN) + 1 entity + 1 Z + 1 check digit</small>
+                  </div>
+                </div>
+
+                <!-- Simulated Captcha -->
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                  <div class="form-group">
+                    <label class="control-label" style="font-weight: 700; color: #1b3f75;">Enter Captcha <span style="color: red;">*</span></label>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                      <div id="captchaCode" style="background: #eef2f6; border: 1px dashed #99aab5; font-family: monospace; font-size: 20px; font-weight: bold; letter-spacing: 4px; padding: 6px 14px; border-radius: 4px; color: #1b3f75; user-select: none;"></div>
+                      <button type="button" class="btn btn-default btn-sm" onclick="generateCaptcha()" title="Refresh Captcha"><i class="fa fa-refresh"></i></button>
+                    </div>
+                    <input type="text" id="captchaInput" class="form-control" placeholder="Enter characters" maxlength="6" style="margin-top: 6px;" required>
+                  </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12 col-xs-12" style="padding-top: 25px;">
+                  <button type="submit" class="btn btn-primary" style="background: #1b3f75; border-color: #1b3f75; padding: 8px 30px; font-weight: 700; font-size: 14px;">
+                    <i class="fa fa-search"></i> Search
+                  </button>
+                  <button type="button" class="btn btn-default" onclick="clearSearch()" style="padding: 8px 20px; font-weight: 600; font-size: 14px; margin-left: 8px;">
+                    Clear
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Pre-seeded Quick Links for Testing -->
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #e1e8ed; font-size: 12px; color: #777;">
+              <strong>Try Sample GSTINs:</strong>
+              <a href="javascript:void(0)" onclick="quickFill('27AAACB2234K1ZV')" style="margin-left: 10px; color: #337ab7;">27AAACB2234K1ZV (Bharat Enterprises - Maharashtra)</a> |
+              <a href="javascript:void(0)" onclick="quickFill('29AABCS5544N1ZR')" style="margin-left: 10px; color: #337ab7;">29AABCS5544N1ZR (Southern Tech - Karnataka)</a> |
+              <a href="javascript:void(0)" onclick="quickFill('07AABCG1234F1ZQ')" style="margin-left: 10px; color: #337ab7;">07AABCG1234F1ZQ (Gupta Traders - Delhi)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Card Container -->
+      <div id="resultContainer" style="display: none;"></div>
+
+    </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell JS Component -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentMode = 'gstin';
+    var currentCaptcha = '';
+
+    function generateCaptcha() {
+      var chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+      var code = '';
+      for (var i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      currentCaptcha = code;
+      document.getElementById('captchaCode').innerText = code;
+      document.getElementById('captchaInput').value = code; // Pre-filled for convenience in simulation
+    }
+
+    function setSearchMode(mode) {
+      currentMode = mode;
+      document.getElementById('tabGstin').className = (mode === 'gstin') ? 'active' : '';
+      document.getElementById('tabPan').className = (mode === 'pan') ? 'active' : '';
+      
+      if (mode === 'gstin') {
+        document.getElementById('panelTitle').innerHTML = '<i class="fa fa-search" style="color: #17c4bb;"></i> Search Taxpayer by GSTIN / UIN';
+        document.getElementById('panelSubtitle').innerText = 'Enter a 15-character Goods and Services Taxpayer Identification Number (GSTIN).';
+        document.getElementById('inputLabel').innerHTML = 'GSTIN / UIN of the Taxpayer <span style="color: red;">*</span>';
+        document.getElementById('searchInput').placeholder = 'e.g. 27AAACB2234K1ZV';
+        document.getElementById('searchInput').maxLength = 15;
+        document.getElementById('inputHint').innerText = 'Format: 2 digits (State) + 10 chars (PAN) + 1 entity + 1 Z + 1 check digit';
+        document.getElementById('searchBreadcrumbCurrent').innerText = 'Search by GSTIN / UIN';
+      } else {
+        document.getElementById('panelTitle').innerHTML = '<i class="fa fa-credit-card" style="color: #17c4bb;"></i> Search Taxpayer by PAN';
+        document.getElementById('panelSubtitle').innerText = 'Enter a 10-character Permanent Account Number (PAN) to view all associated state GSTINs.';
+        document.getElementById('inputLabel').innerHTML = 'Permanent Account Number (PAN) <span style="color: red;">*</span>';
+        document.getElementById('searchInput').placeholder = 'e.g. AAACB2234K';
+        document.getElementById('searchInput').maxLength = 10;
+        document.getElementById('inputHint').innerText = 'Format: 5 alphabets + 4 numbers + 1 alphabet';
+        document.getElementById('searchBreadcrumbCurrent').innerText = 'Search by PAN';
+      }
+      clearSearch();
+    }
+
+    function quickFill(val) {
+      document.getElementById('searchInput').value = val;
+      generateCaptcha();
+      handleSearch(new Event('submit'));
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('resultContainer').style.display = 'none';
+      document.getElementById('resultContainer').innerHTML = '';
+      generateCaptcha();
+    }
+
+    function handleSearch(e) {
+      if (e) e.preventDefault();
+      var query = document.getElementById('searchInput').value.trim().toUpperCase();
+      var captchaVal = document.getElementById('captchaInput').value.trim().toUpperCase();
+
+      if (!query) {
+        GSTSimulation.showToast('Please enter a GSTIN or PAN to search.', 'warning', 'Input Required');
+        return;
+      }
+      if (captchaVal !== currentCaptcha) {
+        GSTSimulation.showToast('Invalid Captcha entered. Please try again.', 'danger', 'Captcha Error');
+        generateCaptcha();
+        return;
+      }
+
+      // Query server REST endpoint
+      fetch('/api/taxpayer/search?query=' + encodeURIComponent(query))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success && data.results && data.results.length > 0) {
+            renderResults(data.results);
+            GSTSimulation.showToast('Found ' + data.results.length + ' matching taxpayer record(s).', 'success', 'Taxpayer Found');
+          } else {
+            renderNoResults(query);
+            GSTSimulation.showToast('No taxpayer registered with this ' + currentMode.toUpperCase() + '.', 'warning', 'Not Found');
+          }
+        })
+        .catch(function(err) {
+          console.error(err);
+          GSTSimulation.showToast('Failed to connect to simulation server.', 'danger', 'Server Error');
+        });
+    }
+
+    function renderResults(taxpayers) {
+      var container = document.getElementById('resultContainer');
+      container.style.display = 'block';
+      var html = '';
+
+      taxpayers.forEach(function(tp) {
+        html += '<div class="taxpayer-card">';
+        html += '  <div class="taxpayer-card-header">';
+        html += '    <div>';
+        html += '      <h4 style="margin: 0; color: #1b3f75; font-size: 18px; font-weight: 700;">' + tp.legalName + '</h4>';
+        html += '      <span style="font-size: 13px; color: #666;">Trade Name: <strong>' + tp.tradeName + '</strong></span>';
+        html += '    </div>';
+        html += '    <span class="status-badge-active"><i class="fa fa-check-circle"></i> ' + (tp.status || 'Active').toUpperCase() + '</span>';
+        html += '  </div>';
+
+        html += '  <div class="row">';
+        html += '    <div class="col-md-6 col-xs-12">';
+        html += '      <div class="detail-row"><span class="detail-label">GSTIN / UIN:</span><span class="detail-value" style="color: #1b3f75; font-family: monospace; font-size: 15px;">' + tp.gstin + '</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">Permanent Account Number (PAN):</span><span class="detail-value font-mono">' + tp.pan + '</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">Constitution of Business:</span><span class="detail-value">' + (tp.constitution || 'Private Limited Company') + '</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">Taxpayer Type:</span><span class="detail-value">' + tp.type + ' Taxpayer</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">Date of Registration:</span><span class="detail-value">' + (tp.registrationDate || '01/07/2017') + '</span></div>';
+        html += '    </div>';
+
+        html += '    <div class="col-md-6 col-xs-12">';
+        html += '      <div class="detail-row"><span class="detail-label">State / UT:</span><span class="detail-value">' + tp.state + ' (Code: ' + tp.stateCode + ')</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">Principal Place of Business:</span><span class="detail-value">' + (tp.address || 'Registered Office Address') + '</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">Center Jurisdiction:</span><span class="detail-value" style="font-size: 11px;">' + (tp.centerJurisdiction || 'RANGE-01, DIVISION-II') + '</span></div>';
+        html += '      <div class="detail-row"><span class="detail-label">State Jurisdiction:</span><span class="detail-value" style="font-size: 11px;">' + (tp.stateJurisdiction || 'NODAL WARD 1') + '</span></div>';
+        html += '    </div>';
+        html += '  </div>';
+
+        // Filing History Table
+        html += '  <div style="margin-top: 25px;">';
+        html += '    <h5 style="font-weight: 700; color: #1b3f75; margin-bottom: 12px;"><i class="fa fa-history"></i> Return Filing Status (Last 2 Periods)</h5>';
+        html += '    <div class="table-responsive">';
+        html += '      <table class="table table-bordered table-striped filing-table">';
+        html += '        <thead>';
+        html += '          <tr>';
+        html += '            <th>Financial Year</th>';
+        html += '            <th>Tax Period</th>';
+        html += '            <th>Form GSTR-1 (Outward)</th>';
+        html += '            <th>Form GSTR-3B (Summary)</th>';
+        html += '            <th>ARN / Reference</th>';
+        html += '            <th>Date of Filing</th>';
+        html += '          </tr>';
+        html += '        </thead>';
+        html += '        <tbody>';
+        html += '          <tr>';
+        html += '            <td>2024-25</td>';
+        html += '            <td><strong>August</strong></td>';
+        html += '            <td><span class="label label-warning">TO BE FILED</span></td>';
+        html += '            <td><span class="label label-warning">TO BE FILED</span></td>';
+        html += '            <td>-</td>';
+        html += '            <td>Due: 20/09/2024</td>';
+        html += '          </tr>';
+        html += '          <tr>';
+        html += '            <td>2024-25</td>';
+        html += '            <td><strong>July</strong></td>';
+        html += '            <td><span class="label label-success"><i class="fa fa-check"></i> FILED</span></td>';
+        html += '            <td><span class="label label-success"><i class="fa fa-check"></i> FILED</span></td>';
+        html += '            <td>AA2707240049211</td>';
+        html += '            <td>20/08/2024</td>';
+        html += '          </tr>';
+        html += '        </tbody>';
+        html += '      </table>';
+        html += '    </div>';
+        html += '  </div>';
+
+        html += '</div>';
+      });
+
+      container.innerHTML = html;
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderNoResults(query) {
+      var container = document.getElementById('resultContainer');
+      container.style.display = 'block';
+      container.innerHTML = `
+        <div class="alert alert-warning" style="margin-top: 25px; padding: 20px; text-align: center;">
+          <i class="fa fa-exclamation-triangle" style="font-size: 32px; color: #f39c12; margin-bottom: 10px;"></i>
+          <h4>No Taxpayer Found</h4>
+          <p>We could not find any active or registered taxpayer matching <strong>${query}</strong>.</p>
+          <p style="font-size: 12px; color: #888;">Ensure the 15-character GSTIN or 10-character PAN is spelled correctly.</p>
+        </div>
+      `;
+    }
+
+    // Auto-search if query param present
+    window.addEventListener('load', function() {
+      generateCaptcha();
+      var urlParams = new URLSearchParams(window.location.search);
+      var q = urlParams.get('query');
+      if (q) {
+        document.getElementById('searchInput').value = q;
+        handleSearch(null);
+      }
+    });
+  </script>
+
+</body>
+</html>

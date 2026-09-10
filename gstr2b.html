@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form GSTR-2B Summary | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .gstr2b-header-card {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.06);
+    }
+    .gstr2b-section-panel {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      margin-top: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .gstr2b-section-header {
+      padding: 12px 20px;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .header-available { background: #1b3f75; }
+    .header-not-available { background: #854d0e; }
+    .header-reversal { background: #c0392b; }
+    .header-rejected { background: #475569; }
+
+    .gstr2b-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-size: 12px;
+      text-align: center;
+      vertical-align: middle !important;
+    }
+    .gstr2b-table td {
+      font-size: 12px;
+      vertical-align: middle !important;
+    }
+    .gstr2b-table td.num {
+      text-align: right;
+      font-family: monospace;
+      font-size: 12.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- UI Shell Placeholders -->
+  <div id="gst-header"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+    
+    <!-- Breadcrumbs -->
+    <div id="gst-breadcrumbs"></div>
+
+    <!-- Header Card -->
+    <div class="gstr2b-header-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:15px;">
+        <div>
+          <h2 style="margin:0; color:#1b3f75; font-weight:700; font-size:20px;">
+            <i class="fa fa-file-text-o"></i> FORM GSTR-2B (AUTO-DRAFTED INPUT TAX CREDIT STATEMENT)
+          </h2>
+          <p style="margin:4px 0 0 0; color:#64748b; font-size:13px;">
+            Taxpayer: <strong id="g2LegalName" style="color:#1b3f75;">BHARAT ENTERPRISES PRIVATE LIMITED</strong> 
+            &nbsp;|&nbsp; GSTIN: <strong id="g2Gstin" style="font-family:monospace; color:#1b3f75;">27AAACB2234K1ZV</strong> 
+            &nbsp;|&nbsp; Period: <strong id="g2PeriodDisplay">August 2024 (Monthly View)</strong>
+          </p>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="label label-success" style="font-size:12px; padding:6px 12px;" id="g2GenDateBadge">
+            <i class="fa fa-check-circle"></i> GENERATED ON 14/08/2024
+          </span>
+        </div>
+      </div>
+
+      <!-- Action Controls Bar (Specified in User Guide) -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-default btn-sm" onclick="toggleAllSections()">
+            <i class="fa fa-arrows-v"></i> <span id="toggleAllText">Expand All / Collapse All</span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm" onclick="downloadGstr2bPdf()">
+            <i class="fa fa-file-pdf-o text-danger"></i> Download GSTR-2B Summary (PDF)
+          </button>
+          <button type="button" class="btn btn-default btn-sm" onclick="downloadGstr2bExcel()">
+            <i class="fa fa-file-excel-o text-success"></i> Download GSTR-2B Details (Excel)
+          </button>
+        </div>
+
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-default btn-sm" onclick="openImsDashboard()">
+            <i class="fa fa-th-list"></i> Open IMS Dashboard
+          </button>
+          <a href="gstr3b.html" class="btn btn-primary btn-sm" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+            <i class="fa fa-calculator"></i> Open GSTR-3B
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Tiles -->
+    <div class="row" style="margin-top:20px;">
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #1b3f75; border-radius:6px; padding:15px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Total Eligible ITC Available</small>
+          <div style="font-size:22px; font-weight:800; color:#1b3f75; margin-top:3px;">₹ 63,000.00</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #17c4bb; border-radius:6px; padding:15px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Integrated Tax (IGST)</small>
+          <div style="font-size:22px; font-weight:800; color:#17c4bb; margin-top:3px;">₹ 45,000.00</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #27ae60; border-radius:6px; padding:15px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Central Tax (CGST)</small>
+          <div style="font-size:22px; font-weight:800; color:#27ae60; margin-top:3px;">₹ 9,000.00</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #27ae60; border-radius:6px; padding:15px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">State Tax (SGST)</small>
+          <div style="font-size:22px; font-weight:800; color:#27ae60; margin-top:3px;">₹ 9,000.00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 1. ITC AVAILABLE ================= -->
+    <div class="gstr2b-section-panel">
+      <div class="gstr2b-section-header header-available" onclick="togglePanel('panelAvailable', 'iconAvailable')">
+        <span><i class="fa fa-check-circle"></i> 1. ITC AVAILABLE &bull; Summary of Inward Supplies Claimable in Form GSTR-3B</span>
+        <i class="fa fa-chevron-up" id="iconAvailable"></i>
+      </div>
+      <div id="panelAvailable">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped gstr2b-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th style="width:40%;">Heading / Nature of Inward Supply</th>
+                <th style="width:15%;">Taxable Value (₹)</th>
+                <th style="width:15%;">Integrated Tax (₹)</th>
+                <th style="width:15%;">Central Tax (₹)</th>
+                <th style="width:15%;">State Tax (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Part A - All other ITC:</strong> Supplies from registered persons (other than reverse charge)</td>
+                <td class="num">₹ 3,50,000.00</td>
+                <td class="num" style="color:#17c4bb; font-weight:700;">₹ 45,000.00</td>
+                <td class="num" style="color:#27ae60; font-weight:700;">₹ 9,000.00</td>
+                <td class="num" style="color:#27ae60; font-weight:700;">₹ 9,000.00</td>
+              </tr>
+              <tr>
+                <td><strong>Part B - Inward supplies liable to reverse charge:</strong> Reverse charge supplies received from persons</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+              <tr>
+                <td><strong>Part C - Inward supplies from ISD:</strong> Input Service Distributor credits</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+              <tr>
+                <td><strong>Part D - Import of goods:</strong> Supplies from SEZ units / Overseas imports (ICEGATE bill of entry)</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+              <tr style="background:#eef4fc; font-weight:700;">
+                <td>Total Eligible ITC (Auto-populates to GSTR-3B Table 4A)</td>
+                <td class="num" style="color:#1b3f75;">₹ 3,50,000.00</td>
+                <td class="num" style="color:#17c4bb;">₹ 45,000.00</td>
+                <td class="num" style="color:#27ae60;">₹ 9,000.00</td>
+                <td class="num" style="color:#27ae60;">₹ 9,000.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 2. ITC NOT AVAILABLE ================= -->
+    <div class="gstr2b-section-panel">
+      <div class="gstr2b-section-header header-not-available" onclick="togglePanel('panelNotAvailable', 'iconNotAvailable')">
+        <span><i class="fa fa-ban"></i> 2. ITC NOT AVAILABLE &bull; Ineligible Inward Supplies (PoS Rule / Section 16(4))</span>
+        <i class="fa fa-chevron-down" id="iconNotAvailable"></i>
+      </div>
+      <div id="panelNotAvailable" style="display:none;">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped gstr2b-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th style="width:40%;">Category</th>
+                <th style="width:15%;">Taxable Value (₹)</th>
+                <th style="width:15%;">Integrated Tax (₹)</th>
+                <th style="width:15%;">Central Tax (₹)</th>
+                <th style="width:15%;">State Tax (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Inward supplies where Place of Supply (POS) rules restrict credit availment</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+              <tr>
+                <td>Inward supplies time-barred under Section 16(4) of the CGST Act</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 3. ITC REVERSAL ================= -->
+    <div class="gstr2b-section-panel">
+      <div class="gstr2b-section-header header-reversal" onclick="togglePanel('panelReversal', 'iconReversal')">
+        <span><i class="fa fa-undo"></i> 3. ITC REVERSAL &bull; Rule 37A Reversal on Account of Non-Payment by Supplier</span>
+        <i class="fa fa-chevron-down" id="iconReversal"></i>
+      </div>
+      <div id="panelReversal" style="display:none;">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped gstr2b-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th style="width:40%;">Rule / Description</th>
+                <th style="width:15%;">Taxable Value (₹)</th>
+                <th style="width:15%;">Integrated Tax (₹)</th>
+                <th style="width:15%;">Central Tax (₹)</th>
+                <th style="width:15%;">State Tax (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rule 37A - Inward supplies where tax is not paid by supplier in Form GSTR-3B</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 4. ITC REJECTED (IMS) ================= -->
+    <div class="gstr2b-section-panel">
+      <div class="gstr2b-section-header header-rejected" onclick="togglePanel('panelRejected', 'iconRejected')">
+        <span><i class="fa fa-times-circle"></i> 4. ITC REJECTED &bull; Inward Supplies Rejected on IMS (Invoice Management System)</span>
+        <i class="fa fa-chevron-down" id="iconRejected"></i>
+      </div>
+      <div id="panelRejected" style="display:none;">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped gstr2b-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th style="width:40%;">IMS Action</th>
+                <th style="width:15%;">Taxable Value (₹)</th>
+                <th style="width:15%;">Integrated Tax (₹)</th>
+                <th style="width:15%;">Central Tax (₹)</th>
+                <th style="width:15%;">State Tax (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Invoices marked as 'Rejected' on IMS Dashboard (Not populated in GSTR-3B)</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Itemized Inward Invoices List -->
+    <div class="panel panel-default" style="margin-top:25px; border:1px solid #c9d8eb;">
+      <div class="panel-heading" style="background:#ffffff; padding:15px 20px;">
+        <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+          <i class="fa fa-list"></i> Itemized B2B Invoices (Auto-drafted from Suppliers' GSTR-1 / IFF)
+        </h4>
+      </div>
+
+      <div class="panel-body" style="padding:0;">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered gstr2b-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Supplier GSTIN</th>
+                <th>Supplier Legal Name</th>
+                <th>Invoice No.</th>
+                <th>Invoice Date</th>
+                <th>Invoice Value (₹)</th>
+                <th>Place of Supply</th>
+                <th>Taxable Value (₹)</th>
+                <th>Integrated Tax (₹)</th>
+                <th>Central Tax (₹)</th>
+                <th>State Tax (₹)</th>
+                <th>Eligibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><code style="color:#1b3f75;">29AABCS5544N1ZR</code></td>
+                <td>SOUTHERN TECH SOLUTIONS LLP</td>
+                <td><strong>INV-2024-001</strong></td>
+                <td>05/08/2024</td>
+                <td class="num">₹ 2,95,000.00</td>
+                <td>29-Karnataka</td>
+                <td class="num">₹ 2,50,000.00</td>
+                <td class="num" style="color:#17c4bb; font-weight:700;">₹ 45,000.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num">₹ 0.00</td>
+                <td><span class="label label-success">Eligible</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><code style="color:#1b3f75;">27AABCH9912K1ZT</code></td>
+                <td>HINDUSTAN LOGISTICS &amp; PACKAGING</td>
+                <td><strong>INV-2024-002</strong></td>
+                <td>12/08/2024</td>
+                <td class="num">₹ 1,18,000.00</td>
+                <td>27-Maharashtra</td>
+                <td class="num">₹ 1,00,000.00</td>
+                <td class="num">₹ 0.00</td>
+                <td class="num" style="color:#27ae60; font-weight:700;">₹ 9,000.00</td>
+                <td class="num" style="color:#27ae60; font-weight:700;">₹ 9,000.00</td>
+                <td><span class="label label-success">Eligible</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div style="margin-top:25px; padding-top:15px; border-top:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <a href="returns.html" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Returns Dashboard</a>
+      
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="btn btn-default" onclick="downloadGstr2bPdf()"><i class="fa fa-download"></i> Download PDF</button>
+        <a href="gstr3b.html" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700; padding:8px 24px;">
+          <i class="fa fa-arrow-right"></i> Proceed to Form GSTR-3B
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer placeholder -->
+  <div id="gst-footer"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var isAllExpanded = false;
+
+    function togglePanel(panelId, iconId) {
+      var p = document.getElementById(panelId);
+      var icon = document.getElementById(iconId);
+      if (p.style.display === 'none') {
+        p.style.display = 'block';
+        icon.className = 'fa fa-chevron-up';
+      } else {
+        p.style.display = 'none';
+        icon.className = 'fa fa-chevron-down';
+      }
+    }
+
+    function toggleAllSections() {
+      isAllExpanded = !isAllExpanded;
+      var panels = ['panelAvailable', 'panelNotAvailable', 'panelReversal', 'panelRejected'];
+      var icons = ['iconAvailable', 'iconNotAvailable', 'iconReversal', 'iconRejected'];
+      panels.forEach(function(pId, idx) {
+        var el = document.getElementById(pId);
+        var ic = document.getElementById(icons[idx]);
+        if (el && ic) {
+          el.style.display = isAllExpanded ? 'block' : 'none';
+          ic.className = isAllExpanded ? 'fa fa-chevron-up' : 'fa fa-chevron-down';
+        }
+      });
+      document.getElementById('toggleAllText').innerText = isAllExpanded ? 'Collapse All Sections' : 'Expand All Sections';
+    }
+
+    function downloadGstr2bPdf() {
+      GSTSimulation.showToast('GSTR-2B Statement PDF generated and downloaded.', 'success', 'PDF Downloaded');
+    }
+
+    function downloadGstr2bExcel() {
+      var content = "GSTIN,Supplier,Invoice No,Date,Taxable,IGST,CGST,SGST,Status\n" +
+                    "29AABCS5544N1ZR,SOUTHERN TECH SOLUTIONS LLP,INV-2024-001,05/08/2024,250000,45000,0,0,Eligible\n" +
+                    "27AABCH9912K1ZT,HINDUSTAN LOGISTICS,INV-2024-002,12/08/2024,100000,0,9000,9000,Eligible\n";
+      var blob = new Blob([content], { type: 'text/csv' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "GSTR2B_August2024_Details.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      GSTSimulation.showToast('Downloaded GSTR-2B Excel details.', 'success');
+    }
+
+    function openImsDashboard() {
+      GSTSimulation.showToast('Navigating to Invoice Management System (IMS) Dashboard... 2 Invoices Accepted, 0 Pending, 0 Rejected.', 'info', 'IMS Dashboard');
+    }
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var currentFy = urlParams.get('fy') || '2024-25';
+    var currentPeriod = urlParams.get('period') || 'August';
+
+    window.addEventListener('load', function() {
+      var storedUser = localStorage.getItem('gst_current_taxpayer');
+      if (storedUser) {
+        try {
+          var u = JSON.parse(storedUser);
+          if (u.legalName && document.getElementById('g2LegalName')) document.getElementById('g2LegalName').innerText = u.legalName;
+          if (u.gstin && document.getElementById('g2Gstin')) document.getElementById('g2Gstin').innerText = u.gstin;
+        } catch(e) {}
+      }
+      if (document.getElementById('g2PeriodDisplay')) {
+        document.getElementById('g2PeriodDisplay').innerText = currentPeriod + ' (FY ' + currentFy + ')';
+      }
+    });
+  </script>
+
+</body>
+</html>

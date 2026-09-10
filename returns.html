@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Returns Dashboard | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .return-selector-card {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .return-card {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+      padding: 22px;
+      margin-top: 20px;
+      box-shadow: 0 3px 10px rgba(27,63,117,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 230px;
+      border-top: 4px solid #1b3f75;
+      transition: all 0.2s;
+    }
+    .return-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(27,63,117,0.12);
+    }
+    .return-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1b3f75;
+      margin: 0 0 5px 0;
+    }
+    .return-card p {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <!-- Breadcrumbs -->
+  <div class="container" style="margin-top: 15px;">
+    <ol class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 10px; font-size: 12px;">
+      <li><a href="index.html" style="color: #337ab7;"><i class="fa fa-home"></i> Home</a></li>
+      <li>Services</li>
+      <li>Returns</li>
+      <li class="active">Returns Dashboard</li>
+    </ol>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-wrapper" id="main-content" style="min-height: 550px; padding-bottom: 40px;">
+    <div class="container">
+      
+      <!-- Taxpayer Summary Banner -->
+      <div style="background: #f0f5fc; border: 1px solid #c9d8eb; border-radius: 4px; padding: 12px 20px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div>
+          <strong id="retLegalName" style="color: #1b3f75; font-size: 15px;">BHARAT ENTERPRISES PRIVATE LIMITED</strong>
+          <span style="margin-left: 15px; color: #555; font-size: 13px;">GSTIN: <strong id="retGstin" class="font-mono">27AAACB2234K1ZV</strong></span>
+        </div>
+        <div>
+          <a href="ledgers.html" class="btn btn-default btn-sm"><i class="fa fa-book"></i> View Ledgers</a>
+          <a href="challan.html" class="btn btn-success btn-sm" style="margin-left: 5px;"><i class="fa fa-credit-card"></i> Pay Tax</a>
+        </div>
+      </div>
+
+      <!-- Return Period Selector Panel -->
+      <div class="return-selector-card">
+        <h4 style="margin-top: 0; color: #1b3f75; font-weight: 700;"><i class="fa fa-calendar" style="color: #17c4bb;"></i> File Returns (Select Tax Period)</h4>
+        
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label class="control-label" style="font-weight: 700; color: #1b3f75;">Financial Year</label>
+              <select id="selFy" class="form-control" onchange="updatePeriodCards()">
+                <option value="2026-27">2026-27</option>
+                <option value="2025-26">2025-26</option>
+                <option value="2024-25" selected>2024-25</option>
+                <option value="2023-24">2023-24</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label class="control-label" style="font-weight: 700; color: #1b3f75;">Quarter</label>
+              <select id="selQuarter" class="form-control" onchange="onQuarterChange()">
+                <option value="Q1">Quarter 1 (Apr - June)</option>
+                <option value="Q2" selected>Quarter 2 (July - September)</option>
+                <option value="Q3">Quarter 3 (October - December)</option>
+                <option value="Q4">Quarter 4 (January - March)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label class="control-label" style="font-weight: 700; color: #1b3f75;">Return Filing Period</label>
+              <div style="display: flex; gap: 8px;">
+                <select id="selPeriod" class="form-control" onchange="updatePeriodCards()">
+                  <option value="July">July</option>
+                  <option value="August" selected>August</option>
+                  <option value="September">September</option>
+                </select>
+                <button type="button" class="btn btn-primary" onclick="updatePeriodCards()" style="background: #1b3f75; border-color: #1b3f75; font-weight: 700; letter-spacing: 0.5px; padding: 6px 18px;">
+                  SEARCH
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Return Tiles Grid -->
+      <div class="row" style="margin-top: 10px;">
+        
+        <!-- Tile 1: Form GSTR-1 -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="return-card" id="cardGstr1">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3>Form GSTR-1</h3>
+                <span class="label label-warning" id="badgeGstr1" style="font-size: 11px;">TO BE FILED</span>
+              </div>
+              <p>Details of outward supplies of goods or services (B2B, B2C, Credit/Debit notes).</p>
+              
+              <div style="font-size: 12px; color: #555; margin-bottom: 5px;">
+                <strong>Due Date:</strong> <span id="dueDateGstr1">11/09/2024</span>
+              </div>
+              <div style="font-size: 12px; color: #555;" id="arnInfoGstr1">
+                <strong>Status:</strong> Not filed for selected period.
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; border-top: 1px solid #eef2f6; padding-top: 12px;">
+              <a id="btnPrepareGstr1" href="gstr1.html" class="btn btn-primary btn-block" style="background: #1b3f75; border-color: #1b3f75; font-weight: 700;">
+                <i class="fa fa-pencil"></i> Prepare Online (GSTR-1)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 2: Form GSTR-2B -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="return-card" style="border-top-color: #17c4bb;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3>Form GSTR-2B</h3>
+                <span class="label label-info" id="badgeGstr2b" style="font-size: 11px;">AVAILABLE</span>
+              </div>
+              <p>Auto-drafted Input Tax Credit (ITC) statement based on supplier GSTR-1 filings.</p>
+              
+              <div style="font-size: 12px; color: #555; margin-bottom: 5px;">
+                <strong>Generated Date:</strong> <span id="dueDateGstr2b">14/09/2024</span>
+              </div>
+              <div style="font-size: 12px; color: #27ae60; font-weight: bold;" id="itcAmountGstr2b">
+                Eligible ITC: ₹ 63,000.00
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; border-top: 1px solid #eef2f6; padding-top: 12px;">
+              <a id="btnViewGstr2b" href="gstr2b.html" class="btn btn-default btn-block" style="font-weight: 700;">
+                <i class="fa fa-eye"></i> View Statement (GSTR-2B)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 3: Form GSTR-3B -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="return-card" id="cardGstr3b" style="border-top-color: #27ae60;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3>Form GSTR-3B</h3>
+                <span class="label label-warning" id="badgeGstr3b" style="font-size: 11px;">TO BE FILED</span>
+              </div>
+              <p>Monthly summary return to declare outward supplies, claim ITC, and pay net tax liability.</p>
+              
+              <div style="font-size: 12px; color: #555; margin-bottom: 5px;">
+                <strong>Due Date:</strong> <span id="dueDateGstr3b">20/09/2024</span>
+              </div>
+              <div style="font-size: 12px; color: #555;" id="arnInfoGstr3b">
+                <strong>Status:</strong> Ready for filing and ITC offset.
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; border-top: 1px solid #eef2f6; padding-top: 12px;">
+              <a id="btnFileGstr3b" href="gstr3b.html" class="btn btn-success btn-block" style="background: #27ae60; border-color: #27ae60; font-weight: 700;">
+                <i class="fa fa-calculator"></i> File GSTR-3B (Pay Tax)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tile 4: Form GSTR-9 (Annual Return) -->
+        <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top: 15px;">
+          <div class="return-card" style="border-top-color: #8e44ad;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h3>Form GSTR-9</h3>
+                <span class="label label-default" id="badgeGstr9" style="font-size: 11px; background: #8e44ad; color: #fff;">ANNUAL RETURN</span>
+              </div>
+              <p>Annual return consolidating all outward supplies, taxes paid, and ITC availed during the FY.</p>
+              
+              <div style="font-size: 12px; color: #555; margin-bottom: 5px;">
+                <strong>Due Date:</strong> <span id="dueDateGstr9">31/12/2025</span>
+              </div>
+              <div style="font-size: 12px; color: #555;" id="arnInfoGstr9">
+                Applicable for selected Financial Year.
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; border-top: 1px solid #eef2f6; padding-top: 12px;">
+              <a id="btnLinkGstr9" href="gstr9.html" class="btn btn-default btn-block" style="font-weight: 700; border-color: #8e44ad; color: #8e44ad;">
+                <i class="fa fa-file-text-o"></i> Prepare Form GSTR-9 (Annual)
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell Component -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var currentGstin = '27AAACB2234K1ZV';
+
+    var QUARTER_PERIODS = {
+      'Q1': ['April', 'May', 'June'],
+      'Q2': ['July', 'August', 'September'],
+      'Q3': ['October', 'November', 'December'],
+      'Q4': ['January', 'February', 'March']
+    };
+
+    function onQuarterChange() {
+      var q = document.getElementById('selQuarter').value;
+      var periods = QUARTER_PERIODS[q] || QUARTER_PERIODS['Q2'];
+      var selPeriod = document.getElementById('selPeriod');
+      var prevVal = selPeriod.value;
+
+      selPeriod.innerHTML = '';
+      periods.forEach(function(p) {
+        var opt = document.createElement('option');
+        opt.value = p;
+        opt.textContent = p;
+        selPeriod.appendChild(opt);
+      });
+
+      // Preserve previous selection if it exists in the new quarter; otherwise pick default
+      if (periods.indexOf(prevVal) !== -1) {
+        selPeriod.value = prevVal;
+      } else {
+        // Pick August for Q2 by default, or first month of quarter
+        selPeriod.value = (q === 'Q2' && periods.indexOf('August') !== -1) ? 'August' : periods[0];
+      }
+
+      updatePeriodCards();
+    }
+
+    function calculateDueDates(fy, month) {
+      var parts = (fy || '2024-25').split('-');
+      var startYear = parseInt(parts[0], 10) || 2024;
+      var endYear = 2000 + (parseInt(parts[1], 10) || 25);
+      if (parts[1] && parts[1].length === 4) endYear = parseInt(parts[1], 10);
+
+      var monthMap = {
+        'april':     { num: 4, yr: startYear },
+        'may':       { num: 5, yr: startYear },
+        'june':      { num: 6, yr: startYear },
+        'july':      { num: 7, yr: startYear },
+        'august':    { num: 8, yr: startYear },
+        'september': { num: 9, yr: startYear },
+        'october':   { num: 10, yr: startYear },
+        'november':  { num: 11, yr: startYear },
+        'december':  { num: 12, yr: startYear },
+        'january':   { num: 1, yr: endYear },
+        'february':  { num: 2, yr: endYear },
+        'march':     { num: 3, yr: endYear }
+      };
+
+      var cur = monthMap[(month || 'august').toLowerCase()] || monthMap['august'];
+      var nextNum = (cur.num === 12) ? 1 : cur.num + 1;
+      var nextYr = (cur.num === 12) ? endYear : cur.yr;
+      var pad = function(n) { return (n < 10 ? '0' : '') + n; };
+
+      return {
+        gstr1: '11/' + pad(nextNum) + '/' + nextYr,
+        gstr2b: '14/' + pad(nextNum) + '/' + nextYr,
+        gstr3b: '20/' + pad(nextNum) + '/' + nextYr,
+        gstr9: '31/12/' + endYear
+      };
+    }
+
+    function updatePeriodCards() {
+      var selFyEl = document.getElementById('selFy');
+      var selQuarterEl = document.getElementById('selQuarter');
+      var selPeriodEl = document.getElementById('selPeriod');
+
+      var fy = selFyEl ? selFyEl.value : '2024-25';
+      var q = selQuarterEl ? selQuarterEl.value : 'Q2';
+      var period = selPeriodEl ? selPeriodEl.value : 'August';
+
+      // Recalculate and display authentic statutory due dates
+      var dates = calculateDueDates(fy, period);
+      if (document.getElementById('dueDateGstr1')) document.getElementById('dueDateGstr1').innerText = dates.gstr1;
+      if (document.getElementById('dueDateGstr2b')) document.getElementById('dueDateGstr2b').innerText = dates.gstr2b;
+      if (document.getElementById('dueDateGstr3b')) document.getElementById('dueDateGstr3b').innerText = dates.gstr3b;
+      if (document.getElementById('dueDateGstr9')) document.getElementById('dueDateGstr9').innerText = dates.gstr9;
+
+      // Update button action links with selected FY and Period query params
+      var btn1 = document.getElementById('btnPrepareGstr1');
+      var btn2 = document.getElementById('btnViewGstr2b');
+      var btn3 = document.getElementById('btnFileGstr3b');
+      var btn9 = document.getElementById('btnLinkGstr9');
+      if (btn1) btn1.href = 'gstr1.html?fy=' + encodeURIComponent(fy) + '&period=' + encodeURIComponent(period);
+      if (btn2) btn2.href = 'gstr2b.html?fy=' + encodeURIComponent(fy) + '&period=' + encodeURIComponent(period);
+      if (btn3) btn3.href = 'gstr3b.html?fy=' + encodeURIComponent(fy) + '&period=' + encodeURIComponent(period);
+      if (btn9) btn9.href = 'gstr9.html?fy=' + encodeURIComponent(fy);
+
+      fetch('/api/taxpayers/' + currentGstin)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.success && data.taxpayer) {
+            var tp = data.taxpayer;
+            if (document.getElementById('retLegalName')) document.getElementById('retLegalName').innerText = tp.legalName;
+            if (document.getElementById('retGstin')) document.getElementById('retGstin').innerText = tp.gstin;
+
+            var retData = (tp.returns && tp.returns[fy] && tp.returns[fy][period]) || {};
+            var g1 = retData.gstr1 || { status: 'TO BE FILED' };
+            var g3 = retData.gstr3b || { status: 'TO BE FILED' };
+            var g2 = retData.gstr2b || { status: 'AVAILABLE' };
+
+            // GSTR-1 Card State
+            var badge1 = document.getElementById('badgeGstr1');
+            var arn1 = document.getElementById('arnInfoGstr1');
+            if (badge1 && arn1) {
+              if (g1.status === 'FILED') {
+                badge1.className = 'label label-success';
+                badge1.innerHTML = '<i class="fa fa-check"></i> FILED';
+                arn1.innerHTML = '<strong>ARN:</strong> <span class="font-mono">' + (g1.arn || '-') + '</span>';
+              } else {
+                badge1.className = 'label label-warning';
+                badge1.innerText = 'TO BE FILED';
+                arn1.innerText = 'Status: Not filed for ' + period + ' (' + fy + ').';
+              }
+            }
+
+            // GSTR-2B Card State
+            var itcTotal = 63000;
+            if (g2 && g2.eligibleItc) {
+              itcTotal = (g2.eligibleItc.igst || 0) + (g2.eligibleItc.cgst || 0) + (g2.eligibleItc.sgst || 0) + (g2.eligibleItc.cess || 0);
+            }
+            if (document.getElementById('itcAmountGstr2b')) {
+              document.getElementById('itcAmountGstr2b').innerText = 'Eligible ITC: ₹ ' + itcTotal.toLocaleString('en-IN') + '.00';
+            }
+
+            // GSTR-3B Card State
+            var badge3 = document.getElementById('badgeGstr3b');
+            var arn3 = document.getElementById('arnInfoGstr3b');
+            if (badge3 && arn3) {
+              if (g3.status === 'FILED') {
+                badge3.className = 'label label-success';
+                badge3.innerHTML = '<i class="fa fa-check"></i> FILED';
+                arn3.innerHTML = '<strong>ARN:</strong> <span class="font-mono">' + (g3.arn || '-') + '</span>';
+              } else {
+                badge3.className = 'label label-warning';
+                badge3.innerText = 'TO BE FILED';
+                arn3.innerText = 'Status: Ready for filing and ITC offset.';
+              }
+            }
+
+            // GSTR-9 Card State
+            var retAnnual = (tp.returns && tp.returns[fy] && tp.returns[fy].annual && tp.returns[fy].annual.gstr9);
+            var badge9 = document.getElementById('badgeGstr9');
+            var arn9 = document.getElementById('arnInfoGstr9');
+            if (badge9 && arn9) {
+              if (retAnnual && retAnnual.status === 'FILED') {
+                badge9.className = 'label label-success';
+                badge9.innerHTML = '<i class="fa fa-check"></i> FILED';
+                arn9.innerHTML = '<strong>ARN:</strong> <span class="font-mono">' + (retAnnual.arn || '-') + '</span>';
+              } else {
+                badge9.className = 'label label-default';
+                badge9.style.background = '#8e44ad';
+                badge9.style.color = '#fff';
+                badge9.innerText = 'ANNUAL RETURN';
+                arn9.innerText = 'Applicable for Financial Year ' + fy + '.';
+              }
+            }
+          }
+        })
+        .catch(function(err) {
+          console.error('Error fetching return status', err);
+        });
+    }
+
+    window.addEventListener('load', function() {
+      var storedUser = localStorage.getItem('gst_current_taxpayer');
+      if (storedUser) {
+        try { currentGstin = JSON.parse(storedUser).gstin || currentGstin; } catch(e) {}
+      }
+      onQuarterChange();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,2686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form GSTR-1 (Outward Supplies) | Goods and Services Tax (GST)</title>
+  
+  <!-- Authentic Scraped GST Portal Stylesheets -->
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app1.1.css">
+  <link rel="stylesheet" href="css/staticapp1.2.css">
+  <link rel="stylesheet" href="css/simulation-custom.css">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .gstr1-dashboard-header {
+      background: #ffffff;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(27,63,117,0.06);
+    }
+    .section-toggle-bar {
+      background: #1b3f75;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .section-toggle-bar:hover {
+      background: #15325e;
+    }
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    .gstr1-tile {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-top: 4px solid #1b3f75;
+      border-radius: 6px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+      position: relative;
+    }
+    .gstr1-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 12px rgba(27,63,117,0.12);
+      border-color: #1b3f75;
+    }
+    .gstr1-tile.active-tile {
+      border-color: #17c4bb;
+      box-shadow: 0 0 0 2px #17c4bb;
+      background: #fafdfe;
+    }
+    .tile-num {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #1b3f75;
+      margin-bottom: 4px;
+    }
+    .tile-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #334155;
+      min-height: 38px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .tile-meta {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 8px;
+      font-size: 11.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tile-count {
+      font-weight: 700;
+      color: #1b3f75;
+      background: #eef4fc;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .invoice-table th {
+      background: #1b3f75;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+      vertical-align: middle !important;
+      padding: 9px 8px;
+    }
+    .invoice-table td {
+      font-size: 12px;
+      vertical-align: middle !important;
+      padding: 8px;
+    }
+    .table-panel-box {
+      margin-top: 20px;
+      border: 1px solid #c9d8eb;
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .table-panel-header {
+      background: #ffffff;
+      padding: 16px 20px;
+      border-bottom: 1px solid #eef2f6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .empty-state-notice {
+      padding: 40px 20px;
+      text-align: center;
+      color: #64748b;
+    }
+    .table-inline-input {
+      height: 30px;
+      padding: 4px 8px;
+      font-size: 12px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Accessibility Bar -->
+  <div id="gst-top-bar-mount"></div>
+
+  <!-- Authentic Header -->
+  <div id="gst-header-mount"></div>
+
+  <!-- Primary Navigation Bar -->
+  <div id="gst-nav-bar-mount"></div>
+
+  <main class="container content-wrapper" style="min-height: 600px; padding-top: 15px;">
+
+    <!-- Header Strip -->
+    <div class="gstr1-dashboard-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:15px;">
+        <div>
+          <h2 style="margin:0; color:#1b3f75; font-weight:700; font-size:20px;">
+            <i class="fa fa-file-text-o"></i> DETAILS OF OUTWARD SUPPLIES OF GOODS OR SERVICES (FORM GSTR-1)
+          </h2>
+          <p style="margin:4px 0 0 0; color:#64748b; font-size:13px;">
+            Taxpayer: <strong id="g1LegalName" style="color:#1b3f75;">BHARAT ENTERPRISES PRIVATE LIMITED</strong> 
+            &nbsp;|&nbsp; GSTIN: <strong id="g1Gstin" style="font-family:monospace; color:#1b3f75;">27AAACB2234K1ZV</strong> 
+            &nbsp;|&nbsp; Period: <strong id="g1PeriodDisplay">August 2024 (FY 2024-25)</strong>
+          </p>
+        </div>
+        <div id="g1StatusBadge">
+          <span class="label label-warning" style="font-size:12px; padding:6px 12px;">STATUS: TO BE FILED</span>
+        </div>
+      </div>
+
+      <!-- Action Utility Buttons Bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-default btn-sm" onclick="exportGstr1Json()" title="Download official JSON payload">
+            <i class="fa fa-download"></i> Export JSON
+          </button>
+          <label class="btn btn-default btn-sm" style="margin:0; cursor:pointer;" title="Upload JSON or CSV invoice batch">
+            <i class="fa fa-upload"></i> Import JSON / CSV
+            <input type="file" id="importFileInput" accept=".json,.csv" style="display:none;" onchange="importBatchFile(event)">
+          </label>
+          <button type="button" class="btn btn-default btn-sm" onclick="downloadEInvoiceExcel()">
+            <i class="fa fa-file-excel-o text-success"></i> Download e-Invoice Details (Excel)
+          </button>
+          <a href="database.html" target="_blank" class="btn btn-default btn-sm" title="View live SQLite database records">
+            <i class="fa fa-database text-primary"></i> View Database
+          </a>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-default btn-sm" onclick="resetAllGstr1Data()" style="color:#c0392b; font-weight:700;">
+            <i class="fa fa-trash-o"></i> Reset All Data
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="generateSummary()" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+            <i class="fa fa-refresh"></i> Generate Summary
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Practice Guide Banner -->
+    <div style="background:#f0f9ff; border:1px solid #b9e6fe; border-left:4px solid #0284c7; border-radius:4px; padding:10px 16px; margin-top:15px; font-size:12.5px; color:#0369a1; display:flex; justify-content:space-between; align-items:center;">
+      <span>
+        <i class="fa fa-graduation-cap"></i> <strong>Student Practice Mode:</strong> All tabs start empty without pre-filled data. Click any tab below to input and practice filing outward supply transactions.
+      </span>
+      <span class="badge" style="background:#0284c7;">Active Taxpayer State: <span id="lblStateCode">27-Maharashtra</span></span>
+    </div>
+
+    <!-- Summary KPI Cards -->
+    <div class="row" style="margin-top:15px;">
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #1b3f75; border-radius:6px; padding:14px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Total Invoices / Records</small>
+          <div id="sumCount" style="font-size:22px; font-weight:800; color:#1b3f75; margin-top:3px;">0</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #2c4e86; border-radius:6px; padding:14px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Total Taxable Value</small>
+          <div id="sumTaxable" style="font-size:22px; font-weight:800; color:#2c4e86; margin-top:3px;">₹ 0.00</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #17c4bb; border-radius:6px; padding:14px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Total IGST (Inter-State)</small>
+          <div id="sumIgst" style="font-size:22px; font-weight:800; color:#17c4bb; margin-top:3px;">₹ 0.00</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6" style="margin-bottom:12px;">
+        <div style="background:#fff; border:1px solid #d9e2ec; border-left:4px solid #27ae60; border-radius:6px; padding:14px;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Total CGST + SGST</small>
+          <div id="sumCgstSgst" style="font-size:22px; font-weight:800; color:#27ae60; margin-top:3px;">₹ 0.00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: ADD RECORD DETAILS (ALL TABS IN SERIAL ORDER) -->
+    <div class="section-toggle-bar" onclick="toggleSection('addRecordSection', 'addRecordIcon')">
+      <span><i class="fa fa-plus-circle"></i> ADD RECORD DETAILS</span>
+      <i class="fa fa-chevron-up" id="addRecordIcon"></i>
+    </div>
+
+    <div id="addRecordSection">
+      <div class="tile-grid">
+        
+        <!-- Tile 1: 4A, 4B, 6B, 6C (B2B Invoices) -->
+        <div class="gstr1-tile active-tile" id="tile_b2b" onclick="switchTable('b2b')">
+          <div class="tile-num">4A, 4B, 6B, 6C</div>
+          <div class="tile-title">B2B Invoices (Taxable Outward Supplies to Registered Persons)</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_b2b" class="tile-count">0</strong></span>
+            <span id="tileVal_b2b" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 2: 5A, 5B (B2C Large) -->
+        <div class="gstr1-tile" id="tile_b2cl" onclick="switchTable('b2cl')">
+          <div class="tile-num">5A, 5B</div>
+          <div class="tile-title">B2C (Large) Invoices (Inter-State Supplies &gt; ₹ 1 Lakh)</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_b2cl" class="tile-count">0</strong></span>
+            <span id="tileVal_b2cl" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 3: 6A (Exports) -->
+        <div class="gstr1-tile" id="tile_exp" onclick="switchTable('exp')">
+          <div class="tile-num">6A</div>
+          <div class="tile-title">Export Invoices (With / Without Payment of Tax)</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_exp" class="tile-count">0</strong></span>
+            <span id="tileVal_exp" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 4: 7 (B2C Others) -->
+        <div class="gstr1-tile" id="tile_b2cs" onclick="switchTable('b2cs')">
+          <div class="tile-num">7</div>
+          <div class="tile-title">B2C (Others) - Supplies to Unregistered / Consumers</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_b2cs" class="tile-count">0</strong></span>
+            <span id="tileVal_b2cs" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 5: 8A, 8B, 8C, 8D (Nil Rated / Exempt) -->
+        <div class="gstr1-tile" id="tile_nil" onclick="switchTable('nil')">
+          <div class="tile-num">8A, 8B, 8C, 8D</div>
+          <div class="tile-title">Nil Rated, Exempted and Non-GST Supplies</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_nil" class="tile-count">0</strong></span>
+            <span id="tileVal_nil" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 6: 9A (Credit/Debit Notes Registered - Renumbered from 9B) -->
+        <div class="gstr1-tile" id="tile_cdnr" onclick="switchTable('cdnr')">
+          <div class="tile-num">9A</div>
+          <div class="tile-title">Credit / Debit Notes (Registered)</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_cdnr" class="tile-count">0</strong></span>
+            <span id="tileVal_cdnr" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 7: 9B (Credit/Debit Notes Unregistered) -->
+        <div class="gstr1-tile" id="tile_cdnur" onclick="switchTable('cdnur')">
+          <div class="tile-num">9B</div>
+          <div class="tile-title">Credit / Debit Notes (Unregistered)</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_cdnur" class="tile-count">0</strong></span>
+            <span id="tileVal_cdnur" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 8: 12 (HSN-wise Summary) -->
+        <div class="gstr1-tile" id="tile_hsn" onclick="switchTable('hsn')">
+          <div class="tile-num">12</div>
+          <div class="tile-title">HSN-wise Summary of Outward Supplies</div>
+          <div class="tile-meta">
+            <span>Processed: <strong id="tileCount_hsn" class="tile-count">0</strong></span>
+            <span id="tileVal_hsn" class="text-muted" style="font-weight:700;">₹ 0.00</span>
+          </div>
+        </div>
+
+        <!-- Tile 9: 13 (Documents Issued) -->
+        <div class="gstr1-tile" id="tile_doc" onclick="switchTable('doc')">
+          <div class="tile-num">13</div>
+          <div class="tile-title">Documents Issued during the Tax Period</div>
+          <div class="tile-meta">
+            <span>Issued: <strong id="tileCount_doc" class="tile-count">0</strong></span>
+            <span id="tileVal_doc" class="text-muted" style="font-weight:700;">0 series</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 2: AMEND RECORD DETAILS -->
+    <div class="section-toggle-bar" style="background:#2c4e86;" onclick="toggleSection('amendRecordSection', 'amendRecordIcon')">
+      <span><i class="fa fa-pencil-square-o"></i> AMEND RECORD DETAILS</span>
+      <i class="fa fa-chevron-down" id="amendRecordIcon"></i>
+    </div>
+
+    <div id="amendRecordSection" style="display:none;">
+      <div class="tile-grid">
+        <div class="gstr1-tile" onclick="GSTSimulation.showToast('No amended B2B invoices for this tax period.', 'info')">
+          <div class="tile-num">9A</div>
+          <div class="tile-title">Amended B2B Invoices</div>
+          <div class="tile-meta"><span>Records: <strong>0</strong></span></div>
+        </div>
+        <div class="gstr1-tile" onclick="GSTSimulation.showToast('No amended B2C Large invoices for this tax period.', 'info')">
+          <div class="tile-num">9A</div>
+          <div class="tile-title">Amended B2C (Large) Invoices</div>
+          <div class="tile-meta"><span>Records: <strong>0</strong></span></div>
+        </div>
+        <div class="gstr1-tile" onclick="GSTSimulation.showToast('No amended Credit/Debit notes on record.', 'info')">
+          <div class="tile-num">9C</div>
+          <div class="tile-title">Amended Credit / Debit Notes (Registered)</div>
+          <div class="tile-meta"><span>Records: <strong>0</strong></span></div>
+        </div>
+        <div class="gstr1-tile" onclick="GSTSimulation.showToast('No amended export invoices.', 'info')">
+          <div class="tile-num">9A</div>
+          <div class="tile-title">Amended Export Invoices</div>
+          <div class="tile-meta"><span>Records: <strong>0</strong></span></div>
+        </div>
+        <div class="gstr1-tile" onclick="GSTSimulation.showToast('No amended B2C Others.', 'info')">
+          <div class="tile-num">10</div>
+          <div class="tile-title">Amended B2C (Others)</div>
+          <div class="tile-meta"><span>Records: <strong>0</strong></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- DEDICATED TABLE WORKSPACES (ONE PER SERIAL TAB) -->
+    <!-- ============================================================= -->
+
+    <!-- 1. WORKSPACE: 4A, 4B, 6B, 6C (B2B Invoices) -->
+    <div class="table-panel-box" id="workspace_b2b">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-table text-primary"></i> Table 4A, 4B, 6B, 6C - B2B Invoices (Taxable Outward Supplies to Registered Persons)
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Inward supplies attracting reverse charge, supplies made through SEZ, and deemed exports.</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('b2b')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add B2B Invoice
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_b2b" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 4A, 4B, 6B, 6C - B2B Invoices</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add B2B Invoice to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddB2b" onsubmit="saveB2bRecord(event)">
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Receiver GSTIN / UIN <span style="color:red;">*</span></label>
+                  <input type="text" id="b2b_receiverGstin" class="form-control font-mono" placeholder="e.g. 29AABCS5544N1ZR" maxlength="15" style="text-transform:uppercase;" required oninput="autoDetectPos('b2b')">
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Receiver Trade / Legal Name <span style="color:red;">*</span></label>
+                  <input type="text" id="b2b_receiverName" class="form-control" placeholder="e.g. SOUTHERN TECH SOLUTIONS LLP" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Number <span style="color:red;">*</span></label>
+                  <input type="text" id="b2b_invNo" class="form-control" placeholder="e.g. INV-2024-001" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Date <span style="color:red;">*</span></label>
+                  <input type="date" id="b2b_invDate" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Place of Supply (POS) <span style="color:red;">*</span></label>
+                  <select id="b2b_pos" class="form-control pos-select" onchange="calculateModalTax('b2b')" required>
+                    <option value="01|Jammu and Kashmir">01-Jammu and Kashmir (Inter-State)</option>
+                    <option value="02|Himachal Pradesh">02-Himachal Pradesh (Inter-State)</option>
+                    <option value="03|Punjab">03-Punjab (Inter-State)</option>
+                    <option value="04|Chandigarh">04-Chandigarh (Inter-State)</option>
+                    <option value="05|Uttarakhand">05-Uttarakhand (Inter-State)</option>
+                    <option value="06|Haryana">06-Haryana (Inter-State)</option>
+                    <option value="07|Delhi">07-Delhi (Inter-State)</option>
+                    <option value="08|Rajasthan">08-Rajasthan (Inter-State)</option>
+                    <option value="09|Uttar Pradesh">09-Uttar Pradesh (Inter-State)</option>
+                    <option value="10|Bihar">10-Bihar (Inter-State)</option>
+                    <option value="11|Sikkim">11-Sikkim (Inter-State)</option>
+                    <option value="12|Arunachal Pradesh">12-Arunachal Pradesh (Inter-State)</option>
+                    <option value="13|Nagaland">13-Nagaland (Inter-State)</option>
+                    <option value="14|Manipur">14-Manipur (Inter-State)</option>
+                    <option value="15|Mizoram">15-Mizoram (Inter-State)</option>
+                    <option value="16|Tripura">16-Tripura (Inter-State)</option>
+                    <option value="17|Meghalaya">17-Meghalaya (Inter-State)</option>
+                    <option value="18|Assam">18-Assam (Inter-State)</option>
+                    <option value="19|West Bengal">19-West Bengal (Inter-State)</option>
+                    <option value="20|Jharkhand">20-Jharkhand (Inter-State)</option>
+                    <option value="21|Odisha">21-Odisha (Inter-State)</option>
+                    <option value="22|Chhattisgarh">22-Chhattisgarh (Inter-State)</option>
+                    <option value="23|Madhya Pradesh">23-Madhya Pradesh (Inter-State)</option>
+                    <option value="24|Gujarat">24-Gujarat (Inter-State)</option>
+                    <option value="26|Dadra and Nagar Haveli and Daman and Diu">26-Dadra and Nagar Haveli and Daman and Diu (Inter-State)</option>
+                    <option value="27|Maharashtra" selected>27-Maharashtra (Intra-State)</option>
+                    <option value="29|Karnataka">29-Karnataka (Inter-State)</option>
+                    <option value="30|Goa">30-Goa (Inter-State)</option>
+                    <option value="31|Lakshadweep">31-Lakshadweep (Inter-State)</option>
+                    <option value="32|Kerala">32-Kerala (Inter-State)</option>
+                    <option value="33|Tamil Nadu">33-Tamil Nadu (Inter-State)</option>
+                    <option value="34|Puducherry">34-Puducherry (Inter-State)</option>
+                    <option value="35|Andaman and Nicobar Islands">35-Andaman and Nicobar Islands (Inter-State)</option>
+                    <option value="36|Telangana">36-Telangana (Inter-State)</option>
+                    <option value="37|Andhra Pradesh">37-Andhra Pradesh (Inter-State)</option>
+                    <option value="38|Ladakh">38-Ladakh (Inter-State)</option>
+                    <option value="97|Other Territory">97-Other Territory (Inter-State)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Supply Type</label>
+                  <input type="text" id="b2b_supplyType" class="form-control" readonly value="Inter-State" style="background:#f1f5f9;">
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Reverse Charge Applicable?</label>
+                  <select id="b2b_rcm" class="form-control">
+                    <option value="N" selected>No</option>
+                    <option value="Y">Yes</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Type</label>
+                  <select id="b2b_invType" class="form-control">
+                    <option value="Regular" selected>Regular B2B</option>
+                    <option value="SEZ with Payment">SEZ Supplies with Payment</option>
+                    <option value="SEZ without Payment">SEZ Supplies without Payment</option>
+                    <option value="Deemed Export">Deemed Export</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:15px; margin:5px 0 15px 0;">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="b2b_taxable" class="form-control" placeholder="100000" min="1" oninput="calculateModalTax('b2b')" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="b2b_rate" class="form-control" onchange="calculateModalTax('b2b')">
+                    <option value="18" selected>18% (Standard Rate)</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                    <option value="0">0% (Nil)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div style="padding-top:18px; font-size:13px;">
+                  <span id="b2b_taxComputed" style="color:#27ae60; font-weight:700;">Tax: ₹ 0.00</span><br>
+                  <strong id="b2b_totalComputed" style="color:#1b3f75; font-size:14px;">Total Invoice: ₹ 0.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('b2b')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add B2B Invoice to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>Receiver GSTIN</th>
+              <th>Receiver Legal Name</th>
+              <th>Invoice No.</th>
+              <th>Invoice Date</th>
+              <th>Place of Supply (POS)</th>
+              <th>Rate</th>
+              <th>Taxable Value (₹)</th>
+              <th>IGST (₹)</th>
+              <th>CGST (₹)</th>
+              <th>SGST (₹)</th>
+              <th>Total Value (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_b2b"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2. WORKSPACE: 5A, 5B (B2C Large) -->
+    <div class="table-panel-box" id="workspace_b2cl" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-table text-primary"></i> Table 5A, 5B - B2C (Large) Invoices (Inter-State Supplies &gt; ₹ 1 Lakh)
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Taxable outward supplies to unregistered persons where invoice value exceeds ₹ 1,00,000 inter-state.</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('b2cl')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add B2C (Large) Invoice
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_b2cl" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 5A, 5B - B2C (Large) Invoices (> ₹ 1 Lakh)</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add B2C Large Invoice to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddB2cl" onsubmit="saveB2clRecord(event)">
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Place of Supply (POS) <span style="color:red;">*</span></label>
+                  <select id="b2cl_pos" class="form-control pos-select" onchange="calculateModalTax('b2cl')" required>
+                    <option value="01|Jammu and Kashmir">01-Jammu and Kashmir (Inter-State)</option>
+                    <option value="02|Himachal Pradesh">02-Himachal Pradesh (Inter-State)</option>
+                    <option value="03|Punjab">03-Punjab (Inter-State)</option>
+                    <option value="04|Chandigarh">04-Chandigarh (Inter-State)</option>
+                    <option value="05|Uttarakhand">05-Uttarakhand (Inter-State)</option>
+                    <option value="06|Haryana">06-Haryana (Inter-State)</option>
+                    <option value="07|Delhi">07-Delhi (Inter-State)</option>
+                    <option value="08|Rajasthan">08-Rajasthan (Inter-State)</option>
+                    <option value="09|Uttar Pradesh">09-Uttar Pradesh (Inter-State)</option>
+                    <option value="10|Bihar">10-Bihar (Inter-State)</option>
+                    <option value="11|Sikkim">11-Sikkim (Inter-State)</option>
+                    <option value="12|Arunachal Pradesh">12-Arunachal Pradesh (Inter-State)</option>
+                    <option value="13|Nagaland">13-Nagaland (Inter-State)</option>
+                    <option value="14|Manipur">14-Manipur (Inter-State)</option>
+                    <option value="15|Mizoram">15-Mizoram (Inter-State)</option>
+                    <option value="16|Tripura">16-Tripura (Inter-State)</option>
+                    <option value="17|Meghalaya">17-Meghalaya (Inter-State)</option>
+                    <option value="18|Assam">18-Assam (Inter-State)</option>
+                    <option value="19|West Bengal">19-West Bengal (Inter-State)</option>
+                    <option value="20|Jharkhand">20-Jharkhand (Inter-State)</option>
+                    <option value="21|Odisha">21-Odisha (Inter-State)</option>
+                    <option value="22|Chhattisgarh">22-Chhattisgarh (Inter-State)</option>
+                    <option value="23|Madhya Pradesh">23-Madhya Pradesh (Inter-State)</option>
+                    <option value="24|Gujarat">24-Gujarat (Inter-State)</option>
+                    <option value="26|Dadra and Nagar Haveli and Daman and Diu">26-Dadra and Nagar Haveli and Daman and Diu (Inter-State)</option>
+                    <option value="29|Karnataka" selected>29-Karnataka (Inter-State)</option>
+                    <option value="30|Goa">30-Goa (Inter-State)</option>
+                    <option value="31|Lakshadweep">31-Lakshadweep (Inter-State)</option>
+                    <option value="32|Kerala">32-Kerala (Inter-State)</option>
+                    <option value="33|Tamil Nadu">33-Tamil Nadu (Inter-State)</option>
+                    <option value="34|Puducherry">34-Puducherry (Inter-State)</option>
+                    <option value="35|Andaman and Nicobar Islands">35-Andaman and Nicobar Islands (Inter-State)</option>
+                    <option value="36|Telangana">36-Telangana (Inter-State)</option>
+                    <option value="37|Andhra Pradesh">37-Andhra Pradesh (Inter-State)</option>
+                    <option value="38|Ladakh">38-Ladakh (Inter-State)</option>
+                    <option value="97|Other Territory">97-Other Territory (Inter-State)</option>
+                  </select>
+                  <small class="text-muted">Must be Inter-State supply</small>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Number <span style="color:red;">*</span></label>
+                  <input type="text" id="b2cl_invNo" class="form-control" placeholder="e.g. B2CL-001" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Date <span style="color:red;">*</span></label>
+                  <input type="date" id="b2cl_invDate" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:15px; margin:5px 0 15px 0;">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="b2cl_taxable" class="form-control" placeholder="105000" min="1" oninput="calculateModalTax('b2cl')" required>
+                  <small class="text-muted">Invoice value must exceed ₹ 1,00,000</small>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="b2cl_rate" class="form-control" onchange="calculateModalTax('b2cl')">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div style="padding-top:18px; font-size:13px;">
+                  <span id="b2cl_taxComputed" style="color:#17c4bb; font-weight:700;">IGST: ₹ 0.00</span><br>
+                  <strong id="b2cl_totalComputed" style="color:#1b3f75; font-size:14px;">Total Value: ₹ 0.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('b2cl')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add B2C Large Invoice to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>Place of Supply (POS)</th>
+              <th>Invoice No.</th>
+              <th>Invoice Date</th>
+              <th>Rate</th>
+              <th>Taxable Value (₹)</th>
+              <th>IGST (₹)</th>
+              <th>Cess (₹)</th>
+              <th>Total Invoice Value (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_b2cl"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. WORKSPACE: 6A (Export Invoices) -->
+    <div class="table-panel-box" id="workspace_exp" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-plane text-primary"></i> Table 6A - Export Invoices (With / Without Payment of Tax)
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Supplies exported out of India under LUT/Bond (WOPAY) or with payment of IGST (WPAY).</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('exp')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add Export Invoice
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_exp" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 6A - Export Invoices</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add Export Invoice to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddExp" onsubmit="saveExpRecord(event)">
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Export Type <span style="color:red;">*</span></label>
+                  <select id="exp_type" class="form-control" onchange="calculateModalTax('exp')">
+                    <option value="WPAY" selected>With Payment of Tax (WPAY)</option>
+                    <option value="WOPAY">Without Payment of Tax (WOPAY)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Number <span style="color:red;">*</span></label>
+                  <input type="text" id="exp_invNo" class="form-control" placeholder="e.g. EXP-2024-01" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Invoice Date <span style="color:red;">*</span></label>
+                  <input type="date" id="exp_invDate" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Port Code (6 Char) <span style="color:red;">*</span></label>
+                  <input type="text" id="exp_portCode" class="form-control font-mono" placeholder="e.g. INBOM1" maxlength="6" style="text-transform:uppercase;" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Shipping Bill / Bill of Export No. <span style="color:red;">*</span></label>
+                  <input type="text" id="exp_sbNo" class="form-control" placeholder="e.g. 7891234" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Shipping Bill Date <span style="color:red;">*</span></label>
+                  <input type="date" id="exp_sbDate" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:15px; margin:5px 0 15px 0;">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="exp_taxable" class="form-control" placeholder="200000" min="1" oninput="calculateModalTax('exp')" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="exp_rate" class="form-control" onchange="calculateModalTax('exp')">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                    <option value="0">0%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div style="padding-top:18px; font-size:13px;">
+                  <span id="exp_taxComputed" style="color:#17c4bb; font-weight:700;">IGST: ₹ 0.00</span><br>
+                  <strong id="exp_totalComputed" style="color:#1b3f75; font-size:14px;">Total Value: ₹ 0.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('exp')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add Export Invoice to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>Export Type</th>
+              <th>Invoice No.</th>
+              <th>Invoice Date</th>
+              <th>Port Code</th>
+              <th>Shipping Bill No.</th>
+              <th>Shipping Bill Date</th>
+              <th>Rate</th>
+              <th>Taxable Value (₹)</th>
+              <th>IGST (₹)</th>
+              <th>Total Value (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_exp"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4. WORKSPACE: 7 (B2C Others) -->
+    <div class="table-panel-box" id="workspace_b2cs" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-users text-primary"></i> Table 7 - B2C (Others) - Supplies to Unregistered / Consumers
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Intra-state supplies of any value, and inter-state supplies up to ₹ 1,00,000 to unregistered consumers.</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('b2cs')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add B2C (Others) Details
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_b2cs" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 7 - B2C (Others) Supplies</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add B2C Other to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddB2cs" onsubmit="saveB2csRecord(event)">
+            <div class="form-group">
+              <label class="control-label" style="font-weight:700; color:#1b3f75;">Supply Type</label>
+              <select id="b2cs_type" class="form-control">
+                <option value="Other than E-Commerce" selected>Other than E-Commerce (OE)</option>
+                <option value="Through E-Commerce">Through E-Commerce Operator (E-Com)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label" style="font-weight:700; color:#1b3f75;">Place of Supply (POS) <span style="color:red;">*</span></label>
+              <select id="b2cs_pos" class="form-control pos-select" onchange="calculateModalTax('b2cs')" required>
+                    <option value="01|Jammu and Kashmir">01-Jammu and Kashmir (Inter-State)</option>
+                    <option value="02|Himachal Pradesh">02-Himachal Pradesh (Inter-State)</option>
+                    <option value="03|Punjab">03-Punjab (Inter-State)</option>
+                    <option value="04|Chandigarh">04-Chandigarh (Inter-State)</option>
+                    <option value="05|Uttarakhand">05-Uttarakhand (Inter-State)</option>
+                    <option value="06|Haryana">06-Haryana (Inter-State)</option>
+                    <option value="07|Delhi">07-Delhi (Inter-State)</option>
+                    <option value="08|Rajasthan">08-Rajasthan (Inter-State)</option>
+                    <option value="09|Uttar Pradesh">09-Uttar Pradesh (Inter-State)</option>
+                    <option value="10|Bihar">10-Bihar (Inter-State)</option>
+                    <option value="11|Sikkim">11-Sikkim (Inter-State)</option>
+                    <option value="12|Arunachal Pradesh">12-Arunachal Pradesh (Inter-State)</option>
+                    <option value="13|Nagaland">13-Nagaland (Inter-State)</option>
+                    <option value="14|Manipur">14-Manipur (Inter-State)</option>
+                    <option value="15|Mizoram">15-Mizoram (Inter-State)</option>
+                    <option value="16|Tripura">16-Tripura (Inter-State)</option>
+                    <option value="17|Meghalaya">17-Meghalaya (Inter-State)</option>
+                    <option value="18|Assam">18-Assam (Inter-State)</option>
+                    <option value="19|West Bengal">19-West Bengal (Inter-State)</option>
+                    <option value="20|Jharkhand">20-Jharkhand (Inter-State)</option>
+                    <option value="21|Odisha">21-Odisha (Inter-State)</option>
+                    <option value="22|Chhattisgarh">22-Chhattisgarh (Inter-State)</option>
+                    <option value="23|Madhya Pradesh">23-Madhya Pradesh (Inter-State)</option>
+                    <option value="24|Gujarat">24-Gujarat (Inter-State)</option>
+                    <option value="26|Dadra and Nagar Haveli and Daman and Diu">26-Dadra and Nagar Haveli and Daman and Diu (Inter-State)</option>
+                    <option value="27|Maharashtra" selected>27-Maharashtra (Intra-State)</option>
+                    <option value="29|Karnataka">29-Karnataka (Inter-State)</option>
+                    <option value="30|Goa">30-Goa (Inter-State)</option>
+                    <option value="31|Lakshadweep">31-Lakshadweep (Inter-State)</option>
+                    <option value="32|Kerala">32-Kerala (Inter-State)</option>
+                    <option value="33|Tamil Nadu">33-Tamil Nadu (Inter-State)</option>
+                    <option value="34|Puducherry">34-Puducherry (Inter-State)</option>
+                    <option value="35|Andaman and Nicobar Islands">35-Andaman and Nicobar Islands (Inter-State)</option>
+                    <option value="36|Telangana">36-Telangana (Inter-State)</option>
+                    <option value="37|Andhra Pradesh">37-Andhra Pradesh (Inter-State)</option>
+                    <option value="38|Ladakh">38-Ladakh (Inter-State)</option>
+                    <option value="97|Other Territory">97-Other Territory (Inter-State)</option>
+                  </select>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="b2cs_rate" class="form-control" onchange="calculateModalTax('b2cs')">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                    <option value="0">0%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="b2cs_taxable" class="form-control" placeholder="25000" min="1" oninput="calculateModalTax('b2cs')" required>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:12px; margin-bottom:15px; font-size:13px;">
+              <span id="b2cs_taxComputed" style="color:#27ae60; font-weight:700;">Tax: ₹ 0.00</span><br>
+              <strong id="b2cs_totalComputed" style="color:#1b3f75;">Total Supply Value: ₹ 0.00</strong>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('b2cs')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add B2C Other to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>Type</th>
+              <th>Place of Supply (POS)</th>
+              <th>Rate</th>
+              <th>Taxable Value (₹)</th>
+              <th>IGST (₹)</th>
+              <th>CGST (₹)</th>
+              <th>SGST (₹)</th>
+              <th>Cess (₹)</th>
+              <th>Total (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_b2cs"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 5. WORKSPACE: 8A, 8B, 8C, 8D (Nil Rated / Exempt) -->
+    <div class="table-panel-box" id="workspace_nil" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-ban text-primary"></i> Table 8A, 8B, 8C, 8D - Nil Rated, Exempted and Non-GST Outward Supplies
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Enter values directly for each supply category and click Save.</span>
+        </div>
+        <button type="button" class="btn btn-success btn-sm" onclick="saveTable8()" style="font-weight:700;">
+          <i class="fa fa-check"></i> Save Table 8
+        </button>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-bordered table-striped" style="margin:0; font-size:12.5px;">
+          <thead style="background:#1b3f75; color:#fff;">
+            <tr>
+              <th style="width:38%;">Description of Supplies</th>
+              <th style="width:20%; text-align:right;">Nil Rated Supplies (₹)</th>
+              <th style="width:20%; text-align:right;">Exempted Supplies (₹)</th>
+              <th style="width:22%; text-align:right;">Non-GST Supplies (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>8A.</strong> Inter-State supplies to registered persons</td>
+              <td><input type="number" id="nil_8a_nil" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8a_exm" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8a_nongst" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+            </tr>
+            <tr>
+              <td><strong>8B.</strong> Intra-State supplies to registered persons</td>
+              <td><input type="number" id="nil_8b_nil" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8b_exm" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8b_nongst" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+            </tr>
+            <tr>
+              <td><strong>8C.</strong> Inter-State supplies to unregistered persons</td>
+              <td><input type="number" id="nil_8c_nil" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8c_exm" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8c_nongst" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+            </tr>
+            <tr>
+              <td><strong>8D.</strong> Intra-State supplies to unregistered persons</td>
+              <td><input type="number" id="nil_8d_nil" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8d_exm" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+              <td><input type="number" id="nil_8d_nongst" class="form-control table-inline-input text-right" value="0" min="0" oninput="computeTable8Totals()"></td>
+            </tr>
+          </tbody>
+          <tfoot style="background:#f8fafc; font-weight:700;">
+            <tr>
+              <td>Total Supplies</td>
+              <td id="tot_nil_val" style="text-align:right; color:#1b3f75;">₹ 0.00</td>
+              <td id="tot_exm_val" style="text-align:right; color:#1b3f75;">₹ 0.00</td>
+              <td id="tot_nongst_val" style="text-align:right; color:#1b3f75;">₹ 0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6. WORKSPACE: 9A (Credit/Debit Notes Registered - Renumbered from 9B) -->
+    <div class="table-panel-box" id="workspace_cdnr" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-file-text text-primary"></i> Table 9A - Credit / Debit Notes (Registered)
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Credit notes and debit notes issued to registered taxpayers during the tax period.</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('cdnr')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add Credit / Debit Note
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_cdnr" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 9A - Credit / Debit Notes (Registered)</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add Table 9A Note to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddCdnr" onsubmit="saveCdnrRecord(event)">
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Receiver GSTIN <span style="color:red;">*</span></label>
+                  <input type="text" id="cdnr_receiverGstin" class="form-control font-mono" placeholder="e.g. 29AABCS5544N1ZR" maxlength="15" style="text-transform:uppercase;" required oninput="autoDetectPos('cdnr')">
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Receiver Trade / Legal Name <span style="color:red;">*</span></label>
+                  <input type="text" id="cdnr_receiverName" class="form-control" placeholder="e.g. SOUTHERN TECH SOLUTIONS LLP" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Note Type <span style="color:red;">*</span></label>
+                  <select id="cdnr_noteType" class="form-control">
+                    <option value="Credit Note" selected>Credit Note (C)</option>
+                    <option value="Debit Note">Debit Note (D)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Note Number <span style="color:red;">*</span></label>
+                  <input type="text" id="cdnr_noteNo" class="form-control" placeholder="e.g. CN-001" required>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Note Date <span style="color:red;">*</span></label>
+                  <input type="date" id="cdnr_noteDate" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Original Invoice No. <span style="color:red;">*</span></label>
+                  <input type="text" id="cdnr_origInvNo" class="form-control" placeholder="e.g. INV-2024-001" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Original Invoice Date <span style="color:red;">*</span></label>
+                  <input type="date" id="cdnr_origInvDate" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Place of Supply (POS) <span style="color:red;">*</span></label>
+                  <select id="cdnr_pos" class="form-control pos-select" onchange="calculateModalTax('cdnr')" required>
+                    <option value="01|Jammu and Kashmir">01-Jammu and Kashmir (Inter-State)</option>
+                    <option value="02|Himachal Pradesh">02-Himachal Pradesh (Inter-State)</option>
+                    <option value="03|Punjab">03-Punjab (Inter-State)</option>
+                    <option value="04|Chandigarh">04-Chandigarh (Inter-State)</option>
+                    <option value="05|Uttarakhand">05-Uttarakhand (Inter-State)</option>
+                    <option value="06|Haryana">06-Haryana (Inter-State)</option>
+                    <option value="07|Delhi">07-Delhi (Inter-State)</option>
+                    <option value="08|Rajasthan">08-Rajasthan (Inter-State)</option>
+                    <option value="09|Uttar Pradesh">09-Uttar Pradesh (Inter-State)</option>
+                    <option value="10|Bihar">10-Bihar (Inter-State)</option>
+                    <option value="11|Sikkim">11-Sikkim (Inter-State)</option>
+                    <option value="12|Arunachal Pradesh">12-Arunachal Pradesh (Inter-State)</option>
+                    <option value="13|Nagaland">13-Nagaland (Inter-State)</option>
+                    <option value="14|Manipur">14-Manipur (Inter-State)</option>
+                    <option value="15|Mizoram">15-Mizoram (Inter-State)</option>
+                    <option value="16|Tripura">16-Tripura (Inter-State)</option>
+                    <option value="17|Meghalaya">17-Meghalaya (Inter-State)</option>
+                    <option value="18|Assam">18-Assam (Inter-State)</option>
+                    <option value="19|West Bengal">19-West Bengal (Inter-State)</option>
+                    <option value="20|Jharkhand">20-Jharkhand (Inter-State)</option>
+                    <option value="21|Odisha">21-Odisha (Inter-State)</option>
+                    <option value="22|Chhattisgarh">22-Chhattisgarh (Inter-State)</option>
+                    <option value="23|Madhya Pradesh">23-Madhya Pradesh (Inter-State)</option>
+                    <option value="24|Gujarat">24-Gujarat (Inter-State)</option>
+                    <option value="26|Dadra and Nagar Haveli and Daman and Diu">26-Dadra and Nagar Haveli and Daman and Diu (Inter-State)</option>
+                    <option value="27|Maharashtra" selected>27-Maharashtra (Intra-State)</option>
+                    <option value="29|Karnataka">29-Karnataka (Inter-State)</option>
+                    <option value="30|Goa">30-Goa (Inter-State)</option>
+                    <option value="31|Lakshadweep">31-Lakshadweep (Inter-State)</option>
+                    <option value="32|Kerala">32-Kerala (Inter-State)</option>
+                    <option value="33|Tamil Nadu">33-Tamil Nadu (Inter-State)</option>
+                    <option value="34|Puducherry">34-Puducherry (Inter-State)</option>
+                    <option value="35|Andaman and Nicobar Islands">35-Andaman and Nicobar Islands (Inter-State)</option>
+                    <option value="36|Telangana">36-Telangana (Inter-State)</option>
+                    <option value="37|Andhra Pradesh">37-Andhra Pradesh (Inter-State)</option>
+                    <option value="38|Ladakh">38-Ladakh (Inter-State)</option>
+                    <option value="97|Other Territory">97-Other Territory (Inter-State)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="cdnr_rate" class="form-control" onchange="calculateModalTax('cdnr')">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:15px; margin:5px 0 15px 0;">
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="cdnr_taxable" class="form-control" placeholder="15000" min="1" oninput="calculateModalTax('cdnr')" required>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div style="padding-top:10px; font-size:13px;">
+                  <span id="cdnr_taxComputed" style="color:#27ae60; font-weight:700;">Tax: ₹ 0.00</span><br>
+                  <strong id="cdnr_totalComputed" style="color:#1b3f75; font-size:14px;">Total Note Value: ₹ 0.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('cdnr')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add Table 9A Note to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>Receiver GSTIN</th>
+              <th>Note Type</th>
+              <th>Note No.</th>
+              <th>Note Date</th>
+              <th>Orig. Inv No.</th>
+              <th>Orig. Inv Date</th>
+              <th>POS</th>
+              <th>Rate</th>
+              <th>Taxable Value (₹)</th>
+              <th>IGST (₹)</th>
+              <th>CGST (₹)</th>
+              <th>SGST (₹)</th>
+              <th>Note Value (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_cdnr"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7. WORKSPACE: 9B (Credit/Debit Notes Unregistered) -->
+    <div class="table-panel-box" id="workspace_cdnur" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-file-o text-primary"></i> Table 9B - Credit / Debit Notes (Unregistered)
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Credit and debit notes issued for B2C Large inter-state supplies or export shipments.</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('cdnur')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add Unregistered Note
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_cdnur" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 9B - Credit / Debit Notes (Unregistered)</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add Table 9B Note to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddCdnur" onsubmit="saveCdnurRecord(event)">
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Type <span style="color:red;">*</span></label>
+                  <select id="cdnur_type" class="form-control">
+                    <option value="B2CL" selected>B2C Large (Inter-State)</option>
+                    <option value="EXPWPAY">Exports with Payment (WPAY)</option>
+                    <option value="EXPWOPAY">Exports without Payment (WOPAY)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Note Type <span style="color:red;">*</span></label>
+                  <select id="cdnur_noteType" class="form-control">
+                    <option value="Credit Note" selected>Credit Note (C)</option>
+                    <option value="Debit Note">Debit Note (D)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Note Number <span style="color:red;">*</span></label>
+                  <input type="text" id="cdnur_noteNo" class="form-control" placeholder="e.g. CNUR-001" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Note Date <span style="color:red;">*</span></label>
+                  <input type="date" id="cdnur_noteDate" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Original Invoice No. <span style="color:red;">*</span></label>
+                  <input type="text" id="cdnur_origInvNo" class="form-control" placeholder="e.g. B2CL-001" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Original Invoice Date <span style="color:red;">*</span></label>
+                  <input type="date" id="cdnur_origInvDate" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Place of Supply (POS) <span style="color:red;">*</span></label>
+                  <select id="cdnur_pos" class="form-control pos-select" onchange="calculateModalTax('cdnur')" required>
+                    <option value="01|Jammu and Kashmir">01-Jammu and Kashmir (Inter-State)</option>
+                    <option value="02|Himachal Pradesh">02-Himachal Pradesh (Inter-State)</option>
+                    <option value="03|Punjab">03-Punjab (Inter-State)</option>
+                    <option value="04|Chandigarh">04-Chandigarh (Inter-State)</option>
+                    <option value="05|Uttarakhand">05-Uttarakhand (Inter-State)</option>
+                    <option value="06|Haryana">06-Haryana (Inter-State)</option>
+                    <option value="07|Delhi">07-Delhi (Inter-State)</option>
+                    <option value="08|Rajasthan">08-Rajasthan (Inter-State)</option>
+                    <option value="09|Uttar Pradesh">09-Uttar Pradesh (Inter-State)</option>
+                    <option value="10|Bihar">10-Bihar (Inter-State)</option>
+                    <option value="11|Sikkim">11-Sikkim (Inter-State)</option>
+                    <option value="12|Arunachal Pradesh">12-Arunachal Pradesh (Inter-State)</option>
+                    <option value="13|Nagaland">13-Nagaland (Inter-State)</option>
+                    <option value="14|Manipur">14-Manipur (Inter-State)</option>
+                    <option value="15|Mizoram">15-Mizoram (Inter-State)</option>
+                    <option value="16|Tripura">16-Tripura (Inter-State)</option>
+                    <option value="17|Meghalaya">17-Meghalaya (Inter-State)</option>
+                    <option value="18|Assam">18-Assam (Inter-State)</option>
+                    <option value="19|West Bengal">19-West Bengal (Inter-State)</option>
+                    <option value="20|Jharkhand">20-Jharkhand (Inter-State)</option>
+                    <option value="21|Odisha">21-Odisha (Inter-State)</option>
+                    <option value="22|Chhattisgarh">22-Chhattisgarh (Inter-State)</option>
+                    <option value="23|Madhya Pradesh">23-Madhya Pradesh (Inter-State)</option>
+                    <option value="24|Gujarat">24-Gujarat (Inter-State)</option>
+                    <option value="26|Dadra and Nagar Haveli and Daman and Diu">26-Dadra and Nagar Haveli and Daman and Diu (Inter-State)</option>
+                    <option value="27|Maharashtra" selected>27-Maharashtra (Intra-State)</option>
+                    <option value="29|Karnataka">29-Karnataka (Inter-State)</option>
+                    <option value="30|Goa">30-Goa (Inter-State)</option>
+                    <option value="31|Lakshadweep">31-Lakshadweep (Inter-State)</option>
+                    <option value="32|Kerala">32-Kerala (Inter-State)</option>
+                    <option value="33|Tamil Nadu">33-Tamil Nadu (Inter-State)</option>
+                    <option value="34|Puducherry">34-Puducherry (Inter-State)</option>
+                    <option value="35|Andaman and Nicobar Islands">35-Andaman and Nicobar Islands (Inter-State)</option>
+                    <option value="36|Telangana">36-Telangana (Inter-State)</option>
+                    <option value="37|Andhra Pradesh">37-Andhra Pradesh (Inter-State)</option>
+                    <option value="38|Ladakh">38-Ladakh (Inter-State)</option>
+                    <option value="97|Other Territory">97-Other Territory (Inter-State)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="cdnur_rate" class="form-control" onchange="calculateModalTax('cdnur')">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:15px; margin:5px 0 15px 0;">
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="cdnur_taxable" class="form-control" placeholder="12000" min="1" oninput="calculateModalTax('cdnur')" required>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div style="padding-top:10px; font-size:13px;">
+                  <span id="cdnur_taxComputed" style="color:#17c4bb; font-weight:700;">IGST: ₹ 0.00</span><br>
+                  <strong id="cdnur_totalComputed" style="color:#1b3f75; font-size:14px;">Total Note Value: ₹ 0.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('cdnur')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add Table 9B Note to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>Type</th>
+              <th>Note Type</th>
+              <th>Note No.</th>
+              <th>Note Date</th>
+              <th>Orig. Inv No.</th>
+              <th>Orig. Inv Date</th>
+              <th>POS</th>
+              <th>Rate</th>
+              <th>Taxable Value (₹)</th>
+              <th>IGST (₹)</th>
+              <th>Note Value (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_cdnur"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8. WORKSPACE: 12 (HSN Summary) -->
+    <div class="table-panel-box" id="workspace_hsn" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-barcode text-primary"></i> Table 12 - HSN-wise Summary of Outward Supplies
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Harmonized System of Nomenclature (HSN) and Service Accounting Code (SAC) breakdown.</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" onclick="toggleForm('hsn')" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-plus"></i> Add HSN Record
+        </button>
+      </div>
+            <!-- INLINE MANUAL DATA INPUT PANEL -->
+      <div class="panel panel-default" id="panelAdd_hsn" style="margin:15px 0; border:1px solid #cbd5e1; border-left:4px solid #1b3f75; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div class="panel-heading" style="background:#f8fafc; font-weight:700; color:#1b3f75; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+          <span><i class="fa fa-edit"></i> Manual Data Input: 12 - HSN-wise Summary of Outward Supplies</span>
+          <span style="font-size:12px; color:#64748b; font-weight:400;"><i class="fa fa-info-circle"></i> Input details below and click 'Add HSN Record to Table'</span>
+        </div>
+        <div class="panel-body" style="padding:15px;">
+<form id="formAddHsn" onsubmit="saveHsnRecord(event)">
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">HSN / SAC Code (4, 6 or 8 digits) <span style="color:red;">*</span></label>
+                  <input type="text" id="hsn_code" class="form-control font-mono" placeholder="e.g. 8471" maxlength="8" required>
+                </div>
+              </div>
+              <div class="col-md-5 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Description of Goods / Services <span style="color:red;">*</span></label>
+                  <input type="text" id="hsn_desc" class="form-control" placeholder="e.g. Computers & Data Processing Units" required>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-12">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">UQC (Unit) <span style="color:red;">*</span></label>
+                  <select id="hsn_uqc" class="form-control">
+                    <option value="NOS-NUMBERS" selected>NOS - NUMBERS</option>
+                    <option value="PCS-PIECES">PCS - PIECES</option>
+                    <option value="KGS-KILOGRAMS">KGS - KILOGRAMS</option>
+                    <option value="BOX-BOX">BOX - BOX</option>
+                    <option value="MTR-METERS">MTR - METERS</option>
+                    <option value="OTH-OTHERS">OTH - OTHERS (Services/NA)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Total Quantity <span style="color:red;">*</span></label>
+                  <input type="number" id="hsn_qty" class="form-control" placeholder="10" min="0" required>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Total Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="hsn_totalVal" class="form-control" placeholder="118000" min="1" required>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Taxable Value (₹) <span style="color:red;">*</span></label>
+                  <input type="number" id="hsn_taxable" class="form-control" placeholder="100000" min="1" oninput="calculateHsnTaxes()" required>
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">GST Rate (%) <span style="color:red;">*</span></label>
+                  <select id="hsn_rate" class="form-control" onchange="calculateHsnTaxes()">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                    <option value="0">0%</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="background:#f8fafe; border:1px solid #d9e2ec; border-radius:4px; padding:15px; margin:5px 0 15px 0;">
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">IGST (₹)</label>
+                  <input type="number" id="hsn_igst" class="form-control" value="0" min="0">
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">CGST (₹)</label>
+                  <input type="number" id="hsn_cgst" class="form-control" value="0" min="0">
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">SGST (₹)</label>
+                  <input type="number" id="hsn_sgst" class="form-control" value="0" min="0">
+                </div>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="control-label" style="font-weight:700; color:#1b3f75;">Cess (₹)</label>
+                  <input type="number" id="hsn_cess" class="form-control" value="0" min="0">
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+              <button type="button" class="btn btn-default" onclick="clearFormInputs('hsn')"><i class="fa fa-eraser"></i> Clear Form</button>
+              <button type="submit" class="btn btn-success" style="background:#27ae60; border-color:#27ae60; font-weight:700;"><i class="fa fa-plus-circle"></i> Add HSN Record to Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-striped table-bordered invoice-table" style="margin:0;">
+          <thead>
+            <tr>
+              <th style="width:35px;">#</th>
+              <th>HSN Code</th>
+              <th>Description</th>
+              <th>UQC</th>
+              <th>Total Qty</th>
+              <th>Total Value (₹)</th>
+              <th>Taxable Value (₹)</th>
+              <th>Rate</th>
+              <th>IGST (₹)</th>
+              <th>CGST (₹)</th>
+              <th>SGST (₹)</th>
+              <th>Cess (₹)</th>
+              <th style="width:60px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_hsn"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9. WORKSPACE: 13 (Documents Issued) -->
+    <div class="table-panel-box" id="workspace_doc" style="display:none;">
+      <div class="table-panel-header">
+        <div>
+          <h4 style="margin:0; color:#1b3f75; font-weight:700;">
+            <i class="fa fa-list-ol text-primary"></i> Table 13 - Documents Issued during the Tax Period
+          </h4>
+          <span style="font-size:12px; color:#64748b;">Record serial numbers of tax invoices, credit/debit notes, vouchers and delivery challans.</span>
+        </div>
+        <button type="button" class="btn btn-success btn-sm" onclick="saveTable13()" style="font-weight:700;">
+          <i class="fa fa-check"></i> Save Documents
+        </button>
+      </div>
+      <div class="table-responsive" style="margin:0;">
+        <table class="table table-bordered table-striped" style="margin:0; font-size:12px;">
+          <thead style="background:#1b3f75; color:#fff;">
+            <tr>
+              <th style="width:30px;">#</th>
+              <th style="width:35%;">Nature of Document</th>
+              <th style="width:16%;">Sr. No. From</th>
+              <th style="width:16%;">Sr. No. To</th>
+              <th style="width:11%; text-align:right;">Total Number</th>
+              <th style="width:11%; text-align:right;">Cancelled</th>
+              <th style="width:11%; text-align:right;">Net Issued</th>
+            </tr>
+          </thead>
+          <tbody id="tbody_doc"></tbody>
+          <tfoot style="background:#f8fafc; font-weight:700;">
+            <tr>
+              <td colspan="4">Total Documents</td>
+              <td id="doc_sum_total" style="text-align:right; color:#1b3f75;">0</td>
+              <td id="doc_sum_cancelled" style="text-align:right; color:#c0392b;">0</td>
+              <td id="doc_sum_net" style="text-align:right; color:#27ae60;">0</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation & Proceed Bar -->
+    <div style="margin-top:25px; padding-top:15px; border-top:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <a href="returns.html" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Returns Dashboard</a>
+      
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="btn btn-primary" id="btnProceedFile" onclick="proceedToFile()" style="background:#1b3f75; border-color:#1b3f75; font-weight:700;">
+          <i class="fa fa-arrow-right"></i> Proceed to File / Summary
+        </button>
+        <button type="button" id="btnFileGstr1" class="btn btn-success" onclick="fileGstr1()" style="background:#27ae60; border-color:#27ae60; font-weight:700; padding:8px 24px;">
+          <i class="fa fa-lock"></i> File GSTR-1 with EVC
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Standard Footer -->
+  <div id="gst-footer-mount"></div>
+
+  <!-- Shell script -->
+  <script src="js/shell.js"></script>
+
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var currentFy = urlParams.get('fy') || '2024-25';
+    var currentPeriod = urlParams.get('period') || 'August';
+
+    var currentGstin = '27AAACB2234K1ZV';
+    var supplierStateCode = '27';
+    var activeTabKey = 'b2b';
+
+    // Standard Indian GST States Array
+    var GST_STATES = [
+      { code: "01", name: "Jammu and Kashmir" },
+      { code: "02", name: "Himachal Pradesh" },
+      { code: "03", name: "Punjab" },
+      { code: "04", name: "Chandigarh" },
+      { code: "05", name: "Uttarakhand" },
+      { code: "06", name: "Haryana" },
+      { code: "07", name: "Delhi" },
+      { code: "08", name: "Rajasthan" },
+      { code: "09", name: "Uttar Pradesh" },
+      { code: "10", name: "Bihar" },
+      { code: "11", name: "Sikkim" },
+      { code: "12", name: "Arunachal Pradesh" },
+      { code: "13", name: "Nagaland" },
+      { code: "14", name: "Manipur" },
+      { code: "15", name: "Mizoram" },
+      { code: "16", name: "Tripura" },
+      { code: "17", name: "Meghalaya" },
+      { code: "18", name: "Assam" },
+      { code: "19", name: "West Bengal" },
+      { code: "20", name: "Jharkhand" },
+      { code: "21", name: "Odisha" },
+      { code: "22", name: "Chhattisgarh" },
+      { code: "23", name: "Madhya Pradesh" },
+      { code: "24", name: "Gujarat" },
+      { code: "26", name: "Dadra and Nagar Haveli and Daman and Diu" },
+      { code: "27", name: "Maharashtra" },
+      { code: "29", name: "Karnataka" },
+      { code: "30", name: "Goa" },
+      { code: "31", name: "Lakshadweep" },
+      { code: "32", name: "Kerala" },
+      { code: "33", name: "Tamil Nadu" },
+      { code: "34", name: "Puducherry" },
+      { code: "35", name: "Andaman and Nicobar Islands" },
+      { code: "36", name: "Telangana" },
+      { code: "37", name: "Andhra Pradesh" },
+      { code: "38", name: "Ladakh" },
+      { code: "97", name: "Other Territory" }
+    ];
+
+    // ALL GSTR-1 STORES INITIALIZED CLEAN & EMPTY FOR STUDENTS PRACTICE
+    var gstr1Data = {
+      b2b: [],
+      b2cl: [],
+      exp: [],
+      b2cs: [],
+      nil: {
+        r8a: { nil: 0, exm: 0, nonGst: 0 },
+        r8b: { nil: 0, exm: 0, nonGst: 0 },
+        r8c: { nil: 0, exm: 0, nonGst: 0 },
+        r8d: { nil: 0, exm: 0, nonGst: 0 }
+      },
+      cdnr: [],
+      cdnur: [],
+      hsn: [],
+      doc: [
+        { name: "Invoices for outward supply", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Invoices for inward supply from unregistered person", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Revised Invoice", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Debit Note", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Credit Note", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Receipt voucher", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Payment Voucher", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Refund voucher", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Delivery Challan for job work", from: "", to: "", total: 0, cancelled: 0 },
+        { name: "Delivery Challan in other cases", from: "", to: "", total: 0, cancelled: 0 }
+      ]
+    };
+
+    // Populate POS Select dropdowns
+    function initPosDropdowns() {
+      var selects = document.querySelectorAll('.pos-select');
+      selects.forEach(function(sel) {
+        sel.innerHTML = '';
+        GST_STATES.forEach(function(st) {
+          var opt = document.createElement('option');
+          opt.value = st.code + '|' + st.name;
+          opt.innerText = st.code + '-' + st.name + (st.code === supplierStateCode ? ' (Intra-State)' : ' (Inter-State)');
+          if (sel.id === 'b2cl_pos' && st.code === supplierStateCode) {
+            // B2CL requires inter-state
+            return;
+          }
+          if (sel.id === 'b2cl_pos' && st.code === '29') {
+            opt.selected = true;
+          } else if (sel.id !== 'b2cl_pos' && st.code === supplierStateCode) {
+            opt.selected = true;
+          }
+          sel.appendChild(opt);
+        });
+      });
+    }
+
+    function toggleSection(sectionId, iconId) {
+      var sec = document.getElementById(sectionId);
+      var icon = document.getElementById(iconId);
+      if (sec.style.display === 'none') {
+        sec.style.display = 'block';
+        icon.className = 'fa fa-chevron-up';
+      } else {
+        sec.style.display = 'none';
+        icon.className = 'fa fa-chevron-down';
+      }
+    }
+
+    // Switch active workspace table
+    function switchTable(key) {
+      activeTabKey = key;
+      var allKeys = ['b2b', 'b2cl', 'exp', 'b2cs', 'nil', 'cdnr', 'cdnur', 'hsn', 'doc'];
+      allKeys.forEach(function(k) {
+        var t = document.getElementById('tile_' + k);
+        var w = document.getElementById('workspace_' + k);
+        if (t) t.classList.remove('active-tile');
+        if (w) w.style.display = 'none';
+      });
+
+      var activeTile = document.getElementById('tile_' + key);
+      var activeWorkspace = document.getElementById('workspace_' + key);
+      if (activeTile) activeTile.classList.add('active-tile');
+      if (activeWorkspace) {
+        activeWorkspace.style.display = 'block';
+        activeWorkspace.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+        // Clear and reset form inputs
+    function clearFormInputs(key) {
+      var form = document.getElementById('formAdd' + key.charAt(0).toUpperCase() + key.slice(1));
+      if (form) {
+        // Reset inputs except preserving POS selection
+        var inputs = form.querySelectorAll('input:not([readonly])');
+        inputs.forEach(function(inp) {
+          if (inp.type === 'number') {
+            inp.value = '';
+          } else if (inp.type === 'date') {
+            inp.value = new Date().toISOString().split('T')[0];
+          } else {
+            inp.value = '';
+          }
+        });
+        // Set POS to default if empty
+        var posEl = document.getElementById(key + '_pos');
+        if (posEl && (posEl.selectedIndex < 0 || !posEl.value)) {
+          posEl.value = (key === 'b2cl') ? '29|Karnataka' : '27|Maharashtra';
+        }
+      }
+      var today = new Date().toISOString().split('T')[0];
+      var invDateEl = document.getElementById(key + '_invDate');
+      if (invDateEl) invDateEl.value = today;
+      var noteDateEl = document.getElementById(key + '_noteDate');
+      if (noteDateEl) noteDateEl.value = today;
+      var origInvDateEl = document.getElementById(key + '_origInvDate');
+      if (origInvDateEl) origInvDateEl.value = today;
+      var sbDateEl = document.getElementById(key + '_sbDate');
+      if (sbDateEl) sbDateEl.value = today;
+
+      if (key === 'hsn') {
+        calculateHsnTaxes();
+      } else {
+        calculateModalTax(key);
+      }
+    }
+
+    // Toggle add-panel visibility
+    function toggleForm(key) {
+      var p = document.getElementById('panelAdd_' + key);
+      if (!p) return;
+      var isHidden = p.style.display === 'none' || p.style.display === '';
+      p.style.display = isHidden ? 'block' : 'none';
+      if (isHidden) {
+        var firstInput = p.querySelector('input:not([readonly]), select');
+        if (firstInput) firstInput.focus();
+        p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function openAddModal(key) {
+      toggleForm(key);
+    }
+
+    function autoDetectPos(prefix) {
+      var gstinInput = document.getElementById(prefix + '_receiverGstin');
+      var posSelect = document.getElementById(prefix + '_pos');
+      if (!gstinInput || !posSelect) return;
+
+      var g = gstinInput.value.trim().toUpperCase();
+      if (g.length >= 2) {
+        var code = g.substring(0, 2);
+        for (var i = 0; i < posSelect.options.length; i++) {
+          if (posSelect.options[i].value.startsWith(code + '|')) {
+            posSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      calculateModalTax(prefix);
+    }
+
+    function calculateModalTax(prefix) {
+      var taxable = parseFloat(document.getElementById(prefix + '_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById(prefix + '_rate').value) || 0;
+      var posEl = document.getElementById(prefix + '_pos');
+      var posVal = posEl ? posEl.value.split('|') : ['27', 'Maharashtra'];
+      var posCode = posVal[0];
+      var isInter = (posCode !== supplierStateCode);
+
+      if (prefix === 'b2b') {
+        document.getElementById('b2b_supplyType').value = isInter ? 'Inter-State' : 'Intra-State';
+        var igst = isInter ? Math.round(taxable * (rate / 100)) : 0;
+        var cgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+        var sgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+        var tot = taxable + igst + cgst + sgst;
+        document.getElementById('b2b_taxComputed').innerText = isInter ? 
+          ('IGST: ₹ ' + igst.toLocaleString('en-IN') + '.00') : 
+          ('CGST: ₹ ' + cgst.toLocaleString('en-IN') + ' + SGST: ₹ ' + sgst.toLocaleString('en-IN'));
+        document.getElementById('b2b_totalComputed').innerText = 'Total Invoice: ₹ ' + tot.toLocaleString('en-IN') + '.00';
+      } else if (prefix === 'b2cl') {
+        var igst = Math.round(taxable * (rate / 100));
+        var tot = taxable + igst;
+        document.getElementById('b2cl_taxComputed').innerText = 'IGST: ₹ ' + igst.toLocaleString('en-IN') + '.00';
+        document.getElementById('b2cl_totalComputed').innerText = 'Total Value: ₹ ' + tot.toLocaleString('en-IN') + '.00';
+      } else if (prefix === 'exp') {
+        var expType = document.getElementById('exp_type').value;
+        var igst = (expType === 'WPAY') ? Math.round(taxable * (rate / 100)) : 0;
+        var tot = taxable + igst;
+        document.getElementById('exp_taxComputed').innerText = 'IGST: ₹ ' + igst.toLocaleString('en-IN') + '.00';
+        document.getElementById('exp_totalComputed').innerText = 'Total Value: ₹ ' + tot.toLocaleString('en-IN') + '.00';
+      } else if (prefix === 'b2cs') {
+        var igst = isInter ? Math.round(taxable * (rate / 100)) : 0;
+        var cgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+        var sgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+        var tot = taxable + igst + cgst + sgst;
+        document.getElementById('b2cs_taxComputed').innerText = isInter ? 
+          ('IGST: ₹ ' + igst.toLocaleString('en-IN') + '.00') : 
+          ('CGST: ₹ ' + cgst.toLocaleString('en-IN') + ' + SGST: ₹ ' + sgst.toLocaleString('en-IN'));
+        document.getElementById('b2cs_totalComputed').innerText = 'Total Supply Value: ₹ ' + tot.toLocaleString('en-IN') + '.00';
+      } else if (prefix === 'cdnr') {
+        var igst = isInter ? Math.round(taxable * (rate / 100)) : 0;
+        var cgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+        var sgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+        var tot = taxable + igst + cgst + sgst;
+        document.getElementById('cdnr_taxComputed').innerText = isInter ? 
+          ('IGST: ₹ ' + igst.toLocaleString('en-IN') + '.00') : 
+          ('CGST: ₹ ' + cgst.toLocaleString('en-IN') + ' + SGST: ₹ ' + sgst.toLocaleString('en-IN'));
+        document.getElementById('cdnr_totalComputed').innerText = 'Total Note Value: ₹ ' + tot.toLocaleString('en-IN') + '.00';
+      } else if (prefix === 'cdnur') {
+        var igst = Math.round(taxable * (rate / 100));
+        var tot = taxable + igst;
+        document.getElementById('cdnur_taxComputed').innerText = 'IGST: ₹ ' + igst.toLocaleString('en-IN') + '.00';
+        document.getElementById('cdnur_totalComputed').innerText = 'Total Note Value: ₹ ' + tot.toLocaleString('en-IN') + '.00';
+      }
+    }
+
+    function calculateHsnTaxes() {
+      var taxable = parseFloat(document.getElementById('hsn_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('hsn_rate').value) || 0;
+      var totTax = Math.round(taxable * (rate / 100));
+      document.getElementById('hsn_igst').value = totTax;
+      document.getElementById('hsn_cgst').value = 0;
+      document.getElementById('hsn_sgst').value = 0;
+      document.getElementById('hsn_totalVal').value = taxable + totTax;
+    }
+
+    // Save Handlers for each modal
+    function saveB2bRecord(e) {
+      e.preventDefault();
+      var posVal = document.getElementById('b2b_pos').value.split('|');
+      var taxable = parseFloat(document.getElementById('b2b_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('b2b_rate').value) || 0;
+      var isInter = (posVal[0] !== supplierStateCode);
+      var igst = isInter ? Math.round(taxable * (rate / 100)) : 0;
+      var cgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+      var sgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+
+      gstr1Data.b2b.push({
+        receiverGstin: document.getElementById('b2b_receiverGstin').value.trim().toUpperCase(),
+        receiverName: document.getElementById('b2b_receiverName').value.trim(),
+        invoiceNumber: document.getElementById('b2b_invNo').value.trim(),
+        invoiceDate: formatDate(document.getElementById('b2b_invDate').value),
+        posCode: posVal[0],
+        posState: posVal[1],
+        rate: rate,
+        taxableValue: taxable,
+        igst: igst,
+        cgst: cgst,
+        sgst: sgst,
+        total: taxable + igst + cgst + sgst
+      });
+
+      clearFormInputs('b2b');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('B2B Invoice added successfully.', 'success');
+    }
+
+    function saveB2clRecord(e) {
+      e.preventDefault();
+      var posVal = document.getElementById('b2cl_pos').value.split('|');
+      var taxable = parseFloat(document.getElementById('b2cl_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('b2cl_rate').value) || 0;
+      var igst = Math.round(taxable * (rate / 100));
+
+      gstr1Data.b2cl.push({
+        posCode: posVal[0],
+        posState: posVal[1],
+        invoiceNumber: document.getElementById('b2cl_invNo').value.trim(),
+        invoiceDate: formatDate(document.getElementById('b2cl_invDate').value),
+        rate: rate,
+        taxableValue: taxable,
+        igst: igst,
+        cess: 0,
+        total: taxable + igst
+      });
+
+      clearFormInputs('b2cl');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('B2C (Large) Invoice added.', 'success');
+    }
+
+    function saveExpRecord(e) {
+      e.preventDefault();
+      var taxable = parseFloat(document.getElementById('exp_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('exp_rate').value) || 0;
+      var expType = document.getElementById('exp_type').value;
+      var igst = (expType === 'WPAY') ? Math.round(taxable * (rate / 100)) : 0;
+
+      gstr1Data.exp.push({
+        exportType: expType,
+        invoiceNumber: document.getElementById('exp_invNo').value.trim(),
+        invoiceDate: formatDate(document.getElementById('exp_invDate').value),
+        portCode: document.getElementById('exp_portCode').value.trim().toUpperCase(),
+        shippingBillNo: document.getElementById('exp_sbNo').value.trim(),
+        shippingBillDate: formatDate(document.getElementById('exp_sbDate').value),
+        rate: rate,
+        taxableValue: taxable,
+        igst: igst,
+        total: taxable + igst
+      });
+
+      clearFormInputs('exp');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('Export Invoice added.', 'success');
+    }
+
+    function saveB2csRecord(e) {
+      e.preventDefault();
+      var posVal = document.getElementById('b2cs_pos').value.split('|');
+      var taxable = parseFloat(document.getElementById('b2cs_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('b2cs_rate').value) || 0;
+      var isInter = (posVal[0] !== supplierStateCode);
+      var igst = isInter ? Math.round(taxable * (rate / 100)) : 0;
+      var cgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+      var sgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+
+      gstr1Data.b2cs.push({
+        type: document.getElementById('b2cs_type').value,
+        posCode: posVal[0],
+        posState: posVal[1],
+        rate: rate,
+        taxableValue: taxable,
+        igst: igst,
+        cgst: cgst,
+        sgst: sgst,
+        cess: 0,
+        total: taxable + igst + cgst + sgst
+      });
+
+      clearFormInputs('b2cs');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('B2C (Others) record added.', 'success');
+    }
+
+    function saveCdnrRecord(e) {
+      e.preventDefault();
+      var posVal = document.getElementById('cdnr_pos').value.split('|');
+      var taxable = parseFloat(document.getElementById('cdnr_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('cdnr_rate').value) || 0;
+      var isInter = (posVal[0] !== supplierStateCode);
+      var igst = isInter ? Math.round(taxable * (rate / 100)) : 0;
+      var cgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+      var sgst = !isInter ? Math.round(taxable * (rate / 200)) : 0;
+
+      gstr1Data.cdnr.push({
+        receiverGstin: document.getElementById('cdnr_receiverGstin').value.trim().toUpperCase(),
+        receiverName: document.getElementById('cdnr_receiverName').value.trim(),
+        noteType: document.getElementById('cdnr_noteType').value,
+        noteNumber: document.getElementById('cdnr_noteNo').value.trim(),
+        noteDate: formatDate(document.getElementById('cdnr_noteDate').value),
+        origInvNo: document.getElementById('cdnr_origInvNo').value.trim(),
+        origInvDate: formatDate(document.getElementById('cdnr_origInvDate').value),
+        posCode: posVal[0],
+        posState: posVal[1],
+        rate: rate,
+        taxableValue: taxable,
+        igst: igst,
+        cgst: cgst,
+        sgst: sgst,
+        total: taxable + igst + cgst + sgst
+      });
+
+      clearFormInputs('cdnr');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('Table 9A Credit/Debit note added.', 'success');
+    }
+
+    function saveCdnurRecord(e) {
+      e.preventDefault();
+      var posVal = document.getElementById('cdnur_pos').value.split('|');
+      var taxable = parseFloat(document.getElementById('cdnur_taxable').value) || 0;
+      var rate = parseFloat(document.getElementById('cdnur_rate').value) || 0;
+      var igst = Math.round(taxable * (rate / 100));
+
+      gstr1Data.cdnur.push({
+        type: document.getElementById('cdnur_type').value,
+        noteType: document.getElementById('cdnur_noteType').value,
+        noteNumber: document.getElementById('cdnur_noteNo').value.trim(),
+        noteDate: formatDate(document.getElementById('cdnur_noteDate').value),
+        origInvNo: document.getElementById('cdnur_origInvNo').value.trim(),
+        origInvDate: formatDate(document.getElementById('cdnur_origInvDate').value),
+        posCode: posVal[0],
+        posState: posVal[1],
+        rate: rate,
+        taxableValue: taxable,
+        igst: igst,
+        total: taxable + igst
+      });
+
+      clearFormInputs('cdnur');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('Table 9B Unregistered note added.', 'success');
+    }
+
+    function saveHsnRecord(e) {
+      e.preventDefault();
+      var taxable = parseFloat(document.getElementById('hsn_taxable').value) || 0;
+      var totalVal = parseFloat(document.getElementById('hsn_totalVal').value) || 0;
+
+      gstr1Data.hsn.push({
+        code: document.getElementById('hsn_code').value.trim(),
+        desc: document.getElementById('hsn_desc').value.trim(),
+        uqc: document.getElementById('hsn_uqc').value,
+        qty: parseFloat(document.getElementById('hsn_qty').value) || 0,
+        totalValue: totalVal,
+        taxableValue: taxable,
+        rate: parseFloat(document.getElementById('hsn_rate').value) || 0,
+        igst: parseFloat(document.getElementById('hsn_igst').value) || 0,
+        cgst: parseFloat(document.getElementById('hsn_cgst').value) || 0,
+        sgst: parseFloat(document.getElementById('hsn_sgst').value) || 0,
+        cess: parseFloat(document.getElementById('hsn_cess').value) || 0
+      });
+
+      clearFormInputs('hsn');
+      renderAllTables();
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('Table 12 HSN Summary added.', 'success');
+    }
+
+    function saveTable8() {
+      computeTable8Totals();
+      saveGstr1ToStorage();
+      renderAllTables();
+      GSTSimulation.showToast('Table 8 (Nil/Exempt/Non-GST) saved successfully.', 'success');
+    }
+
+    function computeTable8Totals() {
+      var rows = ['8a', '8b', '8c', '8d'];
+      var totNil = 0, totExm = 0, totNonGst = 0;
+      rows.forEach(function(r) {
+        var n = parseFloat(document.getElementById('nil_' + r + '_nil').value) || 0;
+        var e = parseFloat(document.getElementById('nil_' + r + '_exm').value) || 0;
+        var g = parseFloat(document.getElementById('nil_' + r + '_nongst').value) || 0;
+        gstr1Data.nil['r' + r] = { nil: n, exm: e, nonGst: g };
+        totNil += n;
+        totExm += e;
+        totNonGst += g;
+      });
+      document.getElementById('tot_nil_val').innerText = '₹ ' + totNil.toLocaleString('en-IN') + '.00';
+      document.getElementById('tot_exm_val').innerText = '₹ ' + totExm.toLocaleString('en-IN') + '.00';
+      document.getElementById('tot_nongst_val').innerText = '₹ ' + totNonGst.toLocaleString('en-IN') + '.00';
+
+      var grandTotalNil = totNil + totExm + totNonGst;
+      document.getElementById('tileCount_nil').innerText = (grandTotalNil > 0 ? '4' : '0');
+      document.getElementById('tileVal_nil').innerText = '₹ ' + grandTotalNil.toLocaleString('en-IN') + '.00';
+    }
+
+    function saveTable13() {
+      var totalIssued = 0;
+      var totalCancelled = 0;
+      var totalNet = 0;
+
+      gstr1Data.doc.forEach(function(d, idx) {
+        var fromEl = document.getElementById('doc_from_' + idx);
+        var toEl = document.getElementById('doc_to_' + idx);
+        var totEl = document.getElementById('doc_tot_' + idx);
+        var canEl = document.getElementById('doc_can_' + idx);
+        var netEl = document.getElementById('doc_net_' + idx);
+
+        if (fromEl && toEl && totEl && canEl && netEl) {
+          d.from = fromEl.value.trim();
+          d.to = toEl.value.trim();
+          d.total = parseInt(totEl.value) || 0;
+          d.cancelled = parseInt(canEl.value) || 0;
+          var net = Math.max(0, d.total - d.cancelled);
+          netEl.innerText = net;
+
+          totalIssued += d.total;
+          totalCancelled += d.cancelled;
+          totalNet += net;
+        }
+      });
+
+      document.getElementById('doc_sum_total').innerText = totalIssued;
+      document.getElementById('doc_sum_cancelled').innerText = totalCancelled;
+      document.getElementById('doc_sum_net').innerText = totalNet;
+
+      document.getElementById('tileCount_doc').innerText = totalNet;
+      document.getElementById('tileVal_doc').innerText = totalNet > 0 ? (totalNet + ' docs') : '0 series';
+
+      saveGstr1ToStorage();
+      GSTSimulation.showToast('Table 13 Documents summary saved.', 'success');
+    }
+
+    function deleteRecord(tableKey, index) {
+      if (gstr1Data[tableKey] && gstr1Data[tableKey].length > index) {
+        gstr1Data[tableKey].splice(index, 1);
+        renderAllTables();
+        saveGstr1ToStorage();
+        GSTSimulation.showToast('Record deleted.', 'info');
+      }
+    }
+
+    // Render HTML tables and recalculate metrics
+    function renderAllTables() {
+      renderB2bTable();
+      renderB2clTable();
+      renderExpTable();
+      renderB2csTable();
+      renderCdnrTable();
+      renderCdnurTable();
+      renderHsnTable();
+      renderDocTable();
+
+      // Recalculate KPIs across all tables
+      var totalCount = gstr1Data.b2b.length + gstr1Data.b2cl.length + gstr1Data.exp.length + gstr1Data.b2cs.length + gstr1Data.cdnr.length + gstr1Data.cdnur.length;
+      
+      var sumTaxable = 0;
+      var sumIgst = 0;
+      var sumCgst = 0;
+      var sumSgst = 0;
+
+      // Positive supplies
+      gstr1Data.b2b.forEach(function(i) { sumTaxable += i.taxableValue; sumIgst += i.igst; sumCgst += i.cgst; sumSgst += i.sgst; });
+      gstr1Data.b2cl.forEach(function(i) { sumTaxable += i.taxableValue; sumIgst += i.igst; });
+      gstr1Data.exp.forEach(function(i) { sumTaxable += i.taxableValue; sumIgst += i.igst; });
+      gstr1Data.b2cs.forEach(function(i) { sumTaxable += i.taxableValue; sumIgst += i.igst; sumCgst += i.cgst; sumSgst += i.sgst; });
+
+      // Note adjustments
+      gstr1Data.cdnr.forEach(function(i) {
+        if (i.noteType === 'Credit Note') {
+          sumTaxable = Math.max(0, sumTaxable - i.taxableValue);
+          sumIgst = Math.max(0, sumIgst - i.igst);
+          sumCgst = Math.max(0, sumCgst - i.cgst);
+          sumSgst = Math.max(0, sumSgst - i.sgst);
+        } else {
+          sumTaxable += i.taxableValue;
+          sumIgst += i.igst;
+          sumCgst += i.cgst;
+          sumSgst += i.sgst;
+        }
+      });
+
+      gstr1Data.cdnur.forEach(function(i) {
+        if (i.noteType === 'Credit Note') {
+          sumTaxable = Math.max(0, sumTaxable - i.taxableValue);
+          sumIgst = Math.max(0, sumIgst - i.igst);
+        } else {
+          sumTaxable += i.taxableValue;
+          sumIgst += i.igst;
+        }
+      });
+
+      document.getElementById('sumCount').innerText = totalCount;
+      document.getElementById('sumTaxable').innerText = '₹ ' + sumTaxable.toLocaleString('en-IN') + '.00';
+      document.getElementById('sumIgst').innerText = '₹ ' + sumIgst.toLocaleString('en-IN') + '.00';
+      document.getElementById('sumCgstSgst').innerText = '₹ ' + (sumCgst + sumSgst).toLocaleString('en-IN') + '.00';
+    }
+
+    function renderB2bTable() {
+      var tbody = document.getElementById('tbody_b2b');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.b2b.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="13" class="empty-state-notice"><i class="fa fa-folder-open-o" style="font-size:24px;"></i><br>No B2B invoices entered. Click "Add B2B Invoice" to practice data entry.</td></tr>';
+      } else {
+        gstr1Data.b2b.forEach(function(inv, idx) {
+          valSum += inv.total;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td class="font-mono" style="font-weight:700; color:#1b3f75;">' + inv.receiverGstin + '</td>' +
+            '<td>' + inv.receiverName + '</td>' +
+            '<td><strong>' + inv.invoiceNumber + '</strong></td>' +
+            '<td>' + inv.invoiceDate + '</td>' +
+            '<td>' + inv.posCode + '-' + inv.posState + '</td>' +
+            '<td>' + inv.rate + '%</td>' +
+            '<td style="text-align:right;">₹ ' + inv.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#17c4bb; font-weight:700;">₹ ' + inv.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60; font-weight:700;">₹ ' + inv.cgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60; font-weight:700;">₹ ' + inv.sgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + inv.total.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'b2b\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_b2b').innerText = gstr1Data.b2b.length;
+      document.getElementById('tileVal_b2b').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderB2clTable() {
+      var tbody = document.getElementById('tbody_b2cl');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.b2cl.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" class="empty-state-notice"><i class="fa fa-folder-open-o" style="font-size:24px;"></i><br>No B2C Large invoices entered. Click "Add B2C (Large) Invoice" to practice.</td></tr>';
+      } else {
+        gstr1Data.b2cl.forEach(function(inv, idx) {
+          valSum += inv.total;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td>' + inv.posCode + '-' + inv.posState + '</td>' +
+            '<td><strong>' + inv.invoiceNumber + '</strong></td>' +
+            '<td>' + inv.invoiceDate + '</td>' +
+            '<td>' + inv.rate + '%</td>' +
+            '<td style="text-align:right;">₹ ' + inv.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#17c4bb; font-weight:700;">₹ ' + inv.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right;">₹ 0.00</td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + inv.total.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'b2cl\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_b2cl').innerText = gstr1Data.b2cl.length;
+      document.getElementById('tileVal_b2cl').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderExpTable() {
+      var tbody = document.getElementById('tbody_exp');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.exp.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="12" class="empty-state-notice"><i class="fa fa-plane" style="font-size:24px;"></i><br>No export supplies recorded. Click "Add Export Invoice" to practice export reporting.</td></tr>';
+      } else {
+        gstr1Data.exp.forEach(function(inv, idx) {
+          valSum += inv.total;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td><span class="label label-' + (inv.exportType === 'WPAY' ? 'success' : 'default') + '">' + inv.exportType + '</span></td>' +
+            '<td><strong>' + inv.invoiceNumber + '</strong></td>' +
+            '<td>' + inv.invoiceDate + '</td>' +
+            '<td class="font-mono">' + inv.portCode + '</td>' +
+            '<td>' + inv.shippingBillNo + '</td>' +
+            '<td>' + inv.shippingBillDate + '</td>' +
+            '<td>' + inv.rate + '%</td>' +
+            '<td style="text-align:right;">₹ ' + inv.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#17c4bb; font-weight:700;">₹ ' + inv.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + inv.total.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'exp\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_exp').innerText = gstr1Data.exp.length;
+      document.getElementById('tileVal_exp').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderB2csTable() {
+      var tbody = document.getElementById('tbody_b2cs');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.b2cs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" class="empty-state-notice"><i class="fa fa-users" style="font-size:24px;"></i><br>No B2C Others supplies recorded. Click "Add B2C (Others) Details" to input consumer transactions.</td></tr>';
+      } else {
+        gstr1Data.b2cs.forEach(function(inv, idx) {
+          valSum += inv.total;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td>' + inv.type + '</td>' +
+            '<td>' + inv.posCode + '-' + inv.posState + '</td>' +
+            '<td>' + inv.rate + '%</td>' +
+            '<td style="text-align:right;">₹ ' + inv.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#17c4bb;">₹ ' + inv.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60;">₹ ' + inv.cgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60;">₹ ' + inv.sgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right;">₹ 0.00</td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + inv.total.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'b2cs\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_b2cs').innerText = gstr1Data.b2cs.length;
+      document.getElementById('tileVal_b2cs').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderCdnrTable() {
+      var tbody = document.getElementById('tbody_cdnr');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.cdnr.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="15" class="empty-state-notice"><i class="fa fa-file-text-o" style="font-size:24px;"></i><br>No Table 9A Credit/Debit Notes registered. Click "Add Credit / Debit Note" to practice note reporting.</td></tr>';
+      } else {
+        gstr1Data.cdnr.forEach(function(note, idx) {
+          valSum += note.total;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td class="font-mono" style="font-weight:700;">' + note.receiverGstin + '</td>' +
+            '<td><span class="label label-' + (note.noteType === 'Credit Note' ? 'warning' : 'info') + '">' + note.noteType + '</span></td>' +
+            '<td><strong>' + note.noteNumber + '</strong></td>' +
+            '<td>' + note.noteDate + '</td>' +
+            '<td>' + note.origInvNo + '</td>' +
+            '<td>' + note.origInvDate + '</td>' +
+            '<td>' + note.posCode + '-' + note.posState + '</td>' +
+            '<td>' + note.rate + '%</td>' +
+            '<td style="text-align:right;">₹ ' + note.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#17c4bb;">₹ ' + note.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60;">₹ ' + note.cgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60;">₹ ' + note.sgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + note.total.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'cdnr\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_cdnr').innerText = gstr1Data.cdnr.length;
+      document.getElementById('tileVal_cdnr').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderCdnurTable() {
+      var tbody = document.getElementById('tbody_cdnur');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.cdnur.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="13" class="empty-state-notice"><i class="fa fa-file-o" style="font-size:24px;"></i><br>No Table 9B unregistered notes entered. Click "Add Unregistered Note" to input.</td></tr>';
+      } else {
+        gstr1Data.cdnur.forEach(function(note, idx) {
+          valSum += note.total;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td>' + note.type + '</td>' +
+            '<td><span class="label label-' + (note.noteType === 'Credit Note' ? 'warning' : 'info') + '">' + note.noteType + '</span></td>' +
+            '<td><strong>' + note.noteNumber + '</strong></td>' +
+            '<td>' + note.noteDate + '</td>' +
+            '<td>' + note.origInvNo + '</td>' +
+            '<td>' + note.origInvDate + '</td>' +
+            '<td>' + note.posCode + '-' + note.posState + '</td>' +
+            '<td>' + note.rate + '%</td>' +
+            '<td style="text-align:right;">₹ ' + note.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#17c4bb;">₹ ' + note.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + note.total.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'cdnur\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_cdnur').innerText = gstr1Data.cdnur.length;
+      document.getElementById('tileVal_cdnur').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderHsnTable() {
+      var tbody = document.getElementById('tbody_hsn');
+      tbody.innerHTML = '';
+      var valSum = 0;
+      if (gstr1Data.hsn.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="13" class="empty-state-notice"><i class="fa fa-barcode" style="font-size:24px;"></i><br>No HSN/SAC records entered. Click "Add HSN Record" to practice HSN summary reporting.</td></tr>';
+      } else {
+        gstr1Data.hsn.forEach(function(h, idx) {
+          valSum += h.totalValue;
+          var tr = document.createElement('tr');
+          tr.innerHTML = 
+            '<td>' + (idx + 1) + '</td>' +
+            '<td class="font-mono" style="font-weight:700; color:#1b3f75;">' + h.code + '</td>' +
+            '<td>' + h.desc + '</td>' +
+            '<td>' + h.uqc + '</td>' +
+            '<td style="text-align:right;">' + h.qty + '</td>' +
+            '<td style="text-align:right; font-weight:700;">₹ ' + h.totalValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right;">₹ ' + h.taxableValue.toLocaleString('en-IN') + '.00</td>' +
+            '<td>' + h.rate + '%</td>' +
+            '<td style="text-align:right; color:#17c4bb;">₹ ' + h.igst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60;">₹ ' + h.cgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right; color:#27ae60;">₹ ' + h.sgst.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:right;">₹ ' + h.cess.toLocaleString('en-IN') + '.00</td>' +
+            '<td style="text-align:center;"><button type="button" class="btn btn-xs btn-danger" onclick="deleteRecord(\'hsn\', ' + idx + ')"><i class="fa fa-trash"></i></button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('tileCount_hsn').innerText = gstr1Data.hsn.length;
+      document.getElementById('tileVal_hsn').innerText = '₹ ' + valSum.toLocaleString('en-IN') + '.00';
+    }
+
+    function renderDocTable() {
+      var tbody = document.getElementById('tbody_doc');
+      tbody.innerHTML = '';
+      var totalIssued = 0, totalCan = 0, totalNet = 0;
+
+      gstr1Data.doc.forEach(function(d, idx) {
+        var net = Math.max(0, d.total - d.cancelled);
+        totalIssued += d.total;
+        totalCan += d.cancelled;
+        totalNet += net;
+
+        var tr = document.createElement('tr');
+        tr.innerHTML = 
+          '<td>' + (idx + 1) + '</td>' +
+          '<td><strong>' + d.name + '</strong></td>' +
+          '<td><input type="text" id="doc_from_' + idx + '" class="form-control table-inline-input" value="' + (d.from || '') + '" placeholder="e.g. 001"></td>' +
+          '<td><input type="text" id="doc_to_' + idx + '" class="form-control table-inline-input" value="' + (d.to || '') + '" placeholder="e.g. 050"></td>' +
+          '<td><input type="number" id="doc_tot_' + idx + '" class="form-control table-inline-input text-right" value="' + d.total + '" min="0"></td>' +
+          '<td><input type="number" id="doc_can_' + idx + '" class="form-control table-inline-input text-right" value="' + d.cancelled + '" min="0"></td>' +
+          '<td id="doc_net_' + idx + '" style="text-align:right; font-weight:700; color:#27ae60; padding-top:10px;">' + net + '</td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('doc_sum_total').innerText = totalIssued;
+      document.getElementById('doc_sum_cancelled').innerText = totalCan;
+      document.getElementById('doc_sum_net').innerText = totalNet;
+
+      document.getElementById('tileCount_doc').innerText = totalNet;
+      document.getElementById('tileVal_doc').innerText = totalNet > 0 ? (totalNet + ' docs') : '0 series';
+    }
+
+    function formatDate(dStr) {
+      if (!dStr) return '';
+      var parts = dStr.split('-');
+      if (parts.length === 3) {
+        return parts[2] + '/' + parts[1] + '/' + parts[0];
+      }
+      return dStr;
+    }
+
+    // Reset All Data
+    function resetAllGstr1Data() {
+      GSTSimulation.showConfirm({
+        title: 'Reset All GSTR-1 Practice Data',
+        message: 'Are you sure you want to clear all entered practice invoices and tables for this tax period? All tabs will be reset to 0.',
+        onConfirm: function() {
+          gstr1Data = {
+            b2b: [],
+            b2cl: [],
+            exp: [],
+            b2cs: [],
+            nil: {
+              r8a: { nil: 0, exm: 0, nonGst: 0 },
+              r8b: { nil: 0, exm: 0, nonGst: 0 },
+              r8c: { nil: 0, exm: 0, nonGst: 0 },
+              r8d: { nil: 0, exm: 0, nonGst: 0 }
+            },
+            cdnr: [],
+            cdnur: [],
+            hsn: [],
+            doc: [
+              { name: "Invoices for outward supply", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Invoices for inward supply from unregistered person", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Revised Invoice", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Debit Note", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Credit Note", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Receipt voucher", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Payment Voucher", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Refund voucher", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Delivery Challan for job work", from: "", to: "", total: 0, cancelled: 0 },
+              { name: "Delivery Challan in other cases", from: "", to: "", total: 0, cancelled: 0 }
+            ]
+          };
+
+          // Reset inputs in Table 8
+          ['8a', '8b', '8c', '8d'].forEach(function(r) {
+            document.getElementById('nil_' + r + '_nil').value = 0;
+            document.getElementById('nil_' + r + '_exm').value = 0;
+            document.getElementById('nil_' + r + '_nongst').value = 0;
+          });
+          computeTable8Totals();
+
+          localStorage.removeItem('gst_gstr1_' + currentGstin + '_' + currentFy + '_' + currentPeriod);
+          renderAllTables();
+          GSTSimulation.showToast('All GSTR-1 tables have been reset to clean state.', 'warning');
+        }
+      });
+    }
+
+    function generateSummary() {
+      var totalCount = gstr1Data.b2b.length + gstr1Data.b2cl.length + gstr1Data.exp.length + gstr1Data.b2cs.length + gstr1Data.cdnr.length + gstr1Data.cdnur.length;
+      GSTSimulation.showToast('Summary compiled across all 9 tables (' + totalCount + ' outward transactions). Form GSTR-1 is ready for filing.', 'success', 'Summary Generated');
+    }
+
+    function proceedToFile() {
+      document.getElementById('btnFileGstr1').scrollIntoView({ behavior: 'smooth' });
+      GSTSimulation.showToast('Summary validated. Click "File GSTR-1 with EVC" to complete submission.', 'info');
+    }
+
+    function exportGstr1Json() {
+      var payload = {
+        gstin: currentGstin,
+        fp: currentPeriod + "_" + currentFy,
+        version: "GSTR1_v1.1",
+        b2b: gstr1Data.b2b,
+        b2cl: gstr1Data.b2cl,
+        exp: gstr1Data.exp,
+        b2cs: gstr1Data.b2cs,
+        nil: gstr1Data.nil,
+        cdnr: gstr1Data.cdnr,
+        cdnur: gstr1Data.cdnur,
+        hsn: gstr1Data.hsn,
+        doc: gstr1Data.doc
+      };
+
+      var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "GSTR1_" + currentGstin + "_" + currentPeriod + "_" + currentFy + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      GSTSimulation.showToast('GSTR-1 JSON Payload exported with all 9 tables.', 'success');
+    }
+
+    function importBatchFile(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          var text = evt.target.result;
+          var data = JSON.parse(text);
+          if (data.b2b && Array.isArray(data.b2b)) gstr1Data.b2b = data.b2b;
+          if (data.b2cl && Array.isArray(data.b2cl)) gstr1Data.b2cl = data.b2cl;
+          if (data.exp && Array.isArray(data.exp)) gstr1Data.exp = data.exp;
+          if (data.b2cs && Array.isArray(data.b2cs)) gstr1Data.b2cs = data.b2cs;
+          if (data.cdnr && Array.isArray(data.cdnr)) gstr1Data.cdnr = data.cdnr;
+          if (data.cdnur && Array.isArray(data.cdnur)) gstr1Data.cdnur = data.cdnur;
+          if (data.hsn && Array.isArray(data.hsn)) gstr1Data.hsn = data.hsn;
+          if (data.nil) gstr1Data.nil = data.nil;
+          if (data.doc && Array.isArray(data.doc)) gstr1Data.doc = data.doc;
+
+          renderAllTables();
+          saveGstr1ToStorage();
+          GSTSimulation.showToast('JSON file imported successfully into all tables.', 'success');
+        } catch(err) {
+          GSTSimulation.showToast('Please select a valid GSTR-1 JSON format.', 'danger');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function downloadEInvoiceExcel() {
+      var content = "E-INVOICE DOWNLOAD REPORT
+IRN,Ack No,Ack Date,Buyer GSTIN,Document No,Taxable Value,Total Value,Status
+";
+      gstr1Data.b2b.forEach(function(b, i) {
+        content += "38a91b2c4e..." + (100 + i) + ",122410982" + (10 + i) + "," + b.invoiceDate + "," + b.receiverGstin + "," + b.invoiceNumber + "," + b.taxableValue + "," + b.total + ",ACT
+";
+      });
+      var blob = new Blob([content], { type: 'text/csv' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = "eInvoice_Details_" + currentPeriod + "_" + currentFy + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      GSTSimulation.showToast('Downloaded e-Invoice Excel report.', 'success');
+    }
+
+    function fileGstr1() {
+      var totalCount = gstr1Data.b2b.length + gstr1Data.b2cl.length + gstr1Data.exp.length + gstr1Data.b2cs.length + gstr1Data.cdnr.length + gstr1Data.cdnur.length;
+      if (totalCount === 0 && document.getElementById('tot_nil_val').innerText === '₹ 0.00') {
+        GSTSimulation.showToast('Please add at least one outward supply record or Nil-rated supply before filing.', 'warning');
+        return;
+      }
+
+      GSTSimulation.showOtpModal({
+        title: 'File Form GSTR-1 via Aadhaar / PAN EVC',
+        mobile: '9820123456',
+        email: 'rajesh.sharma@bharatenterprises.in',
+        expectedOtp: '123456',
+        onVerify: function() {
+          fetch('/api/returns/gstr1/file', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              gstin: currentGstin,
+              period: currentPeriod,
+              fy: currentFy,
+              invoices: gstr1Data.b2b,
+              tables: gstr1Data
+            })
+          })
+          .then(function(res) { return res.json(); })
+          .then(function(data) {
+            if (data.success) {
+              GSTSimulation.showToast(data.message + ' ARN: ' + data.arn, 'success', 'GSTR-1 Filed');
+              document.getElementById('g1StatusBadge').innerHTML = '<span class="label label-success" style="font-size:12px; padding:6px 12px;"><i class="fa fa-check"></i> FILED (ARN: ' + data.arn + ')</span>';
+              document.getElementById('btnFileGstr1').disabled = true;
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+            GSTSimulation.showToast('Network error filing GSTR-1.', 'danger');
+          });
+        }
+      });
+    }
+
+    function saveGstr1ToStorage() {
+      try {
+        localStorage.setItem('gst_gstr1_' + currentGstin + '_' + currentFy + '_' + currentPeriod, JSON.stringify(gstr1Data));
+        // Persist to backend SQLite database
+        fetch('/api/form/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            formName: 'GSTR-1',
+            section: activeTabKey,
+            gstin: currentGstin,
+            fy: currentFy,
+            period: currentPeriod,
+            data: gstr1Data
+          })
+        }).catch(function() {});
+      } catch(e) {}
+    }
+
+    function applyGstr1Data(parsed) {
+      if (parsed && typeof parsed === 'object') {
+        if (parsed.b2b) gstr1Data.b2b = parsed.b2b;
+        if (parsed.b2cl) gstr1Data.b2cl = parsed.b2cl;
+        if (parsed.exp) gstr1Data.exp = parsed.exp;
+        if (parsed.b2cs) gstr1Data.b2cs = parsed.b2cs;
+        if (parsed.cdnr) gstr1Data.cdnr = parsed.cdnr;
+        if (parsed.cdnur) gstr1Data.cdnur = parsed.cdnur;
+        if (parsed.hsn) gstr1Data.hsn = parsed.hsn;
+        if (parsed.nil) gstr1Data.nil = parsed.nil;
+        if (parsed.doc) gstr1Data.doc = parsed.doc;
+
+        if (gstr1Data.nil) {
+          ['8a', '8b', '8c', '8d'].forEach(function(r) {
+            var rowData = gstr1Data.nil['r' + r] || {};
+            if (document.getElementById('nil_' + r + '_nil')) document.getElementById('nil_' + r + '_nil').value = rowData.nil || 0;
+            if (document.getElementById('nil_' + r + '_exm')) document.getElementById('nil_' + r + '_exm').value = rowData.exm || 0;
+            if (document.getElementById('nil_' + r + '_nongst')) document.getElementById('nil_' + r + '_nongst').value = rowData.nonGst || 0;
+          });
+          computeTable8Totals();
+        }
+      }
+    }
+
+    function loadGstr1FromStorage() {
+      try {
+        var raw = localStorage.getItem('gst_gstr1_' + currentGstin + '_' + currentFy + '_' + currentPeriod);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          applyGstr1Data(parsed);
+        } else {
+          // Fetch saved draft from database if local cache is empty
+          fetch('/api/form/submissions?formName=GSTR-1&gstin=' + encodeURIComponent(currentGstin) + '&period=' + encodeURIComponent(currentPeriod) + '&fy=' + encodeURIComponent(currentFy) + '&limit=1')
+            .then(function(r) { return r.json(); })
+            .then(function(res) {
+              if (res.success && res.submissions && res.submissions.length > 0) {
+                applyGstr1Data(res.submissions[0].data);
+                renderAllTables();
+              }
+            }).catch(function() {});
+        }
+      } catch(e) {}
+    }
+
+    window.addEventListener('load', function() {
+      // Hide all input panels by default — opened on demand via Add button
+      ['b2b', 'b2cl', 'exp', 'b2cs', 'cdnr', 'cdnur', 'hsn'].forEach(function(k) {
+        var p = document.getElementById('panelAdd_' + k);
+        if (p) p.style.display = 'none';
+      });
+
+      var storedUser = localStorage.getItem('gst_current_taxpayer');
+      if (storedUser) {
+        try {
+          var u = JSON.parse(storedUser);
+          currentGstin = u.gstin || currentGstin;
+          if (u.legalName && document.getElementById('g1LegalName')) document.getElementById('g1LegalName').innerText = u.legalName;
+          if (u.gstin && document.getElementById('g1Gstin')) document.getElementById('g1Gstin').innerText = u.gstin;
+          if (u.stateCode) {
+            supplierStateCode = u.stateCode;
+            var stObj = GST_STATES.find(function(s){ return s.code === supplierStateCode; });
+            if (stObj && document.getElementById('lblStateCode')) {
+              document.getElementById('lblStateCode').innerText = stObj.code + '-' + stObj.name;
+            }
+          }
+        } catch(e) {}
+      }
+
+      if (document.getElementById('g1PeriodDisplay')) {
+        document.getElementById('g1PeriodDisplay').innerText = currentPeriod + ' (FY ' + currentFy + ')';
+      }
+
+      initPosDropdowns();
+      ['b2b', 'b2cl', 'exp', 'b2cs', 'cdnr', 'cdnur', 'hsn'].forEach(function(k) {
+        clearFormInputs(k);
+      });
+      loadGstr1FromStorage();
+      renderAllTables();
+    });
+  </script>
+
+</body>
+</html>

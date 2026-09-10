@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Portal Simulation - SQLite Database Records</title>
+  <link rel="stylesheet" href="css/fa-bootstrap1.1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body { background-color: #f4f6f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #2d3748; }
+    .db-header { background: #1b3f75; color: #fff; padding: 20px 0; border-bottom: 3px solid #df7b07; margin-bottom: 25px; }
+    .stat-card { background: #fff; border-radius: 6px; padding: 18px; border: 1px solid #e2e8f0; border-left: 4px solid #1b3f75; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; }
+    .stat-val { font-size: 26px; font-weight: 800; color: #1b3f75; }
+    .panel-box { background: #fff; border-radius: 6px; border: 1px solid #d9e2ec; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 25px; }
+    .panel-header { background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 12px 18px; font-weight: 700; color: #1b3f75; display: flex; justify-content: space-between; align-items: center; }
+    .data-table { width: 100%; margin: 0; font-size: 13px; }
+    .data-table th { background: #1b3f75; color: #fff; padding: 10px; font-size: 12px; }
+    .data-table td { padding: 10px; border-bottom: 1px solid #edf2f7; vertical-align: middle; }
+    .badge-form { background: #0284c7; color: #fff; padding: 4px 8px; border-radius: 4px; font-weight: 600; font-size: 11px; }
+    .badge-time { color: #64748b; font-size: 11.5px; }
+    .json-preview { font-family: monospace; font-size: 11.5px; background: #f8fafc; padding: 6px 10px; border-radius: 4px; max-height: 80px; overflow-y: auto; border: 1px solid #e2e8f0; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="db-header">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div>
+          <h3 style="margin:0; font-weight:700;"><i class="fa fa-database"></i> SQLite Database Explorer</h3>
+          <p style="margin:5px 0 0 0; font-size:13px; opacity:0.9;">Live persistent storage for all user form submissions, invoices & filings</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <a href="returns.html" class="btn btn-default btn-sm"><i class="fa fa-arrow-left"></i> Returns Dashboard</a>
+          <a href="gstr1.html" class="btn btn-warning btn-sm" style="background:#df7b07; border-color:#df7b07; color:#fff; font-weight:700;"><i class="fa fa-file-text-o"></i> Go to GSTR-1</a>
+          <button class="btn btn-success btn-sm" onclick="loadDatabaseData()"><i class="fa fa-refresh"></i> Refresh Records</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- KPI Counts -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card" style="border-left-color:#1b3f75;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Form Submissions</small>
+          <div class="stat-val" id="cntSubmissions">0</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card" style="border-left-color:#27ae60;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">GSTR-1 Records (Invoices)</small>
+          <div class="stat-val" id="cntGstr1" style="color:#27ae60;">0</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card" style="border-left-color:#0284c7;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Registered Taxpayers</small>
+          <div class="stat-val" id="cntTaxpayers" style="color:#0284c7;">0</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="stat-card" style="border-left-color:#f59e0b;">
+          <small style="color:#64748b; font-weight:700; text-transform:uppercase;">Returns & Challans</small>
+          <div class="stat-val" id="cntReturns" style="color:#f59e0b;">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="panel-box" style="padding:15px; margin-bottom:18px;">
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <label style="font-size:12px; font-weight:700; color:#1b3f75;">Filter by Form Name</label>
+          <select id="selFormFilter" class="form-control input-sm" onchange="filterSubmissions()">
+            <option value="">All Forms (GSTR-1, Registration, Challan, etc.)</option>
+            <option value="GSTR-1">GSTR-1 (Outward Supplies Draft/Saved)</option>
+            <option value="GSTR-1_FILED">GSTR-1 Final Filing</option>
+            <option value="GSTR-3B_FILED">GSTR-3B Final Filing</option>
+            <option value="REGISTRATION">New Registration (REG-01)</option>
+            <option value="CHALLAN_CREATE">Challan Payment (PMT-06)</option>
+            <option value="EWAY_BILL">e-Way Bill (EWB-01)</option>
+          </select>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <label style="font-size:12px; font-weight:700; color:#1b3f75;">Search by GSTIN</label>
+          <input type="text" id="txtGstinFilter" class="form-control input-sm" placeholder="e.g. 27AAACB2234K1ZV" oninput="filterSubmissions()">
+        </div>
+        <div class="col-md-4 col-sm-12" style="padding-top:22px; text-align:right;">
+          <span class="text-muted" style="font-size:12px;">Storage Engine: <strong>SQLite 3 (data/gst_database.db)</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table of Submissions -->
+    <div class="panel-box">
+      <div class="panel-header">
+        <span><i class="fa fa-list"></i> Form Submissions Log (<span id="lblCount">0</span> entries)</span>
+        <small class="text-muted">Ordered by most recent input first</small>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover data-table">
+          <thead>
+            <tr>
+              <th style="width:50px;">ID</th>
+              <th style="width:140px;">Form Name</th>
+              <th style="width:100px;">Tab / Section</th>
+              <th style="width:160px;">Taxpayer GSTIN</th>
+              <th style="width:120px;">FY / Period</th>
+              <th>Submitted Data Payload</th>
+              <th style="width:160px;">Timestamp</th>
+            </tr>
+          </thead>
+          <tbody id="tbodySubmissions">
+            <tr><td colspan="7" style="text-align:center; padding:30px; color:#94a3b8;"><i class="fa fa-spinner fa-spin"></i> Loading records from database...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- GSTR-1 Extracted Invoices Table -->
+    <div class="panel-box">
+      <div class="panel-header">
+        <span><i class="fa fa-table"></i> GSTR-1 Itemized Invoices Table (`gstr1_records`)</span>
+        <small class="text-muted">Extracted outward supply items stored in SQL</small>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>GSTIN</th>
+              <th>Table</th>
+              <th>Inv / Note No</th>
+              <th>Date</th>
+              <th>POS</th>
+              <th>Rate</th>
+              <th>Taxable Value</th>
+              <th>IGST</th>
+              <th>CGST+SGST</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyGstr1Records">
+            <tr><td colspan="11" style="text-align:center; padding:20px; color:#94a3b8;">No itemized invoice records yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    var allSubmissions = [];
+
+    function loadDatabaseData() {
+      // 1. Fetch DB Status Counts
+      fetch('/api/database/status')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.success && data.counts) {
+            document.getElementById('cntSubmissions').innerText = data.counts.form_submissions || 0;
+            document.getElementById('cntGstr1').innerText = data.counts.gstr1_records || 0;
+            document.getElementById('cntTaxpayers').innerText = data.counts.taxpayers || 0;
+            document.getElementById('cntReturns').innerText = (data.counts.returns_filed || 0) + (data.counts.challans || 0);
+          }
+        }).catch(function(e) { console.error(e); });
+
+      // 2. Fetch Submissions
+      fetch('/api/database/submissions?limit=200')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.success) {
+            allSubmissions = data.submissions || [];
+            renderSubmissions(allSubmissions);
+          }
+        }).catch(function(e) {
+          document.getElementById('tbodySubmissions').innerHTML = '<tr><td colspan="7" class="text-danger text-center">Failed to load submissions.</td></tr>';
+        });
+
+      // 3. Fetch GSTR-1 records
+      fetch('/api/database/gstr1-records')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.success && data.records) {
+            renderGstr1Records(data.records);
+          }
+        }).catch(function(e) { console.error(e); });
+    }
+
+    function renderSubmissions(list) {
+      var tbody = document.getElementById('tbodySubmissions');
+      document.getElementById('lblCount').innerText = list.length;
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:30px; color:#94a3b8;">No form submissions stored yet. Input data in any GSTR-1 tab or registration/challan form to see entries recorded here.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = '';
+      list.forEach(function(row) {
+        var tr = document.createElement('tr');
+        var jsonStr = typeof row.data === 'object' ? JSON.stringify(row.data, null, 2) : String(row.data);
+        tr.innerHTML = 
+          '<td><strong>#' + row.id + '</strong></td>' +
+          '<td><span class="badge-form">' + escapeHtml(row.formName) + '</span></td>' +
+          '<td>' + (row.section ? ('<span class="label label-default">' + escapeHtml(row.section.toUpperCase()) + '</span>') : '-') + '</td>' +
+          '<td><code style="color:#1b3f75;">' + escapeHtml(row.gstin || 'N/A') + '</code></td>' +
+          '<td>' + escapeHtml((row.period || '') + ' ' + (row.fy || '')) + '</td>' +
+          '<td><div class="json-preview">' + escapeHtml(jsonStr) + '</div></td>' +
+          '<td><span class="badge-time">' + escapeHtml(row.createdAt || '') + '</span></td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderGstr1Records(records) {
+      var tbody = document.getElementById('tbodyGstr1Records');
+      if (!records || records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; padding:20px; color:#94a3b8;">No itemized invoice records yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = '';
+      records.forEach(function(r, idx) {
+        var tr = document.createElement('tr');
+        tr.innerHTML = 
+          '<td>' + (idx + 1) + '</td>' +
+          '<td><code>' + escapeHtml(r.gstin) + '</code></td>' +
+          '<td><span class="label label-primary">' + escapeHtml(r.table_name.toUpperCase()) + '</span></td>' +
+          '<td><strong>' + escapeHtml(r.invoice_no || '-') + '</strong></td>' +
+          '<td>' + escapeHtml(r.invoice_date || '-') + '</td>' +
+          '<td>' + escapeHtml(r.pos || '-') + '</td>' +
+          '<td>' + (r.rate || 0) + '%</td>' +
+          '<td style="text-align:right;">₹ ' + Number(r.taxable_value || 0).toLocaleString('en-IN') + '</td>' +
+          '<td style="text-align:right; color:#17c4bb;">₹ ' + Number(r.igst || 0).toLocaleString('en-IN') + '</td>' +
+          '<td style="text-align:right; color:#27ae60;">₹ ' + Number((r.cgst || 0) + (r.sgst || 0)).toLocaleString('en-IN') + '</td>' +
+          '<td style="text-align:right; font-weight:700; color:#1b3f75;">₹ ' + Number(r.total_value || 0).toLocaleString('en-IN') + '</td>';
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterSubmissions() {
+      var formVal = document.getElementById('selFormFilter').value;
+      var gstinVal = document.getElementById('txtGstinFilter').value.trim().toUpperCase();
+      var filtered = allSubmissions.filter(function(s) {
+        var matchForm = !formVal || s.formName === formVal;
+        var matchGstin = !gstinVal || (s.gstin && s.gstin.toUpperCase().indexOf(gstinVal) !== -1);
+        return matchForm && matchGstin;
+      });
+      renderSubmissions(filtered);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    window.addEventListener('load', loadDatabaseData);
+  </script>
+</body>
+</html>
